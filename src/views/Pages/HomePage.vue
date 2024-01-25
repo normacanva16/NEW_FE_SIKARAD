@@ -30,7 +30,7 @@
         <div
           style="
             padding: 10px;
-            background-color: #06163a;
+            background-color: #1e210d;
             width: 100%;
             color: white;
           "
