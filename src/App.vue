@@ -8,8 +8,10 @@
 @import "@/styles/app.scss";
 
 .table-header-cell-class {
-  background: #f7ec59 !important;
-  color: rgb(0, 0, 0) !important;
+  // background: #f7ec59 !important;
+  // color: rgb(0, 0, 0) !important;
+  background: #4b5320 !important;
+  color: rgb(255, 255, 255) !important;
 }
 
 .empty-data {
