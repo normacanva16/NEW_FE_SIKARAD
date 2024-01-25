@@ -4,7 +4,10 @@
       <div class="navbar-header">
         <a class="navbar-brand" href="/admin-sikarad-peta">
           <div class="brand-logo-collapsed">
-            <p class="text-bold text-white">SIKARAD</p>
+            <span>
+              <img class="img-fluid small" :src="logoKecil" alt="App Logo" />
+              <span class="text-bold text-white">SIKARAD</span>
+            </span>
           </div>
         </a>
       </div>
@@ -91,6 +94,7 @@ import Avatar from "vue-avatar-component";
 import { mapMutations } from "vuex";
 import HeaderSearch from "@/components/Layout/HeaderSearch";
 import ToggleFullscreen from "@/components/Common/ToggleFullscreen";
+import logoKecil from "./../../../public/img/mdmc/logokecil-svg.svg";
 import swal from "sweetalert2";
 import Cookies from "universal-cookie";
 import axios from "axios";
@@ -101,6 +105,7 @@ export default {
   name: "Header",
   data: () => {
     return {
+      logoKecil,
       usernameLogin: "",
       instansiEmail: "",
       instansiRoles: "",
