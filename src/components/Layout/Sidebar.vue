@@ -5,9 +5,9 @@
       <nav class="sidebar" data-sidebar-anyclick-close="">
         <!-- START sidebar nav-->
         <ul class="sidebar-nav mt-3">
-          <template v-for="item in Menu">
+                    <template v-for="item in Menu">
             <!-- Heading -->
-            <li class="nav-heading"  v-if="item.heading">
+            <li class="nav-heading" v-if="item.heading">
               <span>{{ $t(item.translate) || item.heading }}</span>
             </li>
             <!-- Single Menu -->
@@ -69,7 +69,7 @@
               </b-collapse>
             </li>
           </template>
-        </ul>
+                  </ul>
         <!-- END sidebar nav-->
       </nav>
     </div>
@@ -119,10 +119,10 @@ export default {
     closeSidebar() {
       this.$store.commit("changeSetting", {
         name: "asideToggled",
-        value: true,
+        value: false,
       });
     },
-    getUser() {
+        getUser() {
       this.usernameLogin = cookies.get("username");
       this.instansiLogin = cookies.get("instansi_name");
     },

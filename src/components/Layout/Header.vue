@@ -3,20 +3,48 @@
     <nav class="navbar topnavbar">
       <div class="navbar-header">
         <a class="navbar-brand" href="/admin-sikarad-peta">
+          <div class="brand-logo">
+            <span>
+              <img class="img-fluid small" :src="logoKecil" alt="App Logo" />
+              <!-- <span class="text-bold text-white">SIKARAD</span> -->
+            </span>
+          </div>
           <div class="brand-logo-collapsed">
             <span>
               <img class="img-fluid small" :src="logoKecil" alt="App Logo" />
-              <span class="text-bold text-white">SIKARAD</span>
+              <!-- <span class="text-bold text-white">SIKARAD</span> -->
             </span>
           </div>
         </a>
       </div>
-  
+      <ul class="navbar-nav mr-auto flex-row">
+        <li class="nav-item">
+          <a
+            href=""
+            class="nav-link d-none d-md-block d-lg-block d-xl-block"
+            @click.prevent="toggleAsideCollapsed"
+          >
+            <em class="fas fa-bars"></em>
+          </a>
+          <a
+            href=""
+            class="nav-link sidebar-toggle d-md-none"
+            @click.prevent="toggleOffcanvas"
+          >
+            <em class="fas fa-bars"></em>
+          </a>
+        </li>
+        <!-- <li class="nav-item d-none d-md-block">
+          <a class="nav-link" href="" @click.prevent="toggleUserBlock">
+            <em class="icon-user"></em>
+          </a>
+        </li> -->
+      </ul>
       <ul class="navbar-nav flex-row">
         <li class="nav-item">
           <b-container style="width: 100%; align-items: center">
             <b-row class="d-flex align-items-center">
-              <b-col sm="*">
+                            <b-col sm="*">
                 <div>
                   <li class="nav-item d-none d-md-block" style="color: white">
                     <ToggleFullscreen
@@ -54,7 +82,7 @@
                       <div class="list-group">
                         <div
                           class="list-group-item list-group-item-action"
-                        >
+                                                  >
                           <div class="media">
                             <div class="media-body">
                               <p v-on:click="handleClickProfil()" class="m-0">
@@ -105,9 +133,9 @@ export default {
   name: "Header",
   data: () => {
     return {
-      logoKecil,
+logoKecil,
       usernameLogin: "",
-      instansiEmail: "",
+            instansiEmail: "",
       instansiRoles: "",
       idRelawan: "",
       instansiRelawan: "",
@@ -121,7 +149,7 @@ export default {
         email: "",
         password: "",
       },
-      navSearchOpen: false,
+            navSearchOpen: false,
     };
   },
   components: {
@@ -134,7 +162,7 @@ export default {
     getUser() {
       this.idRelawan = cookies.get("user_id");
       this.usernameLogin = cookies.get("username");
-      this.instansiEmail = cookies.get("email");
+            this.instansiEmail = cookies.get("email");
       this.instansiRoles = cookies.get("role_name");
       this.RelawanFullname = cookies.get("fullname");
       this.tokenUser = cookies.get("token");
@@ -208,8 +236,8 @@ export default {
           cookies.remove("user_id");
           cookies.remove("token");
           cookies.remove("roles");
-          cookies.remove("username");
-          cookies.remove("email");
+                    cookies.remove("username");
+                    cookies.remove("email");
           cookies.remove("fullname");
 
           // add think cookie
