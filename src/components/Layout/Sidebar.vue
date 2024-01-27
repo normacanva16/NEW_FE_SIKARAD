@@ -7,7 +7,7 @@
         <ul class="sidebar-nav mt-3">
           <template v-for="item in Menu">
             <!-- Heading -->
-            <li class="nav-heading">
+            <li class="nav-heading"  v-if="item.heading">
               <span>{{ $t(item.translate) || item.heading }}</span>
             </li>
             <!-- Single Menu -->
@@ -15,7 +15,7 @@
               tag="li"
               :to="item.path"
               active-class="active"
-              v-if="!item.submenu"
+              v-if="!item.heading && !item.submenu"
             >
               <a :title="tr(item.translate, item.name)">
                 <span
@@ -30,7 +30,7 @@
             <!-- Menu With Subitems -->
             <li
               :class="routeActiveClass(getSubRoutes(item))"
-              v-if="item.submenu"
+              v-if="!item.heading && item.submenu"
             >
               <a
                 :title="tr(item.translate, item.name)"
@@ -119,7 +119,7 @@ export default {
     closeSidebar() {
       this.$store.commit("changeSetting", {
         name: "asideToggled",
-        value: false,
+        value: true,
       });
     },
     getUser() {
