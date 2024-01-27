@@ -37,7 +37,7 @@ if (roles === "superadmin") {
         {
           name: "Kotama/Balakpus",
           icon: "fa fa-people-group",
-          path: "/admin-sikarad-user",
+          path: "/admin-sikarad-kotama-balakpus",
         },
       ],
     },

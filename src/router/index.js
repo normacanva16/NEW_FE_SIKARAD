@@ -11,6 +11,7 @@ import LayoutPage from "@/components/Layout/LayoutPage";
 // Admin MDMC
 const PetaAdminMDMC = () => import("@/views/AdminMDMC/Peta/PetaAdminMDMC.vue");
 const TabelUserMDMC = () => import("@/views/AdminMDMC/User/TabelUserMDMC");
+const TabelKotamaBalkpus = () => import("@/views/AdminMDMC/User/TabelKotamaBalkpus");
 
 // Pages
 const Error404 = () => import("@/views/Pages/404.vue");
@@ -55,6 +56,10 @@ export default new VueRouter({
         {
           path: "/admin-sikarad-user",
           component: TabelUserMDMC,
+        },
+        {
+          path: "/admin-sikarad-kotama-balakpus",
+          component: TabelKotamaBalkpus,
         },
         // RELAWAN
         {
