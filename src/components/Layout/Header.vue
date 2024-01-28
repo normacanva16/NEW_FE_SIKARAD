@@ -264,4 +264,8 @@ logoBesar,
   width: 120px;
   height: auto;
 }
+
+.fas.fa-bars {
+    color: white;
+  }
 </style>
