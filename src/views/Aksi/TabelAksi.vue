@@ -292,6 +292,7 @@
                   variant="primary"
                   class="ml-3 btn-sm w-100"
                   @click="handleShowModal"
+                  :disabled="uploadInProgress"
                   >Upload Data</b-button
                 >
           </div>
@@ -376,6 +377,7 @@ export default {
   },
   data() {
     return {
+    uploadInProgress: false,
       modalShow: false, 
       modalInputManual: false,
       file1: null,
@@ -895,7 +897,7 @@ export default {
         const formData = new FormData();
         console.log(this.file,"file");
         formData.append("file", this.file);
-        
+        this.uploadInProgress = true;
         this.loadingCreate = true;
 
           await axios
@@ -916,9 +918,11 @@ export default {
               this.getData();
             this.resetField();
             this.modalShow = false;
+            this.uploadInProgress = false;
             })
             .catch((error) => {
               this.loadingCreate = false;
+              this.uploadInProgress = false;
 
               console.error(error);
               if (error.response.data.error_messages[0].msg) {
