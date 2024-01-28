@@ -50,7 +50,7 @@ export default new VueRouter({
           component: PetaAdminMDMC,
         },
         {
-          path: "/admin-sikarad-aksi",
+          path: "/admin-sikarad-pegawai",
           component: TabelAksi,
         },
         {

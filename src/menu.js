@@ -22,7 +22,7 @@ if (roles === "superadmin") {
     {
       name: "Data Pegawai",
       icon: "fa fa-parachute-box",
-      path: "/admin-sikarad-aksi",
+      path: "/admin-sikarad-pegawai",
     },
     // administrasi
     {
@@ -55,7 +55,7 @@ if (roles === "admin" || roles === "user") {
     {
       name: "Data Pegawai",
       icon: "fa fa-parachute-box",
-      path: "/admin-sikarad-aksi",
+      path: "/admin-sikarad-pegawai",
     }
   ];
 }
