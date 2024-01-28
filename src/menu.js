@@ -21,22 +21,20 @@ if (roles === "superadmin") {
     // aksi
     {
       name: "Data Pegawai",
-      icon: "fa fa-parachute-box",
+      icon: "fa fa-people-group",
       path: "/admin-sikarad-pegawai",
     },
     // administrasi
     {
       name: "Master",
-      icon: "fa fa-user-tie",
+      icon: "fa fa-server",
       submenu: [
         {
           name: "User",
-          icon: "fa fa-user",
           path: "/admin-sikarad-user",
         },
         {
           name: "Kotama/Balakpus",
-          icon: "fa fa-people-group",
           path: "/admin-sikarad-kotama-balakpus",
         },
       ],
@@ -45,7 +43,7 @@ if (roles === "superadmin") {
 }
 
 // admin relawan
-if (roles === "admin" || roles === "user") {
+if (roles === "admin") {
   Menu = [
     {
       name: "Peta",
@@ -54,7 +52,32 @@ if (roles === "admin" || roles === "user") {
     },
     {
       name: "Data Pegawai",
-      icon: "fa fa-parachute-box",
+      icon: "fa fa-people-group",
+      path: "/admin-sikarad-pegawai",
+    },
+    {
+      name: "Master",
+      icon: "fa fa-server",
+      submenu: [
+        {
+          name: "Kotama/Balakpus",
+          path: "/admin-sikarad-kotama-balakpus",
+        },
+      ],
+    },
+  ];
+}
+
+if (roles === "user") {
+  Menu = [
+    {
+      name: "Peta",
+      icon: "fa fa-location-dot",
+      path: "/admin-sikarad-peta",
+    },
+    {
+      name: "Data Pegawai",
+      icon: "fa fa-people-group",
       path: "/admin-sikarad-pegawai",
     }
   ];
