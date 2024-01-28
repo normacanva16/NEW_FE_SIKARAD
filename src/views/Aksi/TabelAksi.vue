@@ -295,7 +295,7 @@
                   >Upload Data</b-button
                 >
           </div>
-          <b-button class="ml-5 btn-sm w-20" variant="primary" @click="handleDownload">
+          <b-button class="ml-5 btn-sm w-20" variant="primary" @click="alertDownloadAksi()">
             Download
           </b-button>
                 <!-- Tombol Hapus -->
@@ -767,7 +767,7 @@ export default {
     alertAksi() {
       swal({
         title: "Anda Yakin Hapus Data?",
-        text: "Data yang dihapus tidak dapat kembali",
+        text: "Data yang dihapus tidak dapat kembali. Tolong cek kembali filter yang anda pilih.",
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#DD6B55",
@@ -777,6 +777,23 @@ export default {
       }).then((result) => {
         if (result.value) {
           this.deleteAksi();
+        }
+      });
+    },
+
+    alertDownloadAksi() {
+      swal({
+        title: "Download Data",
+        text: "Tolong cek kembali filter yang anda pilih.",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "primary",
+        confirmButtonText: "Download",
+        cancelButtonText: "Batal",
+        heightAuto: false,
+      }).then((result) => {
+        if (result.value) {
+          this.handleDownload();
         }
       });
     },
