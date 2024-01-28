@@ -287,7 +287,7 @@
       <div class="card mt-3">
         <div class="d-flex align-items-center justify-content-between">
           <div class="d-flex align-items-center flex-wrap">
-          <div>
+          <div v-if="isAdmin">
             <b-button
                   variant="primary"
                   class="ml-3 btn-sm w-100"
@@ -296,13 +296,19 @@
                   >Upload Data</b-button
                 >
           </div>
+          <div v-else></div>
+          <div>
           <b-button class="ml-5 btn-sm w-20" variant="primary" @click="alertDownloadAksi()">
             Download
           </b-button>
+        </div>
                 <!-- Tombol Hapus -->
-          <b-button class="ml-3 btn-sm w-20" variant="danger" @click="alertAksi()">
-            <i class="fas fa-trash-alt"></i> Hapus
-          </b-button>
+          <div v-if="isAdmin">
+            <b-button class="ml-3 btn-sm w-20" variant="danger" @click="alertAksi()">
+              <i class="fas fa-trash-alt"></i> Hapus
+            </b-button>
+          </div>
+          <div v-else></div>
         </div>
           <!-- <div>
             <b-button
@@ -377,6 +383,7 @@ export default {
   },
   data() {
     return {
+      isAdmin: true,
     uploadInProgress: false,
       modalShow: false, 
       modalInputManual: false,
@@ -1068,6 +1075,14 @@ export default {
         this.file1 = "";
       }
     },
+  },
+  created() {
+    // role menu
+    const cookies = new Cookies();
+    const roles = cookies.get("roles");
+    if (roles === "user") {
+      this.isAdmin = false;
+    }
   },
 };
 </script>
