@@ -532,12 +532,14 @@ export default {
             days = parseInt(stringBetweenBulanHari);
         }
 
-        if (years === 0 || (years === 1  && months === 0 && days === 0)) {
+        if ((years === 0 && months >= 0 && days >= 1) || (years === 1  && months === 0 && days === 0)) {
             return <b-badge variant="success">{row.masa_jabatan}</b-badge>;
         } else if ((years === 1 && months >= 0 && days >= 1) ||  (years === 2  && months === 0 && days === 0)) {
             return <b-badge variant="warning">{row.masa_jabatan}</b-badge>;
         } else if ((years === 2  && months >= 0 && days >= 1) || (years > 2)) {
             return <b-badge variant="danger">{row.masa_jabatan}</b-badge>;
+        }else if ((years === 0  && months === 0 && days === 0) ) {
+          return <b-badge variant="light">{row.masa_jabatan}</b-badge>;
         }
     } else {
         return '-';
