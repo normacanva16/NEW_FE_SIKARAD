@@ -298,6 +298,10 @@
           <b-button class="ml-5 btn-sm w-20" variant="primary" @click="handleDownload">
             Download
           </b-button>
+                <!-- Tombol Hapus -->
+          <b-button class="ml-3 btn-sm w-20" variant="danger" @click="alertAksi()">
+            <i class="fas fa-trash-alt"></i> Hapus
+          </b-button>
         </div>
           <!-- <div>
             <b-button
@@ -603,6 +607,7 @@ export default {
       this.kotama = '',
       this.masa_jabatan = '',
       this.pangkat = ''
+      this.getData();
     },
 
     // page size change
@@ -672,6 +677,58 @@ export default {
         swal("Kesalahan Server!", "Tidak dapat terhubung ke server!", error);
       }
     },
+
+     async deleteAksi() {
+      try{
+        let url = `${process.env.VUE_APP_URL}employee?&allData=true`
+
+        if (this.kotama !== null && this.kotama.value !== null && this.kotama.value !== "" && this.kotama.value !== undefined) {
+          url += `&code_kotama_balakpus=${this.kotama.value}`;
+        }
+
+        if (this.masa_jabatan !== null && this.masa_jabatan.value !== null && this.masa_jabatan.value !== "" && this.masa_jabatan.value !== undefined) {
+          url += `&masa_jabatan=${this.masa_jabatan.value}`;
+        }
+
+        // if (this.pangkat !== null) {
+        //   url += `&pangkat=${this.pangkat.value}`;
+        // }
+
+        await axios
+        .delete(url, {
+          headers: {
+            Authorization: `Bearer ${this.token}`,
+          },
+        })
+        .then((res) => {
+          swal({
+            title: "Berhasil!",
+            text: "Data Telah Dihapus.",
+            type: "success",
+            timer: 2000,
+            heightAuto: false,
+          });
+          this.getData();
+        })
+        .catch((e) => {
+          if (e.response.data.message) {
+            swal({
+              title: "Gagal!",
+              text: e.response.data.message,
+              type: "danger",
+              heightAuto: false,
+            });
+          }
+        });
+
+
+      } catch (error) {
+        console.error(error);
+        this.loadingInstance.close();
+
+        swal("Kesalahan Server!", "Tidak dapat terhubung ke server!", error);
+      }
+    },
     getToken() {
       this.token = cookies.get("token");
       this.roles = cookies.get("roles");
@@ -700,39 +757,6 @@ export default {
       this.action = "create";
     },
 
-    renderButtonAksi(row) {
-      if (this.roles === "43a8a9ba66616315e83f6286507512b1") {
-        return (
-          <span>
-            
-            &nbsp;
-            <button class="btn btn-outline-primary" on-click={() => this.handleEditForm(row.id)}>
-              <i class="fa fa-pencil"></i>
-            </button>
-            &nbsp;
-            <button class="btn btn-outline-danger" onClick={() => this.alertAksi(row.id)}>
-              <i class="fa fa-trash"></i>
-            </button>
-          </span>
-        );
-      } else if (this.roles === "8107656e42069e846843fab27a5f9894") {
-        if (this.instansiId === row.mst_organisasi.id || JSON.stringify(this.anakInstansiRujukan).includes(row.mst_organisasi.id) || this.anakInstansiRujukan === "undefined") {
-          return (
-            <span>
-              <button class="btn btn-outline-primary" on-click={() => this.handleEditForm(row.id)}>
-                <i class="fa fa-pencil"></i>
-              </button>
-              &nbsp;
-              <button class="btn btn-outline-danger" onClick={() => this.alertAksi(row.id)}>
-                <i class="fa fa-trash"></i>
-              </button>
-            </span>
-          );
-        }
-      } else {
-        return null;
-      }
-    },
     renderTitle() {
       if (this.action === "create") {
         this.title = "Tambah Aksi";
@@ -740,7 +764,7 @@ export default {
         this.title = "Ubah Aksi";
       }
     },
-    alertAksi(id) {
+    alertAksi() {
       swal({
         title: "Anda Yakin Hapus Data?",
         text: "Data yang dihapus tidak dapat kembali",
@@ -752,7 +776,7 @@ export default {
         heightAuto: false,
       }).then((result) => {
         if (result.value) {
-          this.deleteAksi(id);
+          this.deleteAksi();
         }
       });
     },
