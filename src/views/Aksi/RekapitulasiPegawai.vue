@@ -33,12 +33,12 @@
                     <multiselect id="masa_jabatan" v-model="masa_jabatan" :options="optionMasaJabatan" :close-on-select="true" :clear-on-select="false" placeholder="PILIH MASA JABATAN" label="text" track-by="value" :show-labels="false" disabled> </multiselect>
                   </b-form-group>
                   <b-form-group label="PANGKAT" label-for="tipe_aksi">
-                    <multiselect id="pangkat" v-model="pangkat" :options="optionPangkat" :close-on-select="true" :clear-on-select="false" placeholder="PILIH PANGKAT" label="text" track-by="value"> </multiselect>
+                    <multiselect id="pangkat" v-model="pangkat" :options="optionPangkat" :close-on-select="true" :clear-on-select="false" placeholder="PILIH PANGKAT" label="text" track-by="value" :show-labels="false"> </multiselect>
                   </b-form-group>
                 </b-col>
               </b-row>
   
-              <b-button type="submit" variant="primary" class="mt-5 ml-4" @click="getData">Cari</b-button>
+              <b-button type="submit" variant="primary" class="mt-5 ml-4" @click="handleClickSearch">Cari</b-button>
               <b-button type="submit" variant="primary" class="mt-5 ml-5" @click="resetSearch">Batal</b-button>
   
   
@@ -191,7 +191,36 @@ Vue.component("apexchart", VueApexCharts);
             value: "diatas2"
           }
         ],
-        optionPangkat:[],
+        optionPangkat:[
+      {
+          text: "Mayor",
+          value: "mayor"
+        },
+        {
+          text: "Letkol",
+          value: "letkol"
+        },
+        {
+          text: "Kolonel",
+          value: "kolonel"
+        },
+        {
+          text: "Brigjen",
+          value: "brigjen"
+        },
+        {
+          text: "Mayjen",
+          value: "mayjen"
+        },
+        {
+          text: "Letjen",
+          value: "letjen"
+        },
+        {
+          text: "Jenderal",
+          value: "jenderal"
+        }
+      ],
         keyword: "",
         title: "",
         instansiId: "",
@@ -344,7 +373,7 @@ Vue.component("apexchart", VueApexCharts);
       try {
           let url = `${process.env.VUE_APP_URL}dashboard/tabel/rekapitulasi/download?allData=true`
   
-          if (this.pangkat !== null) {
+          if (this.pangkat !== null && this.pangkat.value !== null && this.pangkat.value !== "" && this.pangkat.value !== undefined) {
             url += `&pangkat=${this.pangkat.value}`;
           }
   
@@ -415,7 +444,7 @@ Vue.component("apexchart", VueApexCharts);
   try {
     let url = `${process.env.VUE_APP_URL}dashboard/diagram/rekapitulasi?allData=true`;
 
-    if (this.pangkat !== null) {
+    if (this.pangkat !== null && this.pangkat.value !== null && this.pangkat.value !== "" && this.pangkat.value !== undefined) {
       url += `&pangkat=${this.pangkat.value}`;
     }
 
@@ -456,6 +485,7 @@ Vue.component("apexchart", VueApexCharts);
         this.masa_jabatan = '',
         this.pangkat = ''
         this.getData();
+        this.populateChartData();
       },
   
       // page size change
@@ -484,6 +514,7 @@ Vue.component("apexchart", VueApexCharts);
         this.pageIndex = 1;
   
         this.getData();
+        this.populateChartData();
       },
   
       onPressEnterSearch() {
@@ -511,7 +542,7 @@ Vue.component("apexchart", VueApexCharts);
         try {
           let url = `${process.env.VUE_APP_URL}dashboard/tabel/rekapitulasi?page=${this.pageIndex}&size=${this.pageSize}&search=${this.keyword}&allData=true`
   
-          if (this.pangkat !== null) {
+          if (this.pangkat !== null && this.pangkat.value !== null && this.pangkat.value !== "" && this.pangkat.value !== undefined) {
             url += `&pangkat=${this.pangkat.value}`;
           }
   

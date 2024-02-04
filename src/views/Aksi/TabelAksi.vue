@@ -277,7 +277,7 @@
                   <multiselect id="masa_jabatan" v-model="masa_jabatan" :options="optionMasaJabatan" :close-on-select="true" :clear-on-select="false" placeholder="PILIH MASA JABATAN" label="text" track-by="value" :show-labels="false"> </multiselect>
                 </b-form-group>
                 <b-form-group label="PANGKAT" label-for="tipe_aksi">
-                  <multiselect id="pangkat" v-model="pangkat" :options="optionPangkat" :close-on-select="true" :clear-on-select="false" placeholder="PILIH PANGKAT" label="text" track-by="value"> </multiselect>
+                  <multiselect id="pangkat" v-model="pangkat" :options="optionPangkat" :close-on-select="true" :clear-on-select="false" placeholder="PILIH PANGKAT" label="text" track-by="value" :show-labels="false"> </multiselect>
                 </b-form-group>
               </b-col>
             </b-row>
@@ -445,7 +445,36 @@ export default {
           value: "diatas2"
         }
       ],
-      optionPangkat:[],
+      optionPangkat:[
+      {
+          text: "Mayor",
+          value: "mayor"
+        },
+        {
+          text: "Letkol",
+          value: "letkol"
+        },
+        {
+          text: "Kolonel",
+          value: "kolonel"
+        },
+        {
+          text: "Brigjen",
+          value: "brigjen"
+        },
+        {
+          text: "Mayjen",
+          value: "mayjen"
+        },
+        {
+          text: "Letjen",
+          value: "letjen"
+        },
+        {
+          text: "Jenderal",
+          value: "jenderal"
+        }
+      ],
       keyword: "",
       title: "",
       instansiId: "",
@@ -678,9 +707,9 @@ export default {
           url += `&masa_jabatan=${this.masa_jabatan.value}`;
         }
 
-        // if (this.pangkat !== null) {
-        //   url += `&pangkat=${this.pangkat.value}`;
-        // }
+        if (this.pangkat !== null && this.pangkat.value !== null && this.pangkat.value !== "" && this.pangkat.value !== undefined) {
+          url += `&pangkat=${this.pangkat.value}`;
+        }
 
         await axios.get(url, { responseType: "blob" }).then((response) => {
           let FileSaver = require("file-saver");
@@ -712,9 +741,9 @@ export default {
           url += `&masa_jabatan=${this.masa_jabatan.value}`;
         }
 
-        // if (this.pangkat !== null) {
-        //   url += `&pangkat=${this.pangkat.value}`;
-        // }
+        if (this.pangkat !== null && this.pangkat.value !== null && this.pangkat.value !== "" && this.pangkat.value !== undefined) {
+          url += `&pangkat=${this.pangkat.value}`;
+        }
 
         await axios
         .delete(url, {
@@ -837,9 +866,9 @@ export default {
           url += `&masa_jabatan=${this.masa_jabatan.value}`;
         }
 
-        // if (this.pangkat !== null) {
-        //   url += `&pangkat=${this.pangkat.value}`;
-        // }
+        if (this.pangkat !== null && this.pangkat.value !== null && this.pangkat.value !== "" && this.pangkat.value !== undefined) {
+          url += `&pangkat=${this.pangkat.value}`;
+        }
 
         await axios.get(url).then((response) => { 
           this.totalCount = response.data.data.totalData;
