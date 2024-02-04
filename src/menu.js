@@ -25,12 +25,12 @@ if (roles === "superadmin") {
       icon: "fa fa-people-group",
       submenu: [
         {
-          name: "Rekapitulasi Pegawai",
-          path: "/admin-sikarad-rekapitulasi",
-        },
-        {
           name: "Tabel Data Pegawai",
           path: "/admin-sikarad-pegawai",
+        },
+        {
+          name: "Rekapitulasi Pegawai",
+          path: "/admin-sikarad-rekapitulasi",
         },
       ],
     },
@@ -65,12 +65,12 @@ if (roles === "admin") {
       icon: "fa fa-people-group",
       submenu: [
         {
-          name: "Rekapitulasi Pegawai",
-          path: "/admin-sikarad-rekapitulasi",
-        },
-        {
           name: "Tabel Data Pegawai",
           path: "/admin-sikarad-pegawai",
+        },
+        {
+          name: "Rekapitulasi Pegawai",
+          path: "/admin-sikarad-rekapitulasi",
         },
       ],
     },
@@ -99,12 +99,12 @@ if (roles === "user") {
       icon: "fa fa-people-group",
       submenu: [
         {
-          name: "Rekapitulasi Pegawai",
-          path: "/admin-sikarad-rekapitulasi",
-        },
-        {
           name: "Tabel Data Pegawai",
           path: "/admin-sikarad-pegawai",
+        },
+        {
+          name: "Rekapitulasi Pegawai",
+          path: "/admin-sikarad-rekapitulasi",
         },
       ],
     },
