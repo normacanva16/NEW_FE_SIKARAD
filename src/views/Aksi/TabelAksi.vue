@@ -279,6 +279,9 @@
                 <b-form-group label="PANGKAT" label-for="tipe_aksi">
                   <multiselect id="pangkat" v-model="pangkat" :options="optionPangkat" :close-on-select="true" :clear-on-select="false" placeholder="PILIH PANGKAT" label="text" track-by="value" :show-labels="false"> </multiselect>
                 </b-form-group>
+                <b-form-group label="KORPS" label-for="tipe_aksi">
+                  <multiselect id="korps" v-model="korps" :options="optionKorps" :close-on-select="true" :clear-on-select="false" placeholder="PILIH KORPS" label="text" track-by="value" :show-labels="false"> </multiselect>
+                </b-form-group>
               </b-col>
             </b-row>
 
@@ -424,6 +427,7 @@ export default {
       kotama:null,
       masa_jabatan: null,
       pangkat: null,
+      korps: null,
       sidebarVisibilityFilter: false,
       optionKotama:[],
       IsExistKotamaEmployee:[],
@@ -475,6 +479,7 @@ export default {
           value: "jenderal"
         }
       ],
+      optionKorps:[],
       keyword: "",
       title: "",
       instansiId: "",

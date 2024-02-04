@@ -35,6 +35,9 @@
                   <b-form-group label="PANGKAT" label-for="tipe_aksi">
                     <multiselect id="pangkat" v-model="pangkat" :options="optionPangkat" :close-on-select="true" :clear-on-select="false" placeholder="PILIH PANGKAT" label="text" track-by="value" :show-labels="false"> </multiselect>
                   </b-form-group>
+                  <b-form-group label="KORPS" label-for="tipe_aksi">
+                  <multiselect id="korps" v-model="korps" :options="optionKorps" :close-on-select="true" :clear-on-select="false" placeholder="PILIH KORPS" label="text" track-by="value" :show-labels="false"> </multiselect>
+                </b-form-group>
                 </b-col>
               </b-row>
   
@@ -221,6 +224,8 @@ Vue.component("apexchart", VueApexCharts);
           value: "jenderal"
         }
       ],
+      korps: null,
+      optionKorps:[],
         keyword: "",
         title: "",
         instansiId: "",
