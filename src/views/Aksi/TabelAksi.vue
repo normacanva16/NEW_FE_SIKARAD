@@ -205,39 +205,49 @@
       </div>
 
       <div>
-        <b-modal
-          v-model="modalShow"
-          hide-footer
-          @hidden="resetField()"
-          :title="titleModalManual"
-          scrollable
-        >
-          <form @submit.prevent="submitForm">
-            <div class="clearfix" v-if="loadingCreate === true">
-              <b-spinner class="float-right" label="Floated Right"></b-spinner>
-            </div>
-            <b-row>
-              <b-col>
-                <b-form-group label="File" label-for="file">
-                  <b-form-file
-                    id="file"
-                    v-model="file"
-                    placeholder="Masukkan file"
-                  ></b-form-file>
-                  <b-form-text class="text-danger" v-if="errorFile">
-                    File Wajib Diisi!
-                  </b-form-text>
-                  <p class="mt-2 text-dark">Format File: Excel</p>
-                </b-form-group>
-              </b-col>
-            </b-row>
-
-            <b-button type="submit" variant="primary" :disabled="loadingCreate"
-              >Submit</b-button
-            >
-          </form>
-        </b-modal>
+  <b-modal
+    v-model="modalShow"
+    hide-footer
+    @hidden="resetField()"
+    :title="titleModalManual"
+    scrollable
+  >
+    <form @submit.prevent="submitForm">
+      <div class="clearfix" v-if="loadingCreate === true">
+        <b-spinner class="float-right" label="Floated Right"></b-spinner>
       </div>
+
+      <b-row v-for="(item, index) in IsExistKotamaEmployee" :key="index">
+      <b-col>
+        <b-form-group :label="item.text" :label-for="'file_' + index">
+          <div class="d-flex align-items-center justify-content-between">
+            <b-form-file
+              :id="'file_' + index"
+              v-model="file"
+              placeholder="Masukkan file"
+              :disabled="item.value === 'true' || file !== ''"
+            ></b-form-file>
+
+            <!-- Conditionally render the button or icon based on item.value -->
+            <template v-if="item.value === 'true'">
+              <i class="fa-solid fa-check text-success ml-3"></i>
+            </template>
+            <template v-else>
+              <b-button class="ml-3" type="submit" variant="primary" :disabled="loadingCreate">Submit</b-button>
+            </template>
+          </div>
+
+          <b-form-text class="text-danger" v-if="errorFile && item.value === 'false' && file === ''">
+            File Wajib Diisi!
+          </b-form-text>
+          <p class="mt-2 text-dark">Format File: Excel</p>
+        </b-form-group>
+      </b-col>
+    </b-row>
+    </form>
+  </b-modal>
+</div>
+
 
       <div>
       <b-sidebar v-model="sidebarVisibilityFilter" id="sidebar-filter" sidebar-class="border-right" aria-modal="true" style="z-index: 9999;" width="270px">
@@ -416,6 +426,7 @@ export default {
       pangkat: null,
       sidebarVisibilityFilter: false,
       optionKotama:[],
+      IsExistKotamaEmployee:[],
       optionMasaJabatan:[
         {
           text: "Jabatan Kosong",
@@ -748,7 +759,9 @@ export default {
     },
 
     handleShowModal() {
+      this.getIsExistKotama();
       this.modalShow = true;
+
     },
 
     handleClickSearch() {
@@ -853,6 +866,19 @@ export default {
         .then((response) => {
           let data = response.data;
           this.optionKotama = data;
+        })
+        .catch((error) => {
+          console.error(error);
+          swal("Kesalahan Server!", "Tidak dapat terhubung ke server!", error);
+        });
+    },
+
+    async getIsExistKotama() {
+      await axios
+        .get(`${process.env.VUE_APP_URL}employee/list/employee/exist`)
+        .then((response) => {
+          let data = response.data;
+          this.IsExistKotamaEmployee = data;
         })
         .catch((error) => {
           console.error(error);
