@@ -19,10 +19,20 @@ if (roles === "superadmin") {
       path: "/admin-sikarad-peta",
     },
     // aksi
+
     {
-      name: "Data Pegawai",
+      name: "Pegawai",
       icon: "fa fa-people-group",
-      path: "/admin-sikarad-pegawai",
+      submenu: [
+        {
+          name: "Rekapitulasi Pegawai",
+          path: "/admin-sikarad-rekapitulasi",
+        },
+        {
+          name: "Tabel Data Pegawai",
+          path: "/admin-sikarad-pegawai",
+        },
+      ],
     },
     // administrasi
     {
@@ -51,9 +61,18 @@ if (roles === "admin") {
       path: "/admin-sikarad-peta",
     },
     {
-      name: "Data Pegawai",
+      name: "Pegawai",
       icon: "fa fa-people-group",
-      path: "/admin-sikarad-pegawai",
+      submenu: [
+        {
+          name: "Rekapitulasi Pegawai",
+          path: "/admin-sikarad-rekapitulasi",
+        },
+        {
+          name: "Tabel Data Pegawai",
+          path: "/admin-sikarad-pegawai",
+        },
+      ],
     },
     {
       name: "Master",
@@ -76,10 +95,19 @@ if (roles === "user") {
       path: "/admin-sikarad-peta",
     },
     {
-      name: "Data Pegawai",
+      name: "Pegawai",
       icon: "fa fa-people-group",
-      path: "/admin-sikarad-pegawai",
-    }
+      submenu: [
+        {
+          name: "Rekapitulasi Pegawai",
+          path: "/admin-sikarad-rekapitulasi",
+        },
+        {
+          name: "Tabel Data Pegawai",
+          path: "/admin-sikarad-pegawai",
+        },
+      ],
+    },
   ];
 }
 export default Menu;

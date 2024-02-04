@@ -25,6 +25,7 @@ const HomePage = () => import("@/views/Pages/HomePage.vue");
 
 // AKSI
 const TabelAksi = () => import("@/views/Aksi/TabelAksi.vue");
+const RekapitulasiPegawai = () => import("@/views/Aksi/RekapitulasiPegawai.vue");
 
 // RELAWAN
 const ProfileRelawan = () => import("@/views/Relawan/ProfileRelawan.vue");
@@ -52,6 +53,10 @@ export default new VueRouter({
         {
           path: "/admin-sikarad-pegawai",
           component: TabelAksi,
+        },
+        {
+          path: "/admin-sikarad-rekapitulasi",
+          component: RekapitulasiPegawai,
         },
         {
           path: "/admin-sikarad-user",
