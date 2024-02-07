@@ -166,7 +166,7 @@
                 </b-button>
               </div>
               <div v-if="selectedMarker.GroupData === 'DataMDMC'">
-                <div>
+                <div class="mb-2 text-center">
                   <img v-if="selectedMarker.code == 1" src="../../../../public/img/kotama/1.png" width="100px" height="auto" alt="Logo Kotama">
                   <img v-else-if="selectedMarker.code == 2" src="../../../../public/img/kotama/2.png" width="100px" height="auto" alt="Logo Kotama">
                   <img v-else-if="selectedMarker.code == 3" src="../../../../public/img/kotama/3.png" width="100px" height="auto" alt="Logo Kotama">
