@@ -205,45 +205,54 @@
       </div>
 
       <div>
-  <b-modal
+        <b-modal
     v-model="modalShow"
     hide-footer
     @hidden="resetField()"
     :title="titleModalManual"
     scrollable
-  >
+  > 
+    <div class="mt-1 mb-3 col-sm-12 d-flex">
+      <b-form-input
+        v-model="katakunci"
+        placeholder="Masukkan keyword"
+        @keydown.enter="onPressEnterCari"
+      ></b-form-input>
+      <!-- <b-button @click="handleClickCari" variant="primary">Cari</b-button> -->
+    </div>
+
     <form @submit.prevent="submitForm">
       <div class="clearfix" v-if="loadingCreate === true">
         <b-spinner class="float-right" label="Floated Right"></b-spinner>
       </div>
 
-      <b-row v-for="(item, index) in IsExistKotamaEmployee" :key="index">
-      <b-col>
-        <b-form-group :label="item.text" :label-for="'file_' + index">
-          <div class="d-flex align-items-center justify-content-between">
-            <b-form-file
-              :id="'file_' + index"
-              v-model="file"
-              placeholder="Masukkan file"
-              :disabled="item.value === 'true' || file !== ''"
-            ></b-form-file>
+      <b-row v-for="(item, index) in filteredForms" :key="index">
+        <b-col>
+          <b-form-group :label="item.text" :label-for="'file_' + index">
+            <div class="d-flex align-items-center justify-content-between">
+              <b-form-file
+                :id="'file_' + index"
+                v-model="file"
+                placeholder="Masukkan file"
+                :disabled="item.value === 'true' || file !== ''"
+              ></b-form-file>
 
-            <!-- Conditionally render the button or icon based on item.value -->
-            <template v-if="item.value === 'true'">
-              <i class="fa-solid fa-check text-success ml-3"></i>
-            </template>
-            <template v-else>
-              <b-button class="ml-3" type="submit" variant="primary" :disabled="loadingCreate">Submit</b-button>
-            </template>
-          </div>
+              <!-- Conditionally render the button or icon based on item.value -->
+              <template v-if="item.value === 'true'">
+                <i class="fa-solid fa-check text-success ml-3"></i>
+              </template>
+              <template v-else>
+                <b-button class="ml-3" type="submit" variant="primary" :disabled="loadingCreate">Submit</b-button>
+              </template>
+            </div>
 
-          <b-form-text class="text-danger" v-if="errorFile && item.value === 'false' && file === ''">
-            File Wajib Diisi!
-          </b-form-text>
-          <p class="mt-2 text-dark">Format File: Excel</p>
-        </b-form-group>
-      </b-col>
-    </b-row>
+            <b-form-text class="text-danger" v-if="errorFile && item.value === 'false' && file === ''">
+              File Wajib Diisi!
+            </b-form-text>
+            <p class="mt-2 text-dark">Format File: Excel</p>
+          </b-form-group>
+        </b-col>
+      </b-row>
     </form>
   </b-modal>
 </div>
@@ -481,6 +490,7 @@ export default {
       ],
       optionKorps:[],
       keyword: "",
+      katakunci: "",
       title: "",
       instansiId: "",
       isPublish: false,
@@ -810,6 +820,31 @@ export default {
       this.getData();
     },
 
+    searchByText(text) {
+    // Ubah teks pencarian menjadi huruf kecil untuk pencocokan yang lebih baik
+    const searchText = text.toLowerCase();
+    // Filter item berdasarkan teks pencarian
+    return this.IsExistKotamaEmployee.filter(item => item.text.toLowerCase().includes(searchText));
+  },
+  // Fungsi untuk menangani tombol pencarian diklik
+  handleClickCari() {
+    // Panggil fungsi pencarian dengan teks yang dimasukkan
+    const searchResult = this.searchByText(this.katakunci);
+    // Lakukan sesuatu dengan hasil pencarian, misalnya tampilkan di konsol atau simpan ke variabel untuk ditampilkan di antarmuka pengguna
+    console.log('Hasil Pencarian:', searchResult);
+    // Reset nilai kata kunci setelah pencarian selesai
+    this.katakunci = '';
+  },
+  // Fungsi untuk menangani pencarian ketika tombol 'Enter' ditekan
+  onPressEnterCari() {
+    // Panggil fungsi pencarian dengan teks yang dimasukkan
+    const searchResult = this.searchByText(this.katakunci);
+    // Lakukan sesuatu dengan hasil pencarian, misalnya tampilkan di konsol atau simpan ke variabel untuk ditampilkan di antarmuka pengguna
+    console.log('Hasil Pencarian:', searchResult);
+    // Reset nilai kata kunci setelah pencarian selesai
+    this.katakunci = '';
+  },
+
     resetField() {
       this.file = "";
       this.action = "create";
@@ -1049,6 +1084,10 @@ export default {
   computed: {
     requiredPassword() {
       return this.action === "create" ? true : false;
+    },
+    filteredForms() {
+      // Filter forms based on search keyword (katakunci)
+      return this.IsExistKotamaEmployee.filter(form => form.text.toLowerCase().includes(this.katakunci.toLowerCase()));
     },
   },
   mounted() {
