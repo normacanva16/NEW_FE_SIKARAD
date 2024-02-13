@@ -19,13 +19,13 @@
                       <b-button variant="light" @focus="showMatches = true" @click="search">Cari</b-button>
                     </div>
                     <div class="input-group-append">
-                      <b-button variant="light" @click="notifModal">
+                      <b-button variant="light" :disabled="btnNotif" @click="notifModal">
                         <i class="fa-solid fa-exclamation fa-shake fa-2xl" style="color: #df0c0c;"></i>
                       </b-button>
                     </div>
                     <!-- <b-button variant="light" @click="showGPSLocation" v-b-tooltip.hover="{ variant: 'info' }" title="Lokasi Anda"><i class="fa-solid fa-location-crosshairs"></i></b-button> -->
                     <div v-if="buttonRute">
-                      <b-button variant="light" disabled @click="hapusRute">
+                      <b-button variant="primary" disabled @click="hapusRute">
                         <i class="fa-solid fa-road-circle-xmark fa-beat"></i>
                       </b-button>
                     </div>
@@ -99,64 +99,6 @@
                         tahun</b-form-checkbox>
                 </div>
               </div>
-
-              <!-- <h5>By Balakpus / Kotama</h5>
-              <div class="container">
-                <b-form-checkbox :disabled="!showRumahSakit" v-model="RumahSakitKelasA">Kodam I BB</b-form-checkbox>
-                <b-form-checkbox :disabled="!showRumahSakit" v-model="RumahSakitKelasB">Kodam II Swj</b-form-checkbox>
-                <b-form-checkbox :disabled="!showRumahSakit" v-model="RumahSakitKelasC">Kodam III Slw</b-form-checkbox>
-                <b-form-checkbox :disabled="!showRumahSakit" v-model="RumahSakitKelasD">Kodam IV Dip</b-form-checkbox>
-                <b-form-checkbox :disabled="!showRumahSakit" v-model="RumahSakitKelasA">Kodam V Brw</b-form-checkbox>
-                <b-form-checkbox :disabled="!showRumahSakit" v-model="RumahSakitKelasB">Kodam VI Mlw</b-form-checkbox>
-                <b-form-checkbox :disabled="!showRumahSakit" v-model="RumahSakitKelasC">Kodam IX Udy</b-form-checkbox>
-                <b-form-checkbox :disabled="!showRumahSakit" v-model="RumahSakitKelasD">Kodam XII Tpr</b-form-checkbox>
-                <b-form-checkbox :disabled="!showRumahSakit" v-model="RumahSakitKelasA">Kodam XIII Mdk</b-form-checkbox>
-                <b-form-checkbox :disabled="!showRumahSakit" v-model="RumahSakitKelasB">Kodam XIV Hsn</b-form-checkbox>
-                <b-form-checkbox :disabled="!showRumahSakit" v-model="RumahSakitKelasC">Kodam XVI Ptm</b-form-checkbox>
-                <b-form-checkbox :disabled="!showRumahSakit" v-model="RumahSakitKelasD">Kodam XVII Cen</b-form-checkbox>
-                <b-form-checkbox :disabled="!showRumahSakit" v-model="RumahSakitKelasA">Kodam XVIII Ksr</b-form-checkbox>
-                <b-form-checkbox :disabled="!showRumahSakit" v-model="RumahSakitKelasB">Kodam Jaya</b-form-checkbox>
-                <b-form-checkbox :disabled="!showRumahSakit" v-model="RumahSakitKelasC">Kodam IM</b-form-checkbox>
-                <b-form-checkbox :disabled="!showRumahSakit" v-model="RumahSakitKelasD">Pussenif</b-form-checkbox>
-                <b-form-checkbox :disabled="!showRumahSakit" v-model="RumahSakitKelasD">Pussenkav</b-form-checkbox>
-                <b-form-checkbox :disabled="!showRumahSakit" v-model="RumahSakitKelasD">Pussenarmed</b-form-checkbox>
-                <b-form-checkbox :disabled="!showRumahSakit" v-model="RumahSakitKelasD">Pussenarhanud</b-form-checkbox>
-                <b-form-checkbox :disabled="!showRumahSakit" v-model="RumahSakitKelasD">Pusziad</b-form-checkbox>
-                <b-form-checkbox :disabled="!showRumahSakit" v-model="RumahSakitKelasD">Kopassus</b-form-checkbox>
-                <b-form-checkbox :disabled="!showRumahSakit" v-model="RumahSakitKelasD">Kostrad</b-form-checkbox>
-                <b-form-checkbox :disabled="!showRumahSakit" v-model="RumahSakitKelasD">Kodiklatad</b-form-checkbox>
-                <b-form-checkbox :disabled="!showRumahSakit" v-model="RumahSakitKelasD">Disadaad</b-form-checkbox>
-                <b-form-checkbox :disabled="!showRumahSakit" v-model="RumahSakitKelasD">Dislaikad</b-form-checkbox>
-                <b-form-checkbox :disabled="!showRumahSakit" v-model="RumahSakitKelasD">Disjarahad</b-form-checkbox>
-                <b-form-checkbox :disabled="!showRumahSakit" v-model="RumahSakitKelasD">Disjasad</b-form-checkbox>
-                <b-form-checkbox :disabled="!showRumahSakit" v-model="RumahSakitKelasD">Disinfolahtad</b-form-checkbox>
-                <b-form-checkbox :disabled="!showRumahSakit" v-model="RumahSakitKelasD">Dislitbangad</b-form-checkbox>
-                <b-form-checkbox :disabled="!showRumahSakit" v-model="RumahSakitKelasD">Dispsiad</b-form-checkbox>
-                <b-form-checkbox :disabled="!showRumahSakit" v-model="RumahSakitKelasD">Disbintalad</b-form-checkbox>
-                <b-form-checkbox :disabled="!showRumahSakit" v-model="RumahSakitKelasD">Dispenad</b-form-checkbox>
-                <b-form-checkbox :disabled="!showRumahSakit" v-model="RumahSakitKelasD">Ditkumad</b-form-checkbox>
-                <b-form-checkbox :disabled="!showRumahSakit" v-model="RumahSakitKelasD">Ditkuad</b-form-checkbox>
-                <b-form-checkbox :disabled="!showRumahSakit" v-model="RumahSakitKelasD">Dittopad</b-form-checkbox>
-                <b-form-checkbox :disabled="!showRumahSakit" v-model="RumahSakitKelasD">Ditajenad</b-form-checkbox>
-                <b-form-checkbox :disabled="!showRumahSakit" v-model="RumahSakitKelasD">Rspad GS</b-form-checkbox>
-                <b-form-checkbox :disabled="!showRumahSakit" v-model="RumahSakitKelasD">Puskesad</b-form-checkbox>
-                <b-form-checkbox :disabled="!showRumahSakit" v-model="RumahSakitKelasD">Pusbekangad</b-form-checkbox>
-                <b-form-checkbox :disabled="!showRumahSakit" v-model="RumahSakitKelasD">Puspalad</b-form-checkbox>
-                <b-form-checkbox :disabled="!showRumahSakit" v-model="RumahSakitKelasD">Pushubad</b-form-checkbox>
-                <b-form-checkbox :disabled="!showRumahSakit" v-model="RumahSakitKelasD">Puspenerbad</b-form-checkbox>
-                <b-form-checkbox :disabled="!showRumahSakit" v-model="RumahSakitKelasD">Pusintelad</b-form-checkbox>
-                <b-form-checkbox :disabled="!showRumahSakit" v-model="RumahSakitKelasD">Pusterad</b-form-checkbox>
-                <b-form-checkbox :disabled="!showRumahSakit" v-model="RumahSakitKelasD">Puspomad</b-form-checkbox>
-                <b-form-checkbox :disabled="!showRumahSakit" v-model="RumahSakitKelasD">Pussansiad</b-form-checkbox>
-                <b-form-checkbox :disabled="!showRumahSakit" v-model="RumahSakitKelasD">Secapa AD</b-form-checkbox>
-                <b-form-checkbox :disabled="!showRumahSakit" v-model="RumahSakitKelasD">Seskoad</b-form-checkbox>
-                <b-form-checkbox :disabled="!showRumahSakit" v-model="RumahSakitKelasD">Akmil</b-form-checkbox>
-                <b-form-checkbox :disabled="!showRumahSakit" v-model="RumahSakitKelasD">Itjenad</b-form-checkbox>
-                <b-form-checkbox :disabled="!showRumahSakit" v-model="RumahSakitKelasD">Mabesad</b-form-checkbox>
-              </div>   -->
-
-
-
             </b-form-radio-group>
           </div>
         </template>
@@ -438,48 +380,39 @@
         </div>
       </div>
     </b-modal>
-    <b-modal v-model="modalNotif" size="lg" >
+    <b-modal v-model="modalNotif" size="lg">
       <div class="justify-center">
-      <b-card class="text-center">
-        <!-- <template v-for="item in notificationData">
-          <div :key="item.name" v-if="item.data.length > 0" class="bg-warning text-dark">
-            <h3 class="p-4" v-b-toggle.collapse-1>{{ item.name }}</h3>
-            <b-collapse id="collapse-1" class="mt-2">
-              <div v-for="dataItem in item.data" :key="dataItem.id">
-              <p>{{ dataItem.nama }}</p>
+        <b-card class="text-center">
+          <div class="m-2" v-for="item in notificationData">
+            <div :key="item.id" v-if="item.data[0].group_name === 'Jab_Kosong'">
+              <div>
+                <div class="bg-warning text-white">
+                  <h3 class="p-4" v-b-toggle.collapse-1>{{ item.name }}</h3>
+                </div>
+                <b-collapse id="collapse-1" class="mt-2">
+                  <div v-for="dataItem in item.data" :key="dataItem.id">
+                    <!-- <p>{{ dataItem.nama }}</p> -->
+                    <ve-table :table-data="itemJabKosong" :columns="fieldMasaJabatan"/>
+                  </div>
+                </b-collapse>
+              </div>
             </div>
-            </b-collapse>
-          </div>
-        </template> -->
-        <div class="m-2" v-for="item in notificationData">
-          <div :key="item.id" v-if="item.data[0].group_name === 'Jab_Kosong'">
-            <div>
+            <div v-else>
               <div class="bg-warning text-white">
-              <h3 class="p-4" v-b-toggle.collapse-1>{{ item.name }}</h3>
-            </div>
-            <b-collapse id="collapse-1" class="mt-2">
+                <h3 class="p-4" v-b-toggle.collapse-2>{{ item.name }}</h3>
+              </div>
+              <b-collapse id="collapse-2" class="mt-2">
                 <div v-for="dataItem in item.data" :key="dataItem.id">
                   <p>{{ dataItem.nama }}</p>
                 </div>
-            </b-collapse>
+              </b-collapse>
             </div>
           </div>
-          <div v-else>
-            <div class="bg-warning text-white">
-              <h3 class="p-4" v-b-toggle.collapse-2>{{ item.name }}</h3>
-            </div>
-            <b-collapse id="collapse-2" class="mt-2">
-                <div v-for="dataItem in item.data" :key="dataItem.id">
-                  <p>{{ dataItem.nama }}</p>
-                </div>
-            </b-collapse>
+          <div v-if="notificationData.length === 0" class="bg-warning text-dark">
+            <h3 class="p-4">No notifications available</h3>
           </div>
-        </div>
-        <div v-if="notificationData.length === 0" class="bg-warning text-dark">
-          <h3 class="p-4">No notifications available</h3>
-        </div>
-      </b-card>
-    </div>
+        </b-card>
+      </div>
     </b-modal>
     <!-- display map -->
     <div id="map" class="mapHome">
@@ -510,6 +443,38 @@ export default {
       routingControl: null,
       closestPlace: null,
       closestPlace: "",
+      fieldMasaJabatan: [
+          { field: "name", key: "a", title: "Nama Kotama", align: "center" },
+          { field: "date", key: "b", title: "Jumlah Personel", align: "left" },
+          {
+            field: "hobby", 
+            key: "c", 
+            title: "Detail", 
+            align: "right",
+            renderBodyCell: ({}) => {
+            return (
+              <span>
+                <button class="btn btn-outline-success">
+                  <i class="fa fa-magnifying-glass"></i>
+                </button>
+                &nbsp;
+              </span>
+            );
+          },
+          },
+      ],
+      itemJabKosong: [
+        {
+            name: "John",
+            date: "1900-05-20",
+            hobby: "coding and coding repeat",
+        },
+        {
+            name: "Dickerson",
+            date: "1910-06-20",
+            hobby: "coding and coding repeat",
+        },
+      ],
       modalNotif: false,
       matchesData: [],
       notificationData: [],
@@ -529,6 +494,7 @@ export default {
       selectedType: '',
       // lainnya filter layer
       showLainnya: false,
+      btnNotif: false,
       LainLayer: null,
       LogoLainnya,
       LogoLainnyaStroke,
@@ -909,13 +875,15 @@ export default {
       });
     },
     async notifModal() {
-        try {
-          const response = await axios.get(`${process.env.VUE_APP_URL}dashboard/peta/notification`);
-          this.notificationData = response.data.data;
-          this.modalNotif = true;
-        } catch (error) {
-          console.error('Error loading notifications:', error);
-        }
+      try {
+        this.btnNotif = true;
+        const response = await axios.get(`${process.env.VUE_APP_URL}dashboard/peta/notification`);
+        this.notificationData = response.data.data;
+        this.modalNotif = true;
+        this.btnNotif = false;
+      } catch (error) {
+        console.error('Error loading notifications:', error);
+      }
     },
   },
 
