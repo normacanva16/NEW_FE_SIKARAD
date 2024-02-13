@@ -428,7 +428,7 @@ export default {
       LainLayer: null,
       LogoLainnya,
       LogoLainnyaStroke,
-   
+      dataTotal: null,
       // near place
       // keyword cari
       querySearch: "",
@@ -822,13 +822,15 @@ export default {
       .then(response => {
         let DataLocation = response.data.data.content;
         this.DataLocation = response.data.data.content;
+        this.dataTotal = response.data.data.totalData;
         this.map.addLayer(this.LainLayer);
+
+        console.log(DataLocation, "Data Lokasi");
 
         DataLocation.forEach(marker => {
           let map = L.marker([marker.latitude, marker.longitude]);
    
             map.setIcon(L.divIcon({
-              // html: '<i class="fa-solid fa-house-flag" style="font-size: 20px; color: #4F8DF4;  -webkit-text-stroke: 1px #0f60e8; text-stroke: 1px black;">',
               html: `<img src="${this.LogoLainnyaStroke}" width="25px" height="25px" alt="">`,
               iconSize: [20, 20],
               className: 'fa-icon',
@@ -837,7 +839,8 @@ export default {
             }));
             this.LainLayer.addLayer(map);
             map.on('click', e => {
-              this.ruteMulaiLokasi = e.latlng;
+              if (this.dataTotal > 4) {
+                this.ruteMulaiLokasi = e.latlng;
               let closestPlaces = [];
               let closestDistance = [];
               this.DataLocation.forEach(DataMarkerDistance => {
@@ -859,7 +862,6 @@ export default {
                 place3: closestPlaces[closestDistance.indexOf(sortedDistances[2])].nama,
                 place4: closestPlaces[closestDistance.indexOf(sortedDistances[3])].nama,
               };
-              // Sort the distances and take the 3 closest places
               this.modalDetail = true;
               this.selectedMarker = {
                 GroupData: 'DataMDMC',
@@ -894,6 +896,27 @@ export default {
                 tempatTerdekatJarak3: "" + closestPlaces.find(place => place.nama === namaTempatDekat.place3).latitude + "," + closestPlaces.find(place => place.nama === namaTempatDekat.place3).longitude,
                 tempatTerdekatJarak4: "" + closestPlaces.find(place => place.nama === namaTempatDekat.place4).latitude + "," + closestPlaces.find(place => place.nama === namaTempatDekat.place4).longitude,
               };
+              } else {
+              this.modalDetail = true;
+              this.selectedMarker = {
+                GroupData: 'DataMDMC',
+                uuid: "" + marker.id + "",
+                title: '' + marker.type + '',
+                name: '' + marker.nama + '',
+                code: '' + marker.code + '',
+                url_image: '' + marker.url_image + '',
+                personel: '' + marker.jumlah_relawan + '',
+                address: "" + marker.alamat + "",
+                gmaps: "" + marker.url_gmaps + "",
+                jab_kosong: "" + marker.jab_kosong + "",
+                jabdibawah1: "" + marker.jabdibawah1 + "",
+                jabdiatas1: "" + marker.jabdiatas1 + "",
+                jabdiatas2: "" + marker.jabdiatas2 + "",
+                latitude: "" + marker.latitude + "",
+                longitude: "" + marker.longitude + "",
+              };
+              }
+
             });
 
           this.map.on('zoomend', () => {
