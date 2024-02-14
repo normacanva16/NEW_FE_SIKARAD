@@ -20,7 +20,8 @@
                     </div>
                     <div class="input-group-append">
                       <b-button variant="light" :disabled="btnNotif" @click="notifModal">
-                        <i class="fa-solid fa-exclamation fa-shake fa-2xl" :style="{ color: iconColorChange, animation: iconAnimationChange }"></i>
+                        <i class="fa-solid fa-exclamation fa-shake fa-2xl"
+                          :style="{ color: isJabatanLebih1Tahun ? '' : '#df0c0c' }"></i>
                       </b-button>
                     </div>
                     <!-- <b-button variant="light" @click="showGPSLocation" v-b-tooltip.hover="{ variant: 'info' }" title="Lokasi Anda"><i class="fa-solid fa-location-crosshairs"></i></b-button> -->
@@ -61,14 +62,7 @@
                   </span>
                 </b-button>
               </div>
-              <!-- <b-button class="w-100 mt-2" variant="primary">
-                <span style="display: flex; align-items: center">
-                  <i class="fa-solid fa-infinity" style="margin-right: 10px;"></i>
-                  <span style="flex: 1; text-align: center;">Semua</span>
-                </span>
-              </b-button> -->
             </div>
-            <!-- jenis peta -->
             <b-form-group label="Pilih Jenis Peta">
               <b-form-radio-group v-model="selectedLayer">
                 <b-form-radio value="display">Peta Display</b-form-radio>
@@ -91,7 +85,7 @@
                 <h5>By Status Jabatan</h5>
                 <div class="container">
                   <b-form-checkbox v-model="showJabatanKosong" :disabled="!showLainnya">Jabatan Kosong</b-form-checkbox>
-                  <b-form-checkbox v-model="showJabatanKurang1" :disabled="!showLainnya">Jabatan < 1
+                  <b-form-checkbox v-model="showJabatanKurang1" :disabled="!showLainnya">Jabatan &lt 1
                       tahun</b-form-checkbox>
                       <b-form-checkbox v-model="showJabatanDiantara12" :disabled="!showLainnya">Jabatan 1-2
                         tahun</b-form-checkbox>
@@ -295,7 +289,6 @@
                   </div>
                   <!-- <b-col class=""><div class='d-flex justify-content-center'><button class="btn btn-outline-primary btn-no-border"  @click="showRoute(selectedMarker)"><i class="fa-solid fa-diamond-turn-right"></i> Direction</button></div></b-col> -->
                 </div>
-                <!-- button detail -->
                 <div class="mt-2">
                   <div class='d-flex justify-content-center'>
                     <button class="btn btn-outline-primary" style="width: 100%" v-on:click="">Detail</button>
@@ -460,7 +453,6 @@ import L from 'leaflet';
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.js';
-// import markerClusterGroup from 'leaflet.markercluster/dist/leaflet.markercluster';
 import axios from 'axios';
 import swal from 'sweetalert2';
 import 'leaflet-gps';
@@ -484,38 +476,29 @@ export default {
       modalDetail: false,
       selectedMarker: {},
       buttonRute: false,
-      // closd place
       places: [],
       nearestDataPlace: '',
-      // layer sidebar
       sidebarVisible: false,
       baseLayer: null,
       satelliteLayer: null,
       selectedLayer: 'display',
       selectedType: '',
-      // lainnya filter layer
       showLainnya: false,
       btnNotif: false,
       LainLayer: null,
       LogoLainnya,
       LogoLainnyaStroke,
       dataTotal: null,
-      // near place
-      // keyword cari
       querySearch: "",
       showMatchesValue: false,
-      // filter by status aksi
       showJabatanKosong: false,
       showJabatanKadaluarsa: false,
       showJabatanKurang1: false,
       showJabatanDiantara12: false,
       showJabatanLebih2: false,
-      // tooltip
       tooltips: [],
-      // click distance cluster
       ruteMulaiLokasi: null,
       closestDistance: null,
-      // filter data sidebar
       detaildataBMKG: false,
       dataGempaBMKG: {},
       sizeImg: { width: 155, height: 155 },
@@ -612,17 +595,6 @@ export default {
           })
         })
           .addTo(this.map)
-        // if (!this.routingControl) {
-        //   this.buttonRute = true;
-        //   this.routingControl = L.Routing.control({
-        //     createMarker: function () { return null; },
-        //     waypoints: [
-        //       startLatLng,
-        //       null
-        //     ],
-        //     routeWhileDragging: true
-        //   }).addTo(this.map);
-        // }
       }, (error) => {
         switch (error.code) {
           case error.PERMISSION_DENIED:
@@ -884,35 +856,15 @@ export default {
         this.btnNotif = true;
         const response = await axios.get(`${process.env.VUE_APP_URL}dashboard/peta/notification`);
         this.notificationData = response.data.data;
-        this.setExclamationStatus();
+        this.isJabatanLebih1Tahun = this.notificationData.some(item => item.name === 'Jabatan lebih dari 1,5 tahun' && item.data.length > 0);
         this.modalNotif = true;
         this.btnNotif = false;
       } catch (error) {
         console.error('Error loading notifications:', error);
       }
     },
-    setExclamationStatus() {
-      const jabKosongLength = this.notificationData.find(item => item.name === 'Jabatan Kosong')?.data.length || 0;
-      const jabKadaluarsaLength = this.notificationData.find(item => item.name === 'Jabatan lebih dari 1,5 tahun')?.data.length || 0;
 
-      if (jabKosongLength === 0 && jabKadaluarsaLength === 0) {
-        this.iconColorChange = '';
-        this.iconAnimationChange = '';
-      } else if (jabKosongLength === 0 && jabKadaluarsaLength > 0) {
-        this.iconColorChange = '#df0c0c';
-        this.iconAnimationChange = 'fa-shake';
-      } else if (jabKosongLength > 0 && jabKadaluarsaLength === 0) {
-        this.iconColorChange = '';
-        this.iconAnimationChange = '';
-      } else {
-        this.iconColorChange = '#df0c0c';
-        this.iconAnimationChange = 'fa-shake';
-      }
-    },
-  },
 
-  beforeDestroy() {
-    clearInterval(this.pollingTimer);
   },
 
   mounted() {
@@ -928,9 +880,10 @@ export default {
     }
 
     this.map = L.map('map', {
-      zoomControl: false, // disable default zoom control
+      zoomControl: false,
     }).setView([-0.9085086842426627, 118.1511063353415], 5);
-    this.baseLayer = L.tileLayer('https://{s}.tile.jawg.io/jawg-streets/{z}/{x}/{y}{r}.png?access-token={accessToken}', {
+    // this.baseLayer = L.tileLayer('https://{s}.tile.jawg.io/jawg-streets/{z}/{x}/{y}{r}.png?access-token={accessToken}', {
+    this.baseLayer = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: 'SIKARAD',
       minZoom: 0,
       maxZoom: 22,
@@ -1108,7 +1061,6 @@ export default {
   },
 
   watch: {
-    // filter search location
     querySearch(value) {
       this.matchesData = this.filteredLocations;
     },
@@ -1178,7 +1130,6 @@ export default {
   },
 
   computed: {
-    // filter by name as filterlocation using (match)
     filteredLocations() {
       return this.DataLocation.filter(location => {
         return location.nama.toLowerCase().includes(this.querySearch.toLowerCase());
@@ -1195,7 +1146,6 @@ export default {
 
     filterDataAksiMarker() {
       return this.DataLocation.filter((marker) => {
-        // NAMBAHIN KONDISI DISINI
         return (this.showJabatanKosong && marker.jab_kosong > 0) ||
           (this.showJabatanKurang1 && marker.jabdibawah1 > 0) ||
           (this.showJabatanDiantara12 && marker.jabdiatas1 > 0) ||
