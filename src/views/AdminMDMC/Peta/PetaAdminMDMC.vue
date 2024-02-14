@@ -20,7 +20,7 @@
                     </div>
                     <div class="input-group-append">
                       <b-button variant="light" :disabled="btnNotif" @click="notifModal">
-                        <i class="fa-solid fa-exclamation fa-shake fa-2xl" style="color: #df0c0c;"></i>
+                        <i class="fa-solid fa-exclamation fa-shake fa-2xl" :style="{ color: iconColorChange, animation: iconAnimationChange }"></i>
                       </b-button>
                     </div>
                     <!-- <b-button variant="light" @click="showGPSLocation" v-b-tooltip.hover="{ variant: 'info' }" title="Lokasi Anda"><i class="fa-solid fa-location-crosshairs"></i></b-button> -->
@@ -390,9 +390,25 @@
                   <h3 class="p-4" v-b-toggle.collapse-1>{{ item.name }}</h3>
                 </div>
                 <b-collapse id="collapse-1" class="mt-2">
-                  <div v-for="dataItem in item.data" :key="dataItem.id">
-                    <!-- <p>{{ dataItem.nama }}</p> -->
-                    <ve-table :table-data="itemJabKosong" :columns="fieldMasaJabatan"/>
+                  <div>
+                    <table class="table wrapper-scroll-y my-custom-scrollbar">
+                      <thead>
+                        <tr>
+                          <th scope="col">Nama Kotama</th>
+                          <th scope="col">Jumlah Personel</th>
+                          <th scope="col">Detail</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr v-for="match in item.data" :key="match.id">
+                          <td>{{ match.nama }}</td>
+                          <td>{{ match.jumlah_employee }}</td>
+                          <td>
+                            <b-button variant="success" @click="searchDataMatch(match)">Detail</b-button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
                 </b-collapse>
               </div>
@@ -402,8 +418,25 @@
                 <h3 class="p-4" v-b-toggle.collapse-2>{{ item.name }}</h3>
               </div>
               <b-collapse id="collapse-2" class="mt-2">
-                <div v-for="dataItem in item.data" :key="dataItem.id">
-                  <p>{{ dataItem.nama }}</p>
+                <div>
+                  <table class="table wrapper-scroll-y my-custom-scrollbar">
+                    <thead>
+                      <tr>
+                        <th scope="col">Nama Kotama</th>
+                        <th scope="col">Jumlah Personel</th>
+                        <th scope="col">Detail</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-for="match in item.data" :key="match.id">
+                        <td>{{ match.nama }}</td>
+                        <td>{{ match.jumlah_employee }}</td>
+                        <td>
+                          <b-button variant="success" @click="searchDataMatch(match)">Detail</b-button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </b-collapse>
             </div>
@@ -443,38 +476,6 @@ export default {
       routingControl: null,
       closestPlace: null,
       closestPlace: "",
-      fieldMasaJabatan: [
-          { field: "name", key: "a", title: "Nama Kotama", align: "center" },
-          { field: "date", key: "b", title: "Jumlah Personel", align: "left" },
-          {
-            field: "hobby", 
-            key: "c", 
-            title: "Detail", 
-            align: "right",
-            renderBodyCell: ({}) => {
-            return (
-              <span>
-                <button class="btn btn-outline-success">
-                  <i class="fa fa-magnifying-glass"></i>
-                </button>
-                &nbsp;
-              </span>
-            );
-          },
-          },
-      ],
-      itemJabKosong: [
-        {
-            name: "John",
-            date: "1900-05-20",
-            hobby: "coding and coding repeat",
-        },
-        {
-            name: "Dickerson",
-            date: "1910-06-20",
-            hobby: "coding and coding repeat",
-        },
-      ],
       modalNotif: false,
       matchesData: [],
       notificationData: [],
@@ -524,8 +525,11 @@ export default {
       placeholders: ['Cari Kotama....', 'Cari Balakpus....'],
       notifications: [],
       pollingInterval: 1000,
+      iconColorChange: '',
+      iconAnimationChange: '',
     }
   },
+
   methods: {
     getToken() {
       this.token = cookies.get("token")
@@ -533,6 +537,7 @@ export default {
     searchDataMatch(match) {
       this.querySearch = `${match.nama}`;
       this.showMatches = false;
+      this.modalNotif = false;
       if (this.circle) {
         this.map.removeLayer(this.circle);
       }
@@ -879,10 +884,29 @@ export default {
         this.btnNotif = true;
         const response = await axios.get(`${process.env.VUE_APP_URL}dashboard/peta/notification`);
         this.notificationData = response.data.data;
+        this.setExclamationStatus();
         this.modalNotif = true;
         this.btnNotif = false;
       } catch (error) {
         console.error('Error loading notifications:', error);
+      }
+    },
+    setExclamationStatus() {
+      const jabKosongLength = this.notificationData.find(item => item.name === 'Jabatan Kosong')?.data.length || 0;
+      const jabKadaluarsaLength = this.notificationData.find(item => item.name === 'Jabatan lebih dari 1,5 tahun')?.data.length || 0;
+
+      if (jabKosongLength === 0 && jabKadaluarsaLength === 0) {
+        this.iconColorChange = '';
+        this.iconAnimationChange = '';
+      } else if (jabKosongLength === 0 && jabKadaluarsaLength > 0) {
+        this.iconColorChange = '#df0c0c';
+        this.iconAnimationChange = 'fa-shake';
+      } else if (jabKosongLength > 0 && jabKadaluarsaLength === 0) {
+        this.iconColorChange = '';
+        this.iconAnimationChange = '';
+      } else {
+        this.iconColorChange = '#df0c0c';
+        this.iconAnimationChange = 'fa-shake';
       }
     },
   },
