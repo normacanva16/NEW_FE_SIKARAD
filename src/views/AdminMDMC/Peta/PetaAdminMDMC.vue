@@ -407,13 +407,21 @@
             <div v-else>
               <div class="bg-warning text-white">
                 <div class="bg-warning text-white">
-                <h3 class="p-4" v-b-toggle.collapse-3>{{ item.name }}</h3>
-              </div>
-              <b-collapse id="collapse-3" class="mt-2">
-                <div>
-                  <h3>Data Tidak Tersedia</h3>
+                  <h3 class="p-4" v-b-toggle.collapse-3>{{ item.name }}</h3>
                 </div>
-              </b-collapse>
+                <b-collapse id="collapse-3" class="mt-2">
+                  <div>
+                    <table class="table wrapper-scroll-y my-custom-scrollbar text-white text-center">
+                      <tbody>
+                        <tr>
+                          <td>
+                            <h3>Tidak ada data...</h3>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </b-collapse>
               </div>
             </div>
           </div>
