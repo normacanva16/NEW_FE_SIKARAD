@@ -86,11 +86,11 @@
                 <div class="container">
                   <b-form-checkbox v-model="showJabatanKosong" :disabled="!showLainnya">Jabatan Kosong</b-form-checkbox>
                   <b-form-checkbox v-model="showJabatanKurang1" :disabled="!showLainnya">Jabatan &lt 1
-                      tahun</b-form-checkbox>
-                      <b-form-checkbox v-model="showJabatanDiantara12" :disabled="!showLainnya">Jabatan 1-2
-                        tahun</b-form-checkbox>
-                      <b-form-checkbox v-model="showJabatanLebih2" :disabled="!showLainnya">Jabatan > 2
-                        tahun</b-form-checkbox>
+                    tahun</b-form-checkbox>
+                  <b-form-checkbox v-model="showJabatanDiantara12" :disabled="!showLainnya">Jabatan 1-2
+                    tahun</b-form-checkbox>
+                  <b-form-checkbox v-model="showJabatanLebih2" :disabled="!showLainnya">Jabatan > 2
+                    tahun</b-form-checkbox>
                 </div>
               </div>
             </b-form-radio-group>
@@ -377,40 +377,11 @@
       <div class="justify-center">
         <b-card class="text-center">
           <div class="m-2" v-for="item in notificationData">
-            <div :key="item.id" v-if="item.data[0].group_name === 'Jab_Kosong'">
-              <div>
-                <div class="bg-warning text-white">
-                  <h3 class="p-4" v-b-toggle.collapse-1>{{ item.name }}</h3>
-                </div>
-                <b-collapse id="collapse-1" class="mt-2">
-                  <div>
-                    <table class="table wrapper-scroll-y my-custom-scrollbar">
-                      <thead>
-                        <tr>
-                          <th scope="col">Nama Kotama</th>
-                          <th scope="col">Jumlah Personel</th>
-                          <th scope="col">Detail</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr v-for="match in item.data" :key="match.id">
-                          <td>{{ match.nama }}</td>
-                          <td>{{ match.jumlah_employee }}</td>
-                          <td>
-                            <b-button variant="success" @click="searchDataMatch(match)">Detail</b-button>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </b-collapse>
-              </div>
-            </div>
-            <div v-else>
+            <div :key="item.id" v-if="item.data.length > 0">
               <div class="bg-warning text-white">
-                <h3 class="p-4" v-b-toggle.collapse-2>{{ item.name }}</h3>
+                <h3 class="p-4" v-b-toggle="'collapse-' + item.name">{{ item.name }}</h3>
               </div>
-              <b-collapse id="collapse-2" class="mt-2">
+              <b-collapse :id="'collapse-' + item.name" class="mt-2">
                 <div>
                   <table class="table wrapper-scroll-y my-custom-scrollbar">
                     <thead>
@@ -433,6 +404,18 @@
                 </div>
               </b-collapse>
             </div>
+            <div v-else>
+              <div class="bg-warning text-white">
+                <div class="bg-warning text-white">
+                <h3 class="p-4" v-b-toggle.collapse-3>{{ item.name }}</h3>
+              </div>
+              <b-collapse id="collapse-3" class="mt-2">
+                <div>
+                  <h3>Data Tidak Tersedia</h3>
+                </div>
+              </b-collapse>
+              </div>
+            </div>
           </div>
           <div v-if="notificationData.length === 0" class="bg-warning text-dark">
             <h3 class="p-4">No notifications available</h3>
@@ -440,6 +423,8 @@
         </b-card>
       </div>
     </b-modal>
+
+
     <!-- display map -->
     <div id="map" class="mapHome">
       <div id="legend"></div>
@@ -448,7 +433,6 @@
 </template>
   
 <script>
-import router from '@/router';
 import L from 'leaflet';
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
 import 'leaflet/dist/leaflet.css';
@@ -863,8 +847,6 @@ export default {
         console.error('Error loading notifications:', error);
       }
     },
-
-
   },
 
   mounted() {
@@ -1233,9 +1215,7 @@ th {
 
 .checkbox-container {
   max-height: 150px;
-  /* Set the maximum height of the container */
   overflow-y: scroll;
-  /* Enable the scroll bar */
 }
 
 .b-sidebar {
