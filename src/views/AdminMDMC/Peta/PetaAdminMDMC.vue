@@ -21,8 +21,9 @@
                     <div class="input-group-append">
                       <b-button variant="light" :disabled="btnNotif" @click="notifModal">
                         <i class="fa-solid fa-exclamation fa-shake fa-2xl"
-                          :style="{ color: isJabatanLebih1Tahun ? '' : '#df0c0c' }"></i>
+                          :style="{ color: (jabKosong.length === 0 && jabKadaluarsa.length === 0) ? 'black' : (jabKosong.length === 0 && jabKadaluarsa.length > 0) ? 'red' : '#df0c0c' }"></i>
                       </b-button>
+
                     </div>
                     <!-- <b-button variant="light" @click="showGPSLocation" v-b-tooltip.hover="{ variant: 'info' }" title="Lokasi Anda"><i class="fa-solid fa-location-crosshairs"></i></b-button> -->
                     <div v-if="buttonRute">
@@ -459,6 +460,8 @@ export default {
       map: null,
       routingControl: null,
       closestPlace: null,
+      jabKosong: [],
+      jabKadaluarsa: [],
       closestPlace: "",
       modalNotif: false,
       matchesData: [],
@@ -848,13 +851,21 @@ export default {
         this.btnNotif = true;
         const response = await axios.get(`${process.env.VUE_APP_URL}dashboard/peta/notification`);
         this.notificationData = response.data.data;
-        this.isJabatanLebih1Tahun = this.notificationData.some(item => item.name === 'Jabatan lebih dari 1,5 tahun' && item.data.length > 0);
+        if (this.notificationData.some(item => item.name === 'Jabatan lebih dari 1,5 tahun' && item.data.length > 0)) {
+          this.iconColor = 'red';
+          this.iconShake = true;
+        } else {
+          // Jika tidak
+          this.iconColor = '#df0c0c';
+          this.iconShake = false;
+        }
         this.modalNotif = true;
         this.btnNotif = false;
       } catch (error) {
         console.error('Error loading notifications:', error);
       }
     },
+
   },
 
   mounted() {
