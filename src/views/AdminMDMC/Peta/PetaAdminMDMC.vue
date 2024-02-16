@@ -397,7 +397,7 @@
                         <td>{{ dataItem.nama }}</td>
                         <td>{{ dataItem.jumlah_employee }}</td>
                         <td>
-                          <b-button variant="success">Detail</b-button>
+                          <b-button variant="success" @click="searchDataMatch(dataItem)">Detail</b-button>
                         </td>
                       </tr>
                     </tbody>
@@ -425,7 +425,7 @@
                         <td>{{ dataItem.nama }}</td>
                         <td>{{ dataItem.jumlah_employee }}</td>
                         <td>
-                          <b-button variant="success">Detail</b-button>
+                          <b-button variant="success" @click="searchDataMatch(dataItem)">Detail</b-button>
                         </td>
                       </tr>
                     </tbody>
