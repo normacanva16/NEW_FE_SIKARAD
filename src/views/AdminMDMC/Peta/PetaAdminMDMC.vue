@@ -20,16 +20,7 @@
                     </div>
                     <div class="input-group-append">
                       <b-button variant="light" :disabled="btnNotif" @click="notifModal">
-                        <i 
-                        :class="{ 
-                          'fa-solid fa-exclamation fa-2xl': jabKosong.length === 0 && jabKadaluarsa.length === 0, 
-                          'fa-solid fa-exclamation fa-shake fa-2xl': jabKosong.length > 0 || jabKadaluarsa.length > 0 
-                        }"
-                        :style="
-                        { 
-                          color: (jabKosong.length === 0 && jabKadaluarsa.length === 0) ? 'black' : (jabKosong.length > 0 || jabKadaluarsa.length > 0) ? 'red' : '#df0c0c' 
-                        }"
-                        ></i>
+                        <i class="fa-solid fa-exclamation fa-2xl"></i>
                       </b-button>
 
                     </div>
@@ -385,14 +376,15 @@
     <b-modal v-model="modalNotif" size="lg">
       <div class="justify-center">
         <b-card class="text-center">
-          <div class="m-2" v-for="item in notificationData">
-            <div :key="item.id" v-if="item.data.length > 0">
-              <div class="bg-warning text-white">
-                <h3 class="p-4" v-b-toggle="'collapse-' + item.name">{{ item.name }}</h3>
-              </div>
-              <b-collapse :id="'collapse-' + item.name" class="mt-2">
-                <div>
-                  <table class="table wrapper-scroll-y my-custom-scrollbar">
+          <div v-for="(itemNotif, index) in notificationData" :key="index">
+            <div v-if="itemNotif.name === 'Jabatan Kosong'">
+              <b-button v-b-toggle.collapse-1 variant="warning w-100 p-4 mt-2 text-bold"><h3>{{ itemNotif.name }}</h3></b-button>
+              <b-collapse id="collapse-1" class="mt-2">
+                <template v-if="itemNotif.data.length === 0">
+                  <p>Data tidak ada...</p>
+                </template>
+                <template v-else>
+                  <table class="table">
                     <thead>
                       <tr>
                         <th scope="col">Nama Kotama</th>
@@ -401,47 +393,50 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr v-for="match in item.data" :key="match.id">
-                        <td>{{ match.nama }}</td>
-                        <td>{{ match.jumlah_employee }}</td>
+                      <tr v-for="dataItem in itemNotif.data" :key="dataItem.id">
+                        <td>{{ dataItem.nama }}</td>
+                        <td>{{ dataItem.jumlah_employee }}</td>
                         <td>
-                          <b-button variant="success" @click="searchDataMatch(match)">Detail</b-button>
+                          <b-button variant="success">Detail</b-button>
                         </td>
                       </tr>
                     </tbody>
                   </table>
-                </div>
+                </template>
               </b-collapse>
             </div>
             <div v-else>
-              <div class="bg-warning text-white">
-                <div class="bg-warning text-white">
-                  <h3 class="p-4" v-b-toggle.collapse-3>{{ item.name }}</h3>
-                </div>
-                <b-collapse id="collapse-3" class="mt-2">
-                  <div>
-                    <table class="table wrapper-scroll-y my-custom-scrollbar text-white text-center">
-                      <tbody>
-                        <tr>
-                          <td>
-                            <h3>Tidak ada data...</h3>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </b-collapse>
-              </div>
+              <b-button v-b-toggle.collapse-2 variant="warning w-100 p-4 mt-2 text-bold"><h3>{{ itemNotif.name }}</h3></b-button>
+              <b-collapse id="collapse-2" class="mt-2">
+                <template v-if="itemNotif.data.length === 0">
+                  <p>Data tidak ada...</p>
+                </template>
+                <template v-else>
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Nama Kotama</th>
+                        <th scope="col">Jumlah Personel</th>
+                        <th scope="col">Detail</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-for="dataItem in itemNotif.data" :key="dataItem.id">
+                        <td>{{ dataItem.nama }}</td>
+                        <td>{{ dataItem.jumlah_employee }}</td>
+                        <td>
+                          <b-button variant="success">Detail</b-button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </template>
+              </b-collapse>
             </div>
-          </div>
-          <div v-if="notificationData.length === 0" class="bg-warning text-dark">
-            <h3 class="p-4">No notifications available</h3>
           </div>
         </b-card>
       </div>
     </b-modal>
-
-
     <!-- display map -->
     <div id="map" class="mapHome">
       <div id="legend"></div>
@@ -833,19 +828,6 @@ export default {
       this.sidebarVisibilityFilter = false;
       this.modalDetail = false;
     },
-    loadNotifications() {
-      axios.get(`${process.env.VUE_APP_URL}dashboard/peta/notification`)
-        .then(response => {
-          this.notifications = response.data.data;
-          console.log(notifications, "Data notifications");
-        })
-        .catch(error => {
-          console.error('Error loading notifications:', error);
-        });
-    },
-    startPolling() {
-      this.pollingTimer = setInterval(this.loadNotifications, this.pollingInterval);
-    },
     showAlert(notification) {
       Swal.fire({
         title: 'New Notification',
@@ -859,21 +841,12 @@ export default {
         this.btnNotif = true;
         const response = await axios.get(`${process.env.VUE_APP_URL}dashboard/peta/notification`);
         this.notificationData = response.data.data;
-        if (this.notificationData.some(item => item.name === 'Jabatan lebih dari 1,5 tahun' && item.data.length > 0)) {
-          this.iconColor = 'red';
-          this.iconShake = true;
-        } else {
-          // Jika tidak
-          this.iconColor = '#df0c0c';
-          this.iconShake = false;
-        }
         this.modalNotif = true;
         this.btnNotif = false;
       } catch (error) {
         console.error('Error loading notifications:', error);
       }
     },
-
   },
 
   mounted() {
@@ -1063,7 +1036,6 @@ export default {
     this.filterJabatanDibawah1();
     this.filterJabatanDiatas1();
     this.filterJabatanDiatas2()
-    this.loadNotifications();
     this.startPolling();
     this.map.on('click', this.onClickCloseSidebar);
 
