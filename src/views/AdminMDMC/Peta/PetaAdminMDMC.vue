@@ -20,7 +20,14 @@
                     </div>
                     <div class="input-group-append">
                       <b-button variant="light" :disabled="btnNotif" @click="notifModal">
-                        <i class="fa-solid fa-exclamation fa-2xl"></i>
+                        <div v-for="(itemNotif, index) in notificationData" :key="index">
+                          <div v-if="itemNotif.data.length === 0">
+                            <i class="fa-solid fa-exclamation fa-2xl"></i>
+                          </div>
+                          <div v-else>
+                            <i class="fa-solid fa-exclamation fa-shake" style="color: #ff0000;"></i>
+                          </div>
+                        </div>
                       </b-button>
 
                     </div>
