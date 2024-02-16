@@ -20,8 +20,16 @@
                     </div>
                     <div class="input-group-append">
                       <b-button variant="light" :disabled="btnNotif" @click="notifModal">
-                        <i class="fa-solid fa-exclamation fa-shake fa-2xl"
-                          :style="{ color: (jabKosong.length === 0 && jabKadaluarsa.length === 0) ? 'black' : (jabKosong.length === 0 && jabKadaluarsa.length > 0) ? 'red' : '#df0c0c' }"></i>
+                        <i 
+                        :class="{ 
+                          'fa-solid fa-exclamation fa-2xl': jabKosong.length === 0 && jabKadaluarsa.length === 0, 
+                          'fa-solid fa-exclamation fa-shake fa-2xl': jabKosong.length > 0 || jabKadaluarsa.length > 0 
+                        }"
+                        :style="
+                        { 
+                          color: (jabKosong.length === 0 && jabKadaluarsa.length === 0) ? 'black' : (jabKosong.length > 0 || jabKadaluarsa.length > 0) ? 'red' : '#df0c0c' 
+                        }"
+                        ></i>
                       </b-button>
 
                     </div>
