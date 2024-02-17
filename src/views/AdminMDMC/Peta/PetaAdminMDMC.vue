@@ -19,18 +19,14 @@
                       <b-button variant="light" @focus="showMatches = true" @click="search">Cari</b-button>
                     </div>
                     <div class="input-group-append">
-                      <b-button variant="light" :disabled="btnNotif" @click="notifModal">
-                        <div v-for="(itemNotif, index) in notificationData" :key="index">
-                          <div v-if="itemNotif.data.length === 0">
-                            <i class="fa-solid fa-exclamation fa-2xl"></i>
-                          </div>
-                          <div v-else>
-                            <i class="fa-solid fa-exclamation fa-shake" style="color: #ff0000;"></i>
-                          </div>
-                        </div>
-                      </b-button>
+  <b-button variant="light" :disabled="btnNotif" @click="notifModal">
+    <i v-if="jabKosong === 0 && jabKadaluarsa !== 0" class="fa-solid fa-exclamation fa-2xl"></i>
+    <i v-else-if="jabKosong !== 0 && jabKadaluarsa !== 0" class="fa-solid fa-exclamation fa-2xl"></i>
+    <i v-else-if="jabKosong !== 0 && jabKadaluarsa === 0" class="fa-solid fa-exclamation  fa-shake fa-2xl" style="color: #ff0000;"></i>
+    <i v-else class="fa-solid fa-exclamation fa-2xl"></i>
+  </b-button>
+</div>
 
-                    </div>
                     <!-- <b-button variant="light" @click="showGPSLocation" v-b-tooltip.hover="{ variant: 'info' }" title="Lokasi Anda"><i class="fa-solid fa-location-crosshairs"></i></b-button> -->
                     <div v-if="buttonRute">
                       <b-button variant="primary" disabled @click="hapusRute">
