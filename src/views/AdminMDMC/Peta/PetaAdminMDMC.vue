@@ -19,14 +19,16 @@
                       <b-button variant="light" @focus="showMatches = true" @click="search">Cari</b-button>
                     </div>
                     <div class="input-group-append">
-  <b-button variant="light" :disabled="btnNotif" @click="notifModal">
-    <i v-if="jabKosong === 0 && jabKadaluarsa !== 0" class="fa-solid fa-exclamation fa-2xl"></i>
-    <i v-else-if="jabKosong !== 0 && jabKadaluarsa !== 0" class="fa-solid fa-exclamation fa-2xl"></i>
-    <i v-else-if="jabKosong !== 0 && jabKadaluarsa === 0" class="fa-solid fa-exclamation  fa-shake fa-2xl" style="color: #ff0000;"></i>
-    <i v-else class="fa-solid fa-exclamation fa-2xl"></i>
-  </b-button>
-</div>
-
+                      <b-button variant="light" :disabled="btnNotif" @click="notifModal">
+                        <i v-if="totalDataJabatanKosong === 0 && totalDataJabatanLebihDari1Tahun !== 0"
+                          class="fa-solid fa-exclamation fa-shake fa-2xl" style="color: #ff0000;"></i>
+                        <i v-else-if="totalDataJabatanKosong !== 0 && totalDataJabatanLebihDari1Tahun !== 0"
+                          class="fa-solid fa-exclamation fa-shake fa-2xl" style="color: #ff0000;"></i>
+                        <i v-else-if="totalDataJabatanKosong !== 0 && totalDataJabatanLebihDari1Tahun === 0"
+                          class="fa-solid fa-exclamation fa-2xl"></i>
+                        <i v-else class="fa-solid fa-exclamation fa-2xl"></i>
+                      </b-button>
+                    </div>
                     <!-- <b-button variant="light" @click="showGPSLocation" v-b-tooltip.hover="{ variant: 'info' }" title="Lokasi Anda"><i class="fa-solid fa-location-crosshairs"></i></b-button> -->
                     <div v-if="buttonRute">
                       <b-button variant="primary" disabled @click="hapusRute">
@@ -381,7 +383,9 @@
         <b-card class="text-center">
           <div v-for="(itemNotif, index) in notificationData" :key="index">
             <div v-if="itemNotif.name === 'Jabatan Kosong'">
-              <b-button v-b-toggle.collapse-1 variant="warning w-100 p-4 mt-2 text-bold"><h3>{{ itemNotif.name }}</h3></b-button>
+              <b-button v-b-toggle.collapse-1 variant="warning w-100 p-4 mt-2 text-bold">
+                <h3>{{ itemNotif.name }}</h3>
+              </b-button>
               <b-collapse id="collapse-1" class="mt-2">
                 <template v-if="itemNotif.data.length === 0">
                   <p>Data tidak ada...</p>
@@ -409,7 +413,9 @@
               </b-collapse>
             </div>
             <div v-else>
-              <b-button v-b-toggle.collapse-2 variant="warning w-100 p-4 mt-2 text-bold"><h3>{{ itemNotif.name }}</h3></b-button>
+              <b-button v-b-toggle.collapse-2 variant="warning w-100 p-4 mt-2 text-bold">
+                <h3>{{ itemNotif.name }}</h3>
+              </b-button>
               <b-collapse id="collapse-2" class="mt-2">
                 <template v-if="itemNotif.data.length === 0">
                   <p>Data tidak ada...</p>
@@ -844,12 +850,18 @@ export default {
         this.btnNotif = true;
         const response = await axios.get(`${process.env.VUE_APP_URL}dashboard/peta/notification`);
         this.notificationData = response.data.data;
+
+        const totalDataJabatanLebihDari1Tahun = this.notificationData.find(item => item.name === 'Jabatan lebih dari 1,5 tahun').data.length;
+
+        const totalDataJabatanKosong = this.notificationData.find(item => item.name === 'Jabatan Kosong').data.length;
+
         this.modalNotif = true;
         this.btnNotif = false;
       } catch (error) {
         console.error('Error loading notifications:', error);
       }
     },
+
   },
 
   mounted() {
@@ -1110,6 +1122,16 @@ export default {
       this.filterJabatanDiatas2();
     },
 
+    notificationData: {
+      deep: true,
+      handler(newValue, oldValue) {
+        const totalDataJabatanKosong = newValue.find(item => item.name === 'Jabatan Kosong').data.length;
+        const totalDataJabatanLebihDari1Tahun = newValue.find(item => item.name === 'Jabatan lebih dari 1,5 tahun').data.length;
+        this.totalDataJabatanKosong = totalDataJabatanKosong;
+        this.totalDataJabatanLebihDari1Tahun = totalDataJabatanLebihDari1Tahun;
+      }
+    }
+
 
   },
 
@@ -1222,5 +1244,4 @@ th {
 
 .b-sidebar {
   z-index: 1000 !important;
-}
-</style>
+}</style>
