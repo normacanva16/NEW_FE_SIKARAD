@@ -850,12 +850,13 @@ export default {
         this.btnNotif = true;
         const response = await axios.get(`${process.env.VUE_APP_URL}dashboard/peta/notification`);
         this.notificationData = response.data.data;
+        this.modalNotif = true;
 
         const totalDataJabatanLebihDari1Tahun = this.notificationData.find(item => item.name === 'Jabatan lebih dari 1,5 tahun').data.length;
-
         const totalDataJabatanKosong = this.notificationData.find(item => item.name === 'Jabatan Kosong').data.length;
+        this.totalDataJabatanKosong = totalDataJabatanKosong;
+        this.totalDataJabatanLebihDari1Tahun = totalDataJabatanLebihDari1Tahun;
 
-        this.modalNotif = true;
         this.btnNotif = false;
       } catch (error) {
         console.error('Error loading notifications:', error);
@@ -1121,7 +1122,6 @@ export default {
       });
       this.filterJabatanDiatas2();
     },
-
     notificationData: {
       deep: true,
       handler(newValue, oldValue) {
@@ -1131,8 +1131,6 @@ export default {
         this.totalDataJabatanLebihDari1Tahun = totalDataJabatanLebihDari1Tahun;
       }
     }
-
-
   },
 
   computed: {
@@ -1244,4 +1242,5 @@ th {
 
 .b-sidebar {
   z-index: 1000 !important;
-}</style>
+}
+</style>
