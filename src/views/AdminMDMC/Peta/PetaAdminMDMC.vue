@@ -19,7 +19,8 @@
                       <b-button variant="light" @focus="showMatches = true" @click="search">Cari</b-button>
                     </div>
                     <div class="input-group-append">
-                      <b-button variant="light" :disabled="btnNotif" @click="notifModal">
+                      <div v-show="showNotifButton">
+                        <b-button variant="light" :disabled="btnNotif" v-b-modal.modal-notif>
                         <i v-if="totalDataJabatanKosong === 0 && totalDataJabatanLebihDari1Tahun > 0"
                           class="fa-solid fa-exclamation fa-shake fa-2xl" style="color: #ff0000;"></i>
                         <i v-else-if="totalDataJabatanKosong > 0 && totalDataJabatanLebihDari1Tahun > 0"
@@ -28,6 +29,7 @@
                           class="fa-solid fa-exclamation fa-2xl"></i>
                         <i v-else class="fa-solid fa-exclamation fa-2xl"></i>
                       </b-button>
+                      </div>
                     </div>
 
                     <!-- <b-button variant="light" @click="showGPSLocation" v-b-tooltip.hover="{ variant: 'info' }" title="Lokasi Anda"><i class="fa-solid fa-location-crosshairs"></i></b-button> -->
@@ -379,7 +381,7 @@
         </div>
       </div>
     </b-modal>
-    <b-modal v-model="modalNotif" size="lg">
+    <b-modal id="modal-notif" size="lg">
       <div class="justify-center">
         <b-card class="text-center">
           <div v-for="(itemNotif, index) in notificationData" :key="index">
@@ -471,6 +473,7 @@ export default {
   data() {
     return {
       map: null,
+      showNotifButton: false,
       routingControl: null,
       closestPlace: null,
       jabKosong: [],
@@ -851,7 +854,7 @@ export default {
         this.btnNotif = true;
         const response = await axios.get(`${process.env.VUE_APP_URL}dashboard/peta/notification`);
         this.notificationData = response.data.data;
-        this.modalNotif = true;
+        this.showNotifButton = true;
 
         const totalDataJabatanLebihDari1Tahun = this.notificationData.find(item => item.name === 'Jabatan lebih dari 1,5 tahun').data.length;
         const totalDataJabatanKosong = this.notificationData.find(item => item.name === 'Jabatan Kosong').data.length;
@@ -859,6 +862,7 @@ export default {
         this.totalDataJabatanLebihDari1Tahun = totalDataJabatanLebihDari1Tahun;
 
         this.btnNotif = false;
+
       } catch (error) {
         console.error('Error loading notifications:', error);
       }
@@ -877,6 +881,7 @@ export default {
       });
       this.$router.push("/panel")
     }
+    this.notifModal();
 
     this.map = L.map('map', {
       zoomControl: false,
