@@ -20,7 +20,7 @@
                     </div>
                     <div class="input-group-append">
                       <div v-show="showNotifButton">
-                        <b-button variant="light" :disabled="btnNotif" v-b-modal.modal-notif>
+                        <b-button variant="light" :disabled="btnNotif" @click="$bvModal.show('modal-notif')">
                         <i v-if="totalDataJabatanKosong === 0 && totalDataJabatanLebihDari1Tahun > 0"
                           class="fa-solid fa-exclamation fa-shake fa-2xl" style="color: #ff0000;"></i>
                         <i v-else-if="totalDataJabatanKosong > 0 && totalDataJabatanLebihDari1Tahun > 0"
@@ -381,7 +381,7 @@
         </div>
       </div>
     </b-modal>
-    <b-modal id="modal-notif" size="lg">
+    <b-modal id="modal-notif" ref="modal-hide" size="lg">
       <div class="justify-center">
         <b-card class="text-center">
           <div v-for="(itemNotif, index) in notificationData" :key="index">
@@ -479,7 +479,6 @@ export default {
       jabKosong: [],
       jabKadaluarsa: [],
       closestPlace: "",
-      modalNotif: false,
       matchesData: [],
       notificationData: [],
       DataLocation: [],
@@ -531,7 +530,8 @@ export default {
     searchDataMatch(match) {
       this.querySearch = `${match.nama}`;
       this.showMatches = false;
-      this.modalNotif = false;
+      this.$refs['modal-hide'].hide();
+      // this.modalNotif = false;
       if (this.circle) {
         this.map.removeLayer(this.circle);
       }
