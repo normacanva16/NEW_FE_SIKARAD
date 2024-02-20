@@ -94,12 +94,18 @@
             <div class="d-flex align-items-center justify-content-between mt-5">
               <h4>Rekapitulasi Data Pegawai</h4>
               <div class="d-flex align-items-end">
-                <div class="col-sm-8">
+                <div class="col-sm-8 d-flex">
                   <b-form-input
-                    v-model="keyword"
-                    placeholder="Masukkan keyword"
+                    v-model="searchtabel"
+                    placeholder="Masukkan kotama"
                     @keydown.enter="onPressEnterSearch"
                   ></b-form-input>
+                  <b-button @click="handleClickSearchTabel" variant="primary"
+                    ><i class="fa-solid fa-search"></i></b-button
+                  >
+                  <b-button @click="handleClickResetTabel" variant="primary"
+                    ><i class="fa-solid fa-refresh"></i></b-button
+                  >
                 </div>
                 <b-button class="ml-1 btn-sm" variant="primary" @click="alertDownloadAksi()">
                   <i class="fa-solid fa-print"></i> Print Tabel
@@ -153,7 +159,7 @@ export default {
   },
   data() {
     return {
-      searchtabel: null,
+      searchtabel: "",
       isAdmin: true,
     uploadInProgress: false,
       modalShow: false, 
@@ -383,6 +389,12 @@ if (column.key === 'datadetail') { // Jika kolom adalah "KETERANGAN"
 
   methods: {
 
+    onPressEnterSearch() {
+      this.pageIndex = 1;
+
+      this.getData();
+    },
+
     alertDownloadAksi() {
     swal({
       title: "Download Data Tabel",
@@ -555,6 +567,20 @@ try {
       this.populateChartData();
     },
 
+    handleClickSearchTabel() {
+      this.pageIndex = 1;
+
+      this.getData();
+    },
+
+    handleClickResetTabel() {
+      this.pageIndex = 1;
+
+      this.searchtabel = "";
+
+      this.getData();
+    },
+
     onPressEnterSearch() {
       this.pageIndex = 1;
 
@@ -578,10 +604,14 @@ try {
       this.loadingInstance.show();
 
       try {
-        let url = `${process.env.VUE_APP_URL}dashboard/tabel/rekapitulasi?page=${this.pageIndex}&size=${this.pageSize}&search=${this.keyword}&allData=true`
+        let url = `${process.env.VUE_APP_URL}dashboard/tabel/rekapitulasi?page=${this.pageIndex}&size=${this.pageSize}&allData=true`
 
         if (this.pangkat !== null && this.pangkat.value !== null && this.pangkat.value !== "" && this.pangkat.value !== undefined) {
           url += `&pangkat=${this.pangkat.value}`;
+        }
+
+        if (this.searchtabel !== null && this.searchtabel !== "") {
+          url += `&search=${this.searchtabel}`;
         }
 
         await axios.get(url).then((response) => { 
