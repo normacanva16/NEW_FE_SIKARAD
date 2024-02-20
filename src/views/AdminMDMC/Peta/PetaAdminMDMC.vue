@@ -299,7 +299,8 @@
                 </div>
                 <div class="mt-2">
                   <div class='d-flex justify-content-center'>
-                    <button class="btn btn-outline-primary" style="width: 100%" v-on:click="">Detail</button>
+                    <button class="btn btn-outline-primary" style="width: 100%"  @click="detailModal(selectedMarker.code)">Detail</button>
+
                   </div>
                 </div>
                 <!-- hr border -->
@@ -449,6 +450,90 @@
         </b-card>
       </div>
     </b-modal>
+
+    <!-- detail modal -->
+
+    <b-modal id="modal-detail" ref="modal-hide" size="md">
+      <div class="justify-center">
+        <b-card class="text-center">
+          <div v-for="(itemDetail, index) in detailemployeeData" :key="index"> 
+            <div v-if="itemDetail.name === 'Jabatan Kosong'">
+              <b-button v-b-toggle.collapse-1 variant="primary w-100 p-2 mt-2 text-bold">
+                <h3>{{ itemDetail.name }}</h3>
+              </b-button>
+              <b-collapse id="collapse-1" class="mt-2">
+                <template v-if="itemDetail.data.length === 0">
+                  <p>Data tidak ada...</p>
+                </template>
+                <template v-else>
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">JABATAN</th>
+                        <th scope="col">KORPS</th>
+                        <th scope="col">PANGKAT</th>
+                        <th scope="col">NAMA</th>
+                        <th scope="col">NRP</th>
+                        <th scope="col">TMT JABATAN</th>
+                        <th scope="col">MASA JABATAN</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-for="dataItem in itemDetail.data" :key="dataItem.id">
+                        <td>{{ dataItem.jabatan }}</td>
+                        <td>{{ dataItem.korps }}</td>
+                        <td>{{ dataItem.pangkat }}</td>
+                        <td>{{ dataItem.employee_nama }}</td>
+                        <td>{{ dataItem.nrp }}</td>
+                        <td>{{ dataItem.tmt_jabatan }}</td>
+                        <td>{{ dataItem.masa_jabatan }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </template>
+              </b-collapse>
+            </div>
+            <div v-else>
+              <b-button v-b-toggle.collapse-2 variant="primary w-100 p-2 mt-2 text-bold">
+                <h3>{{ itemDetail.name }}</h3>
+              </b-button>
+              <b-collapse id="collapse-2" class="mt-2">
+                <template v-if="itemDetail.data.length === 0">
+                  <p>Data tidak ada...</p>
+                </template>
+                <template v-else>
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">JABATAN</th>
+                        <th scope="col">KORPS</th>
+                        <th scope="col">PANGKAT</th>
+                        <th scope="col">NAMA</th>
+                        <th scope="col">NRP</th>
+                        <th scope="col">TMT JABATAN</th>
+                        <th scope="col">MASA JABATAN</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-for="dataItem in itemDetail.data" :key="dataItem.id">
+                        <td>{{ dataItem.jabatan }}</td>
+                        <td>{{ dataItem.korps }}</td>
+                        <td>{{ dataItem.pangkat }}</td>
+                        <td>{{ dataItem.employee_nama }}</td>
+                        <td>{{ dataItem.nrp }}</td>
+                        <td>{{ dataItem.tmt_jabatan }}</td>
+                        <td>{{ dataItem.masa_jabatan }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </template>
+              </b-collapse>
+            </div>
+          </div>
+        </b-card>
+      </div>
+    </b-modal>
+
     <!-- display map -->
     <div id="map" class="mapHome">
       <div id="legend"></div>
@@ -481,6 +566,7 @@ export default {
       closestPlace: "",
       matchesData: [],
       notificationData: [],
+      detailemployeeData: [],
       DataLocation: [],
       sidebarVisibilityFilter: false,
       modalDetail: false,
@@ -495,6 +581,7 @@ export default {
       selectedType: '',
       showLainnya: false,
       btnNotif: false,
+      btnDetail: false,
       LainLayer: null,
       LogoLainnya,
       LogoLainnyaStroke,
@@ -862,6 +949,18 @@ export default {
         this.totalDataJabatanLebihDari1Tahun = totalDataJabatanLebihDari1Tahun;
 
         this.btnNotif = false;
+
+      } catch (error) {
+        console.error('Error loading notifications:', error);
+      }
+    },
+    async detailModal(code) {
+      try {
+        this.btnDetail = true;
+        const response = await axios.get(`${process.env.VUE_APP_URL}dashboard/peta/detail-employee/${code}`);
+        this.detailemployeeData = response.data.data;
+
+        this.btnDetail = false;
 
       } catch (error) {
         console.error('Error loading notifications:', error);
