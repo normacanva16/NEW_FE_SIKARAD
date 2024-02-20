@@ -93,11 +93,21 @@
           <div>
             <div class="d-flex align-items-center justify-content-between mt-5">
               <h4>Rekapitulasi Data Pegawai</h4>
-                <b-button class="ml-3 btn-sm w-20" variant="primary" @click="alertDownloadAksi()">
+              <div class="d-flex align-items-end">
+                <div class="col-sm-8">
+                  <b-form-input
+                    v-model="keyword"
+                    placeholder="Masukkan keyword"
+                    @keydown.enter="onPressEnterSearch"
+                  ></b-form-input>
+                </div>
+                <b-button class="ml-1 btn-sm" variant="primary" @click="alertDownloadAksi()">
                   <i class="fa-solid fa-print"></i> Print Tabel
                 </b-button>
               </div>
+            </div>
           </div>
+
             </div>
             <ve-table id="tableAksi" :columns="columns" :table-data="DataAksi" :cell-style-option="cellStyleOption" :border-x="true" :border-y="true" :scroll-width="600" />
             <div v-show="DataAksi.length === 0" class="empty-data">Tidak ada data...</div>
@@ -143,6 +153,7 @@ export default {
   },
   data() {
     return {
+      searchtabel: null,
       isAdmin: true,
     uploadInProgress: false,
       modalShow: false, 
