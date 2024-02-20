@@ -381,12 +381,12 @@
         </div>
       </div>
     </b-modal>
-    <b-modal id="modal-notif" ref="modal-hide" size="lg">
+    <b-modal id="modal-notif" ref="modal-hide" size="md">
       <div class="justify-center">
         <b-card class="text-center">
-          <div v-for="(itemNotif, index) in notificationData" :key="index">
+          <div v-for="(itemNotif, index) in notificationData" :key="index"> 
             <div v-if="itemNotif.name === 'Jabatan Kosong'">
-              <b-button v-b-toggle.collapse-1 variant="warning w-100 p-4 mt-2 text-bold">
+              <b-button v-b-toggle.collapse-1 variant="primary w-100 p-2 mt-2 text-bold">
                 <h3>{{ itemNotif.name }}</h3>
               </b-button>
               <b-collapse id="collapse-1" class="mt-2">
@@ -416,7 +416,7 @@
               </b-collapse>
             </div>
             <div v-else>
-              <b-button v-b-toggle.collapse-2 variant="warning w-100 p-4 mt-2 text-bold">
+              <b-button v-b-toggle.collapse-2 variant="primary w-100 p-2 mt-2 text-bold">
                 <h3>{{ itemNotif.name }}</h3>
               </b-button>
               <b-collapse id="collapse-2" class="mt-2">
