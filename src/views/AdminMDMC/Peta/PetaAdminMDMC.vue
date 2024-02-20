@@ -299,7 +299,7 @@
                 </div>
                 <div class="mt-2">
                   <div class='d-flex justify-content-center'>
-                    <button class="btn btn-outline-primary" style="width: 100%"  @click="detailModal(selectedMarker.code)">Detail</button>
+                    <button class="btn btn-outline-primary" style="width: 100%"  @click="handleDetailClick(selectedMarker.code)">Detail</button>
 
                   </div>
                 </div>
@@ -453,7 +453,7 @@
 
     <!-- detail modal -->
 
-    <b-modal id="modal-detail" ref="modal-hide" size="md">
+    <b-modal id="modal-detail" ref="modal-hide" size="xl" :title="'DETAIL PERSONEL ' + selectedMarker.name" class="text-bold" centered hide-footer>
       <div class="justify-center">
         <b-card class="text-center">
           <div v-for="(itemDetail, index) in detailemployeeData" :key="index"> 
@@ -954,6 +954,11 @@ export default {
         console.error('Error loading notifications:', error);
       }
     },
+
+    async handleDetailClick(code) {
+    await this.detailModal(code);
+    this.$bvModal.show('modal-detail');
+  },
     async detailModal(code) {
       try {
         this.btnDetail = true;
