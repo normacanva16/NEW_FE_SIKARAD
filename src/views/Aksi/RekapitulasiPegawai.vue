@@ -490,11 +490,10 @@ try {
   }
 
   this.seriesData = seriesData;
+  this.loadingInstance.close();
 
 } catch (error) {
-  if (this.loadingInstance) {
     this.loadingInstance.close();
-  }
   swal("Kesalahan Server!", "Tidak dapat terhubung ke server!", error);
 }
 },
@@ -645,10 +644,10 @@ try {
     if (!token) {
       this.$router.push("/panel");
     }
-    this.loadingInstance = this.$veLoading({
-      target: document.querySelector("#tableAksi"),
-      name: "wave",
-    });
+    // this.loadingInstance = this.$veLoading({
+    //   target: document.querySelector("#tableAksi"),
+    //   name: "wave",
+    // });
     // Call the getData method when the component is mounted
     this.getToken();
     this.getData();
