@@ -77,6 +77,7 @@
                   <img v-if="image != null && image != ''" :src="getImageSrc(image)" alt="Logo Kotama/Balakpus" width="100px" height="auto" >
                 </div>
                 <b-form-file v-model="file1" placeholder="Pilih foto" drop-placeholder="Pilih foto"></b-form-file>
+                <b-form-text class="text-info"> Jenis File jpeg / jpg / png </b-form-text>
               </b-form-group>
               </b-col>
             </b-row>
@@ -339,6 +340,7 @@
         this.alamat = "";
         this.latitude = 0;
         this.longitude = 0;
+        this.file1 = null;
         this.errorAlamat = false;
         this.errorUrlGmaps = false;
         this.action = "create";
