@@ -251,6 +251,7 @@
             this.linkGoogleMaps = response.data.data.url_gmaps;
             this.latitude = response.data.data.latitude;
             this.longitude = response.data.data.longitude;
+            this.image = response.data.data.image;
           });
       },
   
@@ -333,6 +334,7 @@
       resetField() {
         this.id = null;
         this.linkGoogleMaps = "";
+        this.image = "";
         this.nama = "";
         this.alamat = "";
         this.latitude = "";
