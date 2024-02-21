@@ -95,119 +95,16 @@
             </div>
             <b-row>
               <b-col>
-                <div class="mb-2 text-center">
-                  <img v-if="code == 1" src="../../../../public/img/kotama/1.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="code == 2" src="../../../../public/img/kotama/2.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="code == 3" src="../../../../public/img/kotama/3.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="code == 4" src="../../../../public/img/kotama/4.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="code == 5" src="../../../../public/img/kotama/5.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="code == 6" src="../../../../public/img/kotama/6.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="code == 7" src="../../../../public/img/kotama/7.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="code == 8" src="../../../../public/img/kotama/8.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="code == 9" src="../../../../public/img/kotama/9.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="code == 10" src="../../../../public/img/kotama/10.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="code == 11" src="../../../../public/img/kotama/11.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="code == 12" src="../../../../public/img/kotama/12.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="code == 13" src="../../../../public/img/kotama/13.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="code == 14" src="../../../../public/img/kotama/14.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="code == 15" src="../../../../public/img/kotama/15.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="code == 16" src="../../../../public/img/kotama/16.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="code == 17" src="../../../../public/img/kotama/17.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="code == 18" src="../../../../public/img/kotama/18.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="code == 19" src="../../../../public/img/kotama/19.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="code == 20" src="../../../../public/img/kotama/20.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="code == 21" src="../../../../public/img/kotama/21.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="code == 22" src="../../../../public/img/kotama/22.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="code == 23" src="../../../../public/img/kotama/23.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="code == 24" src="../../../../public/img/kotama/24.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="code == 25" src="../../../../public/img/kotama/25.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="code == 26" src="../../../../public/img/kotama/26.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="code == 27" src="../../../../public/img/kotama/27.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="code == 28" src="../../../../public/img/kotama/28.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="code == 29" src="../../../../public/img/kotama/29.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="code == 30" src="../../../../public/img/kotama/30.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="code == 31" src="../../../../public/img/kotama/31.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="code == 32" src="../../../../public/img/kotama/32.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="code == 33" src="../../../../public/img/kotama/33.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="code == 34" src="../../../../public/img/kotama/34.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="code == 35" src="../../../../public/img/kotama/35.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="code == 36" src="../../../../public/img/kotama/36.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="code == 37" src="../../../../public/img/kotama/37.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="code == 38" src="../../../../public/img/kotama/38.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="code == 39" src="../../../../public/img/kotama/39.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="code == 40" src="../../../../public/img/kotama/40.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="code == 41" src="../../../../public/img/kotama/41.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="code == 42" src="../../../../public/img/kotama/42.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="code == 43" src="../../../../public/img/kotama/43.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="code == 44" src="../../../../public/img/kotama/44.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="code == 45" src="../../../../public/img/kotama/45.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="code == 46" src="../../../../public/img/kotama/46.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="code == 47" src="../../../../public/img/kotama/47.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="code == 48" src="../../../../public/img/kotama/48.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="code == 49" src="../../../../public/img/kotama/49.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="code == 50" src="../../../../public/img/kotama/50.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="code == 51" src="../../../../public/img/kotama/51.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                </div>
 
+                <div class="mb-2 text-center">
+                  <img v-for="(image, index) in getFilteredImages(code)" :key="index" :src="getImageSrc(image)" :alt="image.devcode" width="100px" height="auto" >
+                </div>
                 <b-form-file v-model="file1" placeholder="Pilih foto" drop-placeholder="Pilih foto"></b-form-file>
                
               </b-col>
             </b-row>
   
-            <b-button type="submit" variant="primary" :disabled="loadingCreate"
-              >Submit</b-button
-            >
+            <b-button type="submit" variant="primary" :disabled="loadingCreate" @click="submitFoto(code)">Submit</b-button>
           </form>
         </b-modal>
       </div>
@@ -281,11 +178,13 @@
         DataUser: [],
         optionRoles: [],
         optionInstansi: [],
+        listImageKotamaData: [],
         keyword: "",
         loadingCreate: false,
         pageIndex: 1,
         pageSize: 10,
         totalCount: 0,
+        errorImage: false,
         options: ["list", "of", "options"],
         id: null,
         code: null,
@@ -532,7 +431,43 @@
         }
       },
 
-      async submitFoto() {
+      async submitFoto(code) {
+          const formData = new FormData();
+          if (this.file1) {
+            formData.append("image", this.file1);
+          } else {
+            formData.append("image", null);
+          }
+          this.loadingCreate = true;
+
+          if (this.code) {
+          await axios
+            .put(`${process.env.VUE_APP_URL}mst-kotama/image/${code}`, formData)
+            .then((response) => {
+              this.loadingCreate = false;
+
+              swal({
+                title: "Success",
+                text: "Data Berhasil Diubah",
+                type: "success",
+                timer: 2000,
+              });
+              this.$refs["modal-edit-foto"].hide();
+              this.getData();
+              this.resetField();
+            })
+            .catch((error) => {
+              this.loadingCreate = false;
+
+              console.error(error);
+              if (error.response.data.error_messages[0].msg) {
+                swal("Server error!", error.response.data.error_messages[0].msg);
+              } else {
+                swal("Server error!", "Could not connect to the server!");
+              }
+            });
+        }
+        
        
       },
       validation() {
@@ -588,6 +523,36 @@
           return true;
         }
       },
+
+      validationImage() {
+        if (this.file1 == null) {
+          this.errorImage = true;
+        } else{
+          this.errorImage = false;
+        }
+      },
+
+      async listimagelogo() {
+      try {
+        const response = await axios.get(`${process.env.VUE_APP_URL}dashboard/image`);
+        this.listImageKotamaData = response.data.images;
+        console.log("image", this.listImageKotamaData)
+
+      } catch (error) {
+        console.error('Error loading notifications:', error);
+      }
+    },
+        getFilteredImages(code) {
+        // Filter listImageKotamaData based on the selectedMarker.code
+        return this.listImageKotamaData.filter(image => image.code == code);
+      },
+      getImageSrc(image) {
+        // Return the base64 image source
+        return 'data:image/jpeg;base64,' + image.imageBase64;
+      },
+   
+
+      
     },
     computed: {
       requiredPassword: function () {
@@ -604,8 +569,8 @@
         target: document.querySelector("#table"),
         name: "wave",
       });
+      this.listimagelogo();
       this.getData();
-      this.getOptionRoles();
       this.getToken();
     },
     watch: {
