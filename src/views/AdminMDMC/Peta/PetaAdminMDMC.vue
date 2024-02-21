@@ -120,110 +120,11 @@
                 </b-button>
               </div>
               <div v-if="selectedMarker.GroupData === 'DataMDMC'">
+                
                 <div class="mb-2 text-center">
-                  <img v-if="selectedMarker.code == 1" src="../../../../public/img/kotama/1.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="selectedMarker.code == 2" src="../../../../public/img/kotama/2.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="selectedMarker.code == 3" src="../../../../public/img/kotama/3.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="selectedMarker.code == 4" src="../../../../public/img/kotama/4.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="selectedMarker.code == 5" src="../../../../public/img/kotama/5.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="selectedMarker.code == 6" src="../../../../public/img/kotama/6.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="selectedMarker.code == 7" src="../../../../public/img/kotama/7.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="selectedMarker.code == 8" src="../../../../public/img/kotama/8.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="selectedMarker.code == 9" src="../../../../public/img/kotama/9.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="selectedMarker.code == 10" src="../../../../public/img/kotama/10.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="selectedMarker.code == 11" src="../../../../public/img/kotama/11.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="selectedMarker.code == 12" src="../../../../public/img/kotama/12.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="selectedMarker.code == 13" src="../../../../public/img/kotama/13.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="selectedMarker.code == 14" src="../../../../public/img/kotama/14.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="selectedMarker.code == 15" src="../../../../public/img/kotama/15.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="selectedMarker.code == 16" src="../../../../public/img/kotama/16.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="selectedMarker.code == 17" src="../../../../public/img/kotama/17.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="selectedMarker.code == 18" src="../../../../public/img/kotama/18.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="selectedMarker.code == 19" src="../../../../public/img/kotama/19.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="selectedMarker.code == 20" src="../../../../public/img/kotama/20.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="selectedMarker.code == 21" src="../../../../public/img/kotama/21.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="selectedMarker.code == 22" src="../../../../public/img/kotama/22.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="selectedMarker.code == 23" src="../../../../public/img/kotama/23.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="selectedMarker.code == 24" src="../../../../public/img/kotama/24.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="selectedMarker.code == 25" src="../../../../public/img/kotama/25.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="selectedMarker.code == 26" src="../../../../public/img/kotama/26.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="selectedMarker.code == 27" src="../../../../public/img/kotama/27.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="selectedMarker.code == 28" src="../../../../public/img/kotama/28.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="selectedMarker.code == 29" src="../../../../public/img/kotama/29.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="selectedMarker.code == 30" src="../../../../public/img/kotama/30.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="selectedMarker.code == 31" src="../../../../public/img/kotama/31.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="selectedMarker.code == 32" src="../../../../public/img/kotama/32.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="selectedMarker.code == 33" src="../../../../public/img/kotama/33.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="selectedMarker.code == 34" src="../../../../public/img/kotama/34.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="selectedMarker.code == 35" src="../../../../public/img/kotama/35.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="selectedMarker.code == 36" src="../../../../public/img/kotama/36.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="selectedMarker.code == 37" src="../../../../public/img/kotama/37.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="selectedMarker.code == 38" src="../../../../public/img/kotama/38.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="selectedMarker.code == 39" src="../../../../public/img/kotama/39.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="selectedMarker.code == 40" src="../../../../public/img/kotama/40.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="selectedMarker.code == 41" src="../../../../public/img/kotama/41.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="selectedMarker.code == 42" src="../../../../public/img/kotama/42.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="selectedMarker.code == 43" src="../../../../public/img/kotama/43.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="selectedMarker.code == 44" src="../../../../public/img/kotama/44.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="selectedMarker.code == 45" src="../../../../public/img/kotama/45.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="selectedMarker.code == 46" src="../../../../public/img/kotama/46.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="selectedMarker.code == 47" src="../../../../public/img/kotama/47.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="selectedMarker.code == 48" src="../../../../public/img/kotama/48.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="selectedMarker.code == 49" src="../../../../public/img/kotama/49.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="selectedMarker.code == 50" src="../../../../public/img/kotama/50.png" width="100px"
-                    height="auto" alt="Logo Kotama">
-                  <img v-else-if="selectedMarker.code == 51" src="../../../../public/img/kotama/51.png" width="100px"
-                    height="auto" alt="Logo Kotama">
+                  <img v-for="(image, index) in getFilteredImages(selectedMarker.code)" :key="index" :src="getImageSrc(image)" :alt="image.devcode" width="100px" height="auto" >
                 </div>
+
                 <!-- nama -->
                 <div>
                   <p class="h4" style="color: #0000ff; ">{{ selectedMarker.name }}</p>
@@ -567,6 +468,7 @@ export default {
       matchesData: [],
       notificationData: [],
       detailemployeeData: [],
+      listImageKotamaData: [],
       DataLocation: [],
       sidebarVisibilityFilter: false,
       modalDetail: false,
@@ -972,6 +874,26 @@ export default {
       }
     },
 
+    async listimagelogo() {
+      try {
+        const response = await axios.get(`${process.env.VUE_APP_URL}dashboard/image`);
+        this.listImageKotamaData = response.data.images;
+        console.log("image", this.listImageKotamaData)
+
+      } catch (error) {
+        console.error('Error loading notifications:', error);
+      }
+    },
+
+    getFilteredImages(code) {
+    // Filter listImageKotamaData based on the selectedMarker.code
+    return this.listImageKotamaData.filter(image => image.code == code);
+  },
+  getImageSrc(image) {
+    // Return the base64 image source
+    return 'data:image/jpeg;base64,' + image.imageBase64;
+  }
+
   },
 
   mounted() {
@@ -986,6 +908,7 @@ export default {
       this.$router.push("/panel")
     }
     this.notifModal();
+    this.listimagelogo();
 
     this.map = L.map('map', {
       zoomControl: false,
