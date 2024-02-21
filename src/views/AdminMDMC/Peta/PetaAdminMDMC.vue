@@ -873,10 +873,6 @@ export default {
       }
     },
 
-    getFilteredImages(code) {
-    // Filter listImageKotamaData based on the selectedMarker.code
-    return this.listImageKotamaData.filter(image => image.code == code);
-  },
   getImageSrc(image) {
     // Return the base64 image source
     return 'data:image/jpeg;base64,' + image;

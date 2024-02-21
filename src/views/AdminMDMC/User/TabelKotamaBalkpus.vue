@@ -9,7 +9,7 @@
           ref="modal-tambah-user"
           title="Edit Kotama / Balakpus"
           hide-footer
-          size="md"
+          size="lg"
           @hidden="resetField()"
         >
           <form @submit.prevent="submitForm">
@@ -71,40 +71,19 @@
                   ></b-form-input>
                 </b-form-group>
               </b-col>
+              <b-col>
+                <b-form-group label="Logo Kotama / Balakpus" label-for="image">
+                <div class="mb-2 text-center">
+                  <img v-if="image != null && image != ''" :src="getImageSrc(image)" alt="Logo Kotama/Balakpus" width="100px" height="auto" >
+                </div>
+                <b-form-file v-model="file1" placeholder="Pilih foto" drop-placeholder="Pilih foto"></b-form-file>
+              </b-form-group>
+              </b-col>
             </b-row>
   
             <b-button type="submit" variant="primary" :disabled="loadingCreate"
               >Submit</b-button
             >
-          </form>
-        </b-modal>
-      </div>
-
-      <div class="container-fluid">
-        <b-modal
-          id="modal-edit-foto"
-          ref="modal-edit-foto"
-          title="Edit Logo kotama / balakpus"
-          hide-footer
-          size="md"
-          @hidden="resetField()"
-        >
-          <form @submit.prevent="submitFoto">
-            <div class="clearfix" v-if="loadingCreate === true">
-              <b-spinner class="float-right" label="Floated Right"></b-spinner>
-            </div>
-            <b-row>
-              <b-col>
-
-                <div class="mb-2 text-center">
-                  <img v-for="(image, index) in getFilteredImages(code)" :key="index" :src="getImageSrc(image)" :alt="image.devcode" width="100px" height="auto" >
-                </div>
-                <b-form-file v-model="file1" placeholder="Pilih foto" drop-placeholder="Pilih foto"></b-form-file>
-               
-              </b-col>
-            </b-row>
-  
-            <b-button type="submit" variant="primary" :disabled="loadingCreate" @click="submitFoto(code)">Submit</b-button>
           </form>
         </b-modal>
       </div>
@@ -178,7 +157,6 @@
         DataUser: [],
         optionRoles: [],
         optionInstansi: [],
-        listImageKotamaData: [],
         keyword: "",
         loadingCreate: false,
         pageIndex: 1,
@@ -194,6 +172,7 @@
         linkGoogleMaps: "",
         latitude: "",
         longitude: "",
+        image: "",
         errorAlamat: false,
         errorUrlGmaps: false,
         token: null,
@@ -236,13 +215,6 @@
                 >
                   <i class="fa fa-pencil"></i>
                 </button>
-                &nbsp;
-                <button
-                  class="btn btn-outline-primary"
-                  onClick={() => this.handleEditFoto(row.code)}
-                >
-                  Edit Logo
-                </button>
               </span>
               );
             },
@@ -280,12 +252,6 @@
             this.latitude = response.data.data.latitude;
             this.longitude = response.data.data.longitude;
           });
-      },
-
-      handleEditFoto(code) {
-        this.action = "update";
-        this.code = code;
-        this.$refs["modal-edit-foto"].show("modal-edit-foto");
       },
   
       handleClickSearch() {
@@ -430,46 +396,6 @@
           } 
         }
       },
-
-      async submitFoto(code) {
-          const formData = new FormData();
-          if (this.file1) {
-            formData.append("image", this.file1);
-          } else {
-            formData.append("image", null);
-          }
-          this.loadingCreate = true;
-
-          if (this.code) {
-          await axios
-            .put(`${process.env.VUE_APP_URL}mst-kotama/image/${code}`, formData)
-            .then((response) => {
-              this.loadingCreate = false;
-
-              swal({
-                title: "Success",
-                text: "Data Berhasil Diubah",
-                type: "success",
-                timer: 2000,
-              });
-              this.$refs["modal-edit-foto"].hide();
-              this.getData();
-              this.resetField();
-            })
-            .catch((error) => {
-              this.loadingCreate = false;
-
-              console.error(error);
-              if (error.response.data.error_messages[0].msg) {
-                swal("Server error!", error.response.data.error_messages[0].msg);
-              } else {
-                swal("Server error!", "Could not connect to the server!");
-              }
-            });
-        }
-        
-       
-      },
       validation() {
         if (this.tipeAkun === "") {
           this.errorTipeAkun = true;
@@ -524,31 +450,9 @@
         }
       },
 
-      validationImage() {
-        if (this.file1 == null) {
-          this.errorImage = true;
-        } else{
-          this.errorImage = false;
-        }
-      },
-
-      async listimagelogo() {
-      try {
-        const response = await axios.get(`${process.env.VUE_APP_URL}dashboard/image`);
-        this.listImageKotamaData = response.data.images;
-        console.log("image", this.listImageKotamaData)
-
-      } catch (error) {
-        console.error('Error loading notifications:', error);
-      }
-    },
-        getFilteredImages(code) {
-        // Filter listImageKotamaData based on the selectedMarker.code
-        return this.listImageKotamaData.filter(image => image.code == code);
-      },
       getImageSrc(image) {
         // Return the base64 image source
-        return 'data:image/jpeg;base64,' + image.imageBase64;
+        return 'data:image/jpeg;base64,' + image;
       },
    
 
@@ -569,7 +473,6 @@
         target: document.querySelector("#table"),
         name: "wave",
       });
-      this.listimagelogo();
       this.getData();
       this.getToken();
     },
