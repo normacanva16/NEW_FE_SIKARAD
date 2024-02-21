@@ -92,13 +92,9 @@
               <div>
                 <h5>By Status Jabatan</h5>
                 <div class="container">
-                  <b-form-checkbox v-model="showJabatanKosong" :disabled="!showLainnya">Jabatan Kosong</b-form-checkbox>
-                  <b-form-checkbox v-model="showJabatanKurang1" :disabled="!showLainnya">Jabatan &lt 1
-                    tahun</b-form-checkbox>
-                  <b-form-checkbox v-model="showJabatanDiantara12" :disabled="!showLainnya">Jabatan 1-2
-                    tahun</b-form-checkbox>
-                  <b-form-checkbox v-model="showJabatanLebih2" :disabled="!showLainnya">Jabatan > 2
-                    tahun</b-form-checkbox>
+                  <b-form-checkbox v-model="showJabatanKosong" :disabled="!showLainnya || showJabatanKurang1 || showJabatanDiantara12">Jabatan Kosong</b-form-checkbox>
+                  <b-form-checkbox v-model="showJabatanKurang1" :disabled="!showLainnya || showJabatanKosong || showJabatanDiantara12">Jabatan Dibawah 1,5 tahun</b-form-checkbox>
+                  <b-form-checkbox v-model="showJabatanDiantara12" :disabled="!showLainnya || showJabatanKosong || showJabatanKurang1">Jabatan Diatas 1,5 tahun</b-form-checkbox>
                 </div>
               </div>
             </b-form-radio-group>
@@ -146,10 +142,19 @@
                   </span>
 
                   <tr>
-                    <th><i class="fa-solid fa-triangle-exclamation"></i></th>
+                    <th><i class="fa-solid fa-people-group"></i></th>
                     <div>
                       <th>
-                        <p class="">Jabatan Kosong: {{ selectedMarker.jab_kosong }}</p>
+                        <p class="">Total Personel : {{ selectedMarker.jab_kosong }}</p>
+                      </th>
+                    </div>
+                  </tr>
+
+                  <tr>
+                    <th><i class="fa-solid fa-bullseye"></i></th>
+                    <div>
+                      <th>
+                        <p class="text-warning">Jabatan Kosong : {{ selectedMarker.jab_kosong }}</p>
                       </th>
                     </div>
                   </tr>
@@ -157,25 +162,19 @@
                     <th><i class="fa-solid fa-hourglass"></i></th>
                     <span>
                       <th>
-                        <p>Jabatan 0-1 tahun:</p>
-                        <span>
-                          <p class="badge badge-success">{{ selectedMarker.jabdibawah1 }}</p>
-                        </span>
+                        <p class="text-success">Jabatan dibawah 1,5 tahun : {{ selectedMarker.jabdibawah1 }} </p>
                       </th>
                     </span>
                   </tr>
                   <tr>
-                    <th><i class="fa-solid fa-hourglass"></i></th>
+                    <th><i class="fa-solid fa-triangle-exclamation"></i></th>
                     <span>
                       <th>
-                        <p>Jabatan 1-2 tahun:</p>
-                        <span>
-                          <p class="badge badge-warning">{{ selectedMarker.jabdiatas1 }}</p>
-                        </span>
+                        <p class="text-danger">Jabatan diatas 1,5 tahun : {{ selectedMarker.jabdiatas1 }}</p>
                       </th>
                     </span>
                   </tr>
-                  <tr>
+                  <!-- <tr>
                     <th><i class="fa-solid fa-hourglass"></i></th>
                     <span>
                       <th>
@@ -185,7 +184,7 @@
                         </span>
                       </th>
                     </span>
-                  </tr>
+                  </tr> -->
 
                 </div>
 
@@ -493,7 +492,6 @@ export default {
       showJabatanKadaluarsa: false,
       showJabatanKurang1: false,
       showJabatanDiantara12: false,
-      showJabatanLebih2: false,
       tooltips: [],
       ruteMulaiLokasi: null,
       closestDistance: null,
@@ -647,7 +645,7 @@ export default {
     },
     filterJabatanKosong() {
       this.filterDataAksiMarker.forEach((marker) => {
-        const color = marker.status === 'Terlaksana' ? 'red' : 'blue';
+        const color = marker.status === 'Terlaksana' ? 'red' : 'yellow';
         L.circleMarker([marker.latitude, marker.longitude], {
           radius: 15,
           fillColor: color,
@@ -670,18 +668,6 @@ export default {
       })
     },
     filterJabatanDiatas1() {
-      this.filterDataAksiMarker.forEach((marker) => {
-        const color = marker.status === 'Terlaksana' ? 'red' : 'yellow';
-        L.circleMarker([marker.latitude, marker.longitude], {
-          radius: 15,
-          fillColor: color,
-          fillOpacity: 0.7,
-          color: 'white',
-          weight: 2,
-        }).addTo(this.map)
-      })
-    },
-    filterJabatanDiatas2() {
       this.filterDataAksiMarker.forEach((marker) => {
         const color = marker.status === 'Terlaksana' ? 'red' : 'red';
         L.circleMarker([marker.latitude, marker.longitude], {
@@ -822,7 +808,6 @@ export default {
         this.showJabatanKosong = false;
         this.showJabatanKurang1 = false;
         this.showJabatanDiantara12 = false;
-        this.showJabatanLebih2 = false;
       }
     },
     onClickCloseSidebar() {
@@ -1068,7 +1053,6 @@ export default {
     this.filterJabatanKosong();
     this.filterJabatanDibawah1();
     this.filterJabatanDiatas1();
-    this.filterJabatanDiatas2()
     this.startPolling();
     this.map.on('click', this.onClickCloseSidebar);
 
@@ -1131,14 +1115,6 @@ export default {
       });
       this.filterJabatanDiatas1();
     },
-    showJabatanLebih2(newValue) {
-      this.map.eachLayer((layer) => {
-        if (layer instanceof L.CircleMarker) {
-          this.map.removeLayer(layer);
-        }
-      });
-      this.filterJabatanDiatas2();
-    },
     notificationData: {
       deep: true,
       handler(newValue, oldValue) {
@@ -1169,8 +1145,7 @@ export default {
       return this.DataLocation.filter((marker) => {
         return (this.showJabatanKosong && marker.jab_kosong > 0) ||
           (this.showJabatanKurang1 && marker.jabdibawah1 > 0) ||
-          (this.showJabatanDiantara12 && marker.jabdiatas1 > 0) ||
-          (this.showJabatanLebih2 && marker.jabdiatas2 > 0)
+          (this.showJabatanDiantara12 && marker.jabdiatas1 > 0)
       })
     },
   },
