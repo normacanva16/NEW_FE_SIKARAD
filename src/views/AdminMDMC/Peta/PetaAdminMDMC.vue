@@ -122,7 +122,7 @@
               <div v-if="selectedMarker.GroupData === 'DataMDMC'">
                 
                 <div class="mb-2 text-center">
-                  <img v-for="(image, index) in getFilteredImages(selectedMarker.code)" :key="index" :src="getImageSrc(image)" :alt="image.devcode" width="100px" height="auto" >
+                  <img v-if="selectedMarker.image != null && selectedMarker.image != ''" :src="getImageSrc(selectedMarker.image)" alt="Logo Kotama/Balakpus" width="100px" height="auto" >
                 </div>
 
                 <!-- nama -->
@@ -468,7 +468,6 @@ export default {
       matchesData: [],
       notificationData: [],
       detailemployeeData: [],
-      listImageKotamaData: [],
       DataLocation: [],
       sidebarVisibilityFilter: false,
       modalDetail: false,
@@ -874,24 +873,13 @@ export default {
       }
     },
 
-    async listimagelogo() {
-      try {
-        const response = await axios.get(`${process.env.VUE_APP_URL}dashboard/image`);
-        this.listImageKotamaData = response.data.images;
-        console.log("image", this.listImageKotamaData)
-
-      } catch (error) {
-        console.error('Error loading notifications:', error);
-      }
-    },
-
     getFilteredImages(code) {
     // Filter listImageKotamaData based on the selectedMarker.code
     return this.listImageKotamaData.filter(image => image.code == code);
   },
   getImageSrc(image) {
     // Return the base64 image source
-    return 'data:image/jpeg;base64,' + image.imageBase64;
+    return 'data:image/jpeg;base64,' + image;
   }
 
   },
@@ -908,7 +896,6 @@ export default {
       this.$router.push("/panel")
     }
     this.notifModal();
-    this.listimagelogo();
 
     this.map = L.map('map', {
       zoomControl: false,
@@ -983,7 +970,7 @@ export default {
                 title: '' + marker.type + '',
                 name: '' + marker.nama + '',
                 code: '' + marker.code + '',
-                url_image: '' + marker.url_image + '',
+                image: '' + marker.image + '',
                 personel: '' + marker.jumlah_relawan + '',
                 address: "" + marker.alamat + "",
                 gmaps: "" + marker.url_gmaps + "",
@@ -1019,6 +1006,7 @@ export default {
                 name: '' + marker.nama + '',
                 code: '' + marker.code + '',
                 url_image: '' + marker.url_image + '',
+                image: '' + marker.image + '',
                 personel: '' + marker.jumlah_relawan + '',
                 address: "" + marker.alamat + "",
                 gmaps: "" + marker.url_gmaps + "",
