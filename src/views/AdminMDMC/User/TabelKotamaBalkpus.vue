@@ -170,8 +170,8 @@
         nama: "",
         alamat: "",
         linkGoogleMaps: "",
-        latitude: "",
-        longitude: "",
+        latitude: 0,
+        longitude: 0,
         image: "",
         errorAlamat: false,
         errorUrlGmaps: false,
@@ -337,8 +337,8 @@
         this.image = "";
         this.nama = "";
         this.alamat = "";
-        this.latitude = "";
-        this.longitude = "";
+        this.latitude = 0;
+        this.longitude = 0;
         this.errorAlamat = false;
         this.errorUrlGmaps = false;
         this.action = "create";
@@ -347,25 +347,24 @@
       // menambah data
       async submitForm() {
         if (this.validation()) {
-          const data = {
-            nama: this.nama,
-            alamat: this.alamat,
-            latitude:
-            this.latitude !== ""
-              ? this.latitude
-              : null,
-          longitude:
-            this.longitude !== ""
-              ? this.longitude
-              : null,
-          url_gmaps: this.linkGoogleMaps,
-          };
-  
+          const formData = new FormData();
+          formData.append("latitude", this.latitude);
+          formData.append("longitude", this.longitude);
+          formData.append("nama", this.nama);
+          formData.append("alamat", this.alamat);
+          formData.append("url_gmaps", this.linkGoogleMaps);
+
+          if (this.file1) {
+          formData.append("image", this.file1);
+        } else {
+          formData.append("image", null);
+        }
+         
           this.loadingCreate = true;
   
           if (this.id) {
             await axios
-              .put(`${process.env.VUE_APP_URL}mst-kotama/${this.id}`, data, {
+              .put(`${process.env.VUE_APP_URL}mst-kotama/${this.id}`, formData, {
                 headers: {
                   Authorization: `Bearer ${this.token}`,
                 },
