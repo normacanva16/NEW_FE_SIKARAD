@@ -44,7 +44,27 @@
         <li class="nav-item">
           <b-container style="width: 100%; align-items: center">
             <b-row class="d-flex align-items-center">
-                            <b-col sm="*">
+              <b-col sm="*">
+                <div>
+                  <li class="">
+                    <div
+                    >
+                      <a
+                        target="_blank"
+                        href="https://drive.google.com/file/d/1CrZDDCQ5AuNIJpPNc_P4TwAoRMzL8F1M/view?usp=drive_link"
+                        class="btn btn-primary-outline"
+                        variant="primary"
+                        size="sm"
+                        v-b-tooltip.hover="{ variant: 'info' }"
+                        title="Dokumentasi Penggunaan Aplikasi SIKARAD"
+                      >
+                        <i class="fa-solid fa-book" style="color: #fff"></i>
+                      </a>
+                    </div>
+                  </li>
+                </div>
+              </b-col>
+              <b-col sm="*">
                 <div>
                   <li class="nav-item d-none d-md-block" style="color: white">
                     <ToggleFullscreen
