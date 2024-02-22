@@ -145,7 +145,7 @@
                     <th><i class="fa-solid fa-people-group"></i></th>
                     <div>
                       <th>
-                        <p class="">Total Personel : {{ selectedMarker.jab_kosong }}</p>
+                        <p class="">Total Personel : {{ parseInt(selectedMarker.jabdibawah1) + parseInt(selectedMarker.jabdiatas1) }}</p>
                       </th>
                     </div>
                   </tr>
@@ -958,7 +958,7 @@ export default {
                 jab_kosong: "" + marker.jab_kosong + "",
                 jabdibawah1: "" + marker.jabdibawah1 + "",
                 jabdiatas1: "" + marker.jabdiatas1 + "",
-                jabdiatas2: "" + marker.jabdiatas2 + "",
+                totalPersonel: "" + marker.totalPersonel + "",
                 latitude: "" + marker.latitude + "",
                 longitude: "" + marker.longitude + "",
                 tempatDekat1: "" + namaTempatDekat.place1 + "",
@@ -994,7 +994,7 @@ export default {
                 jab_kosong: "" + marker.jab_kosong + "",
                 jabdibawah1: "" + marker.jabdibawah1 + "",
                 jabdiatas1: "" + marker.jabdiatas1 + "",
-                jabdiatas2: "" + marker.jabdiatas2 + "",
+                totalPersonel: "" + marker.totalPersonel + "",
                 latitude: "" + marker.latitude + "",
                 longitude: "" + marker.longitude + "",
               };
