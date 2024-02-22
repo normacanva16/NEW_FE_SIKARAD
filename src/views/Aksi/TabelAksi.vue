@@ -246,10 +246,15 @@
               </template>
             </div>
 
-            <b-form-text class="text-danger" v-if="errorFile && item.value === 'false' && file === ''">
-              File Wajib Diisi!
-            </b-form-text>
-            <p class="mt-2 text-dark">Format File: Excel</p>
+            <div v-if="item.value === 'false'">
+                <b-form-text class="text-danger" v-if="errorFile && item.value === 'false' && file === ''">
+                  File Wajib Diisi!
+                </b-form-text>
+                <p class="mt-2 text-dark">Format File: Excel</p>
+            </div>
+            <div v-else>
+                <p class="mt-2 text-dark">Last Update: {{ item.last_updated_date }}</p>
+            </div>
           </b-form-group>
         </b-col>
       </b-row>
