@@ -926,6 +926,12 @@ export default {
       zoomControl: false,
     }).setView([-0.9085086842426627, 118.1511063353415], 5);
     // this.baseLayer = L.tileLayer('https://{s}.tile.jawg.io/jawg-streets/{z}/{x}/{y}{r}.png?access-token={accessToken}', {
+
+      // Menambahkan zoomControl dengan posisi yang diinginkan
+L.control.zoom({
+  position: 'topleft' // Anda dapat mengganti 'topright' dengan 'topleft', 'bottomleft', atau 'bottomright'
+}).addTo(this.map);
+
     this.baseLayer = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: 'SIKARAD',
       minZoom: 0,
@@ -1278,5 +1284,9 @@ th {
 
 .b-sidebar {
   z-index: 1000 !important;
+}
+
+.leaflet-top .leaflet-control-zoom {
+  margin-top: 60px; /* Sesuaikan dengan margin yang diinginkan */
 }
 </style>
