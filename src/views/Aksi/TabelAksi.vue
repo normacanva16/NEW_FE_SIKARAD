@@ -326,7 +326,7 @@
           <div v-else></div>
           <div>
           <b-button class="ml-5 btn-sm w-20" variant="primary" @click="alertDownloadAksi()">
-            Download
+            <i class="fa-solid fa-download" aria-hidden="true"></i> Download
           </b-button>
         </div>
                 <!-- Tombol Hapus -->
