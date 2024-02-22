@@ -92,7 +92,7 @@
       <div class="d-flex align-items-center justify-content-between">
         <div>
           <b-button v-b-modal.modal-tambah-user variant="primary" class="ml-3"
-            >Tambah user</b-button
+            ><i class="fa fa-plus" aria-hidden="true"></i> Tambah user</b-button
           >
         </div>
         <div>

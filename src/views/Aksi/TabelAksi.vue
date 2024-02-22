@@ -320,12 +320,12 @@
                   class="ml-3 btn-sm w-100"
                   @click="handleShowModal"
                   :disabled="uploadInProgress"
-                  >Upload Data</b-button
+                  ><i class="fa fa-upload" aria-hidden="true"></i> Upload Data</b-button
                 >
           </div>
           <div v-else></div>
           <div>
-          <b-button class="ml-5 btn-sm w-20" variant="primary" @click="alertDownloadAksi()">
+          <b-button class="ml-4 btn-sm w-20" variant="success" @click="alertDownloadAksi()">
             <i class="fa-solid fa-download" aria-hidden="true"></i> Download
           </b-button>
         </div>

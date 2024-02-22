@@ -293,7 +293,7 @@
                   <b-button @click="handleClickSearchTabel" variant="primary"
                     ><i class="fa-solid fa-search"></i></b-button
                   >
-                  <b-button @click="handleClickResetTabel" variant="primary"
+                  <b-button @click="handleClickResetTabel" variant="danger"
                     ><i class="fa-solid fa-refresh"></i></b-button
                   >
                 </div>

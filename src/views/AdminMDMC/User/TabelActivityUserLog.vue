@@ -38,7 +38,7 @@
               <b-button @click="handleClickSearch" variant="primary"
                 ><i class="fa-solid fa-search"></i></b-button
               >
-              <b-button class="ml-2 btn-sm w-20" variant="primary" @click="handleDownload()">
+              <b-button class="ml-2 btn-sm w-20" variant="success" @click="handleDownload()">
                 <i class="fa-solid fa-download" aria-hidden="true"></i> 
           </b-button>
             </div>

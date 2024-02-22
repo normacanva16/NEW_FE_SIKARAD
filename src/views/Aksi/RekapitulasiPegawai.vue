@@ -107,7 +107,7 @@
                     ><i class="fa-solid fa-refresh"></i></b-button
                   >
                 </div>
-                <b-button class="ml-1 btn-sm" variant="primary" @click="alertDownloadAksi()">
+                <b-button class="ml-1 btn-sm" variant="success" @click="alertDownloadAksi()">
                   <i class="fa-solid fa-download"></i> Download Tabel
                 </b-button>
               </div>
