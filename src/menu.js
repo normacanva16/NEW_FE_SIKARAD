@@ -49,6 +49,11 @@ if (roles === "superadmin") {
         },
       ],
     },
+    {
+      name: "User Activity Log",
+      icon: "fa fa-history",
+      path: "/admin-sikarad-log",
+    },
   ];
 }
 
@@ -83,6 +88,11 @@ if (roles === "admin") {
           path: "/admin-sikarad-kotama-balakpus",
         },
       ],
+    },
+    {
+      name: "User Activity Log",
+      icon: "fa fa-history",
+      path: "/admin-sikarad-log",
     },
   ];
 }
