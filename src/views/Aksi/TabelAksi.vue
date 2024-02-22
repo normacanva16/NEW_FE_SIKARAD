@@ -1,7 +1,7 @@
 <template>
   <ContentWrapper>
     <div class="content-heading">
-      <div>Data Pegawai</div>
+      <div>Data Personel</div>
     </div>
     <div class="container-fluid">
       <!-- DATATABLE DEMO 2-->
@@ -10,7 +10,7 @@
         <b-modal
         id="modal-detail-employee"
         ref="modal-detail-employee"
-        title="Detail Pegawai"
+        title="Detail Personel"
         hide-footer
         size="md"
         @hidden="resetField()"
@@ -277,7 +277,7 @@
               <b-row class="mt-3">
               <b-col sm="12">
                 <label for=""
-                  ><h4><i class="fa-solid fa-people-group"></i> Data Pegawai</h4></label
+                  ><h4><i class="fa-solid fa-people-group"></i> Data Personel</h4></label
                 >
                 <b-form-group label="KOTAMA / BALAKPUS" label-for="tipe_aksi">
                   <multiselect id="kotama" v-model="kotama" :options="optionKotama" :close-on-select="true" :clear-on-select="false" placeholder="PILIH KOTAMA/BALAKPUS" label="text" track-by="value" :show-labels="false"> </multiselect>
@@ -364,7 +364,7 @@
 
         <div class="card-body">
           <div>
-            <h4>Semua Data Pegawai</h4>
+            <h4>Semua Data Personel</h4>
             <ve-table id="tableAksi" :columns="columns" :table-data="DataAksi" :cell-style-option="cellStyleOption" :border-x="true" :border-y="true" :scroll-width="600" />
             <div v-show="DataAksi.length === 0" class="empty-data">Tidak ada data...</div>
 
@@ -531,7 +531,7 @@ export default {
       token: null,
       anakInstansiRujukan: [],
       showAlertLinkMap: false,
-      titleModalManual: "Import Data Pegawai",
+      titleModalManual: "Import Data Personel",
       cellStyleOption: {
         headerCellClass: ({ column, rowIndex }) => {
           if (rowIndex === 0) {
@@ -733,7 +733,7 @@ export default {
           let tahun = new Date().getFullYear();
           FileSaver.saveAs(
             response.data,
-            `DataPegawai_${tanggal}${bulan}${tahun}`
+            `DataPersonel_${tanggal}${bulan}${tahun}`
           );
         });
       } catch (error) {

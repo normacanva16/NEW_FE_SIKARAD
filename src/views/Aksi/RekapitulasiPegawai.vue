@@ -1,7 +1,7 @@
 <template>
   <ContentWrapper>
     <div class="content-heading">
-      <div>Rekapitulasi Data Pegawai</div>
+      <div>Rekapitulasi Data Personel</div>
     </div>
     <div>
       <!-- DATATABLE DEMO 2-->
@@ -92,7 +92,7 @@
         <div>
           <div>
             <div class="d-flex align-items-center justify-content-between mt-5">
-              <h4>Rekapitulasi Data Pegawai</h4>
+              <h4>Rekapitulasi Data Personel</h4>
               <div class="d-flex align-items-end">
                 <div class="col-sm-8 d-flex">
                   <b-form-input
@@ -263,7 +263,7 @@ export default {
       token: null,
       anakInstansiRujukan: [],
       showAlertLinkMap: false,
-      titleModalManual: "Import Data Pegawai",
+      titleModalManual: "Import Data Personel",
       cellStyleOption: {
         headerCellClass: ({ column, rowIndex }) => {
           if (rowIndex === 0) {
@@ -442,15 +442,15 @@ if (column.key === 'datadetail') { // Jika kolom adalah "KETERANGAN"
 
   // Set document properties
   pdfDoc.setProperties({
-    title: 'Rekapitulasi Data Pegawai',
+    title: 'Rekapitulasi Data Personel',
     subject: 'Tabel Rekapitulasi Personel',
     author: 'Your Name',
-    keywords: 'rekapitulasi, pegawai, table',
+    keywords: 'rekapitulasi, personel, table',
   });
 
   // Add a title to the PDF
   pdfDoc.setFontSize(18);
-  pdfDoc.text('Rekapitulasi Data Pegawai', 20, 20);
+  pdfDoc.text('Rekapitulasi Data Personel', 20, 20);
 
   // Add a date to the PDF
   pdfDoc.setFontSize(12);
@@ -479,7 +479,7 @@ if (column.key === 'datadetail') { // Jika kolom adalah "KETERANGAN"
   });
 
   // Save or open the PDF
-  pdfDoc.save('Rekapitulasi_Pegawai.pdf');
+  pdfDoc.save('Rekapitulasi_Personel.pdf');
 },
 
 
