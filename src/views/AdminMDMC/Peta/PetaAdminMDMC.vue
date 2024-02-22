@@ -284,8 +284,21 @@
     </b-modal>
     <b-modal id="modal-notif" ref="modal-hide" size="md" title="NOTIFIKASI" class="text-bold" centered hide-footer>
       <div class="justify-center">
+        <div class="col-sm-12 d-flex">
+                  <b-form-input
+                    v-model="searchtabel"
+                    placeholder="Masukkan kotama"
+                    @keydown.enter="onPressEnterSearch"
+                  ></b-form-input>
+                  <b-button @click="handleClickSearchTabel" variant="primary"
+                    ><i class="fa-solid fa-search"></i></b-button
+                  >
+                  <b-button @click="handleClickResetTabel" variant="primary"
+                    ><i class="fa-solid fa-refresh"></i></b-button
+                  >
+                </div>
         <b-card class="text-center">
-          <div v-for="(itemNotif, index) in notificationData" :key="index"> 
+          <div v-for="(itemNotif, index) in notificationDataFilter" :key="index"> 
             <div v-if="itemNotif.name === 'Jabatan Kosong'">
               <b-button v-b-toggle.collapse-1 variant="primary w-100 p-2 mt-2 text-bold">
                 <h3>{{ itemNotif.name }}</h3>
@@ -457,6 +470,7 @@ const cookies = new Coookie();
 export default {
   data() {
     return {
+      searchtabel: "",
       map: null,
       showNotifButton: false,
       routingControl: null,
@@ -466,6 +480,7 @@ export default {
       closestPlace: "",
       matchesData: [],
       notificationData: [],
+      notificationDataFilter: [],
       detailemployeeData: [],
       DataLocation: [],
       sidebarVisibilityFilter: false,
@@ -841,6 +856,20 @@ export default {
       }
     },
 
+    async getDataNotification() {
+      try {
+        const response = await axios.get(`${process.env.VUE_APP_URL}dashboard/peta/notification?search=${this.searchtabel}`);
+
+        this.notificationDataFilter = response.data.data;
+
+      } catch (error) {
+        console.error(error);
+        this.loadingInstance.close();
+
+        swal("Kesalahan Server!", "Tidak dapat terhubung ke server!", error);
+      }
+    },
+
     async handleDetailClick(code) {
     await this.detailModal(code);
     this.$bvModal.show('modal-detail');
@@ -861,7 +890,21 @@ export default {
   getImageSrc(image) {
     // Return the base64 image source
     return 'data:image/jpeg;base64,' + image;
-  }
+  },
+
+  onPressEnterSearch() {
+      this.getDataNotification();
+    },
+
+  handleClickSearchTabel() {
+      this.getDataNotification();
+    },
+
+    handleClickResetTabel() {
+      this.searchtabel = "";
+
+      this.getDataNotification();
+    },
 
   },
 
@@ -877,6 +920,7 @@ export default {
       this.$router.push("/panel")
     }
     this.notifModal();
+    this.getDataNotification();
 
     this.map = L.map('map', {
       zoomControl: false,
