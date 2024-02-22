@@ -282,7 +282,7 @@
         </div>
       </div>
     </b-modal>
-    <b-modal id="modal-notif" ref="modal-hide" size="md">
+    <b-modal id="modal-notif" ref="modal-hide" size="md" title="NOTIFIKASI" class="text-bold" centered hide-footer>
       <div class="justify-center">
         <b-card class="text-center">
           <div v-for="(itemNotif, index) in notificationData" :key="index"> 
