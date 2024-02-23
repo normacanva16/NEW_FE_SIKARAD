@@ -26,7 +26,7 @@ if (roles === "superadmin") {
       path: "/admin-sikarad-pegawai",
     },
     {
-      name: "Rekapitulasi Data Personel",
+      name: "Rekapitulasi Data",
       icon: "fa fa-chart-column",
       path: "/admin-sikarad-rekapitulasi",
     },
@@ -67,7 +67,7 @@ if (roles === "admin") {
       path: "/admin-sikarad-pegawai",
     },
     {
-      name: "Rekapitulasi Data Personel",
+      name: "Rekapitulasi Data",
       icon: "fa fa-chart-column",
       path: "/admin-sikarad-rekapitulasi",
     },
@@ -102,7 +102,7 @@ if (roles === "user") {
       path: "/admin-sikarad-pegawai",
     },
     {
-      name: "Rekapitulasi Data Personel",
+      name: "Rekapitulasi Data",
       icon: "fa fa-chart-column",
       path: "/admin-sikarad-rekapitulasi",
     },
