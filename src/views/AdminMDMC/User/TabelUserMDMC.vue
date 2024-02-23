@@ -415,10 +415,7 @@ export default {
           email: this.email,
           phone_number: this.phone_number,
           password: this.password ? this.password : "",
-          username: this.userName,
-          organisasi_id: this.keteranganStatus
-            ? this.keteranganStatus.id
-            : null,
+          username: this.userName
         };
 
         this.loadingCreate = true;
