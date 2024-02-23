@@ -110,7 +110,7 @@
             </b-col>
           </b-row>
 
-          <b-button variant="primary" :disabled="loadingCreate" @click="submitForm">
+          <b-button variant="primary" @click="submitForm">
   Submit
 </b-button>
         </form>
@@ -264,7 +264,9 @@ export default {
     },
 
     async submitForm() {
+      console.log("belummm")
   if (this.validation()) {
+    console.log("masukkkkk")
     const data = {
       fullname: this.namaAdmin,
       email: this.email,
@@ -276,7 +278,7 @@ export default {
     this.loadingCreate = true;
 
     try {
-      const response = await axios.put(
+      await axios.put(
         `${process.env.VUE_APP_URL}users/${this.id}/user/profile`,
         data,
         {
@@ -323,12 +325,6 @@ export default {
     },
 
     validation() {
-      if (this.tipeAkun === "") {
-        this.errorTipeAkun = true;
-      } else {
-        this.errorTipeAkun = false;
-      }
-
       if (this.namaAdmin === "") {
         this.errorNamaAdmin = true;
       } else {
@@ -341,32 +337,16 @@ export default {
         this.errorEmail = false;
       }
 
-      if (this.action === "create") {
-        if (this.password === "") {
-          this.errorPassword = true;
-        } else {
-          this.errorPassword = false;
-        }
-      }
-
       if (this.userName === "") {
         this.errorUserName = true;
       } else {
         this.errorUserName = false;
       }
 
-      if (this.keterangan === "") {
-        this.errorKeterangan = true;
-      } else {
-        this.errorKeterangan = false;
-      }
-
       if (
-        this.tipeAkun === "" ||
         this.namaAdmin === "" ||
         this.email === "" ||
-        this.userName === "" ||
-        this.keterangan === ""
+        this.userName === ""
       ) {
         return false;
       } else if (this.action === "create" && this.password === "") {
