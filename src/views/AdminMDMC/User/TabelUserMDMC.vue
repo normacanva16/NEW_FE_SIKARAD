@@ -298,7 +298,7 @@ export default {
       axios
         .get(`${process.env.VUE_APP_URL}users/${id}/admin`)
         .then((response) => {
-          this.tipeAkun = response.data.data.role_id[0];
+          this.tipeAkun = response.data.data.mst_roles;
           this.namaAdmin = response.data.data.fullname;
           this.userName = response.data.data.username;
           this.email = response.data.data.email;
