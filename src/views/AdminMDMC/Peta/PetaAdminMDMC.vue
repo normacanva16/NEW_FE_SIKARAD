@@ -930,7 +930,7 @@ export default {
 
       // Menambahkan zoomControl dengan posisi yang diinginkan
 L.control.zoom({
-  position: 'topleft' // Anda dapat mengganti 'topright' dengan 'topleft', 'bottomleft', atau 'bottomright'
+  position: 'bottomleft' // Anda dapat mengganti 'topright' dengan 'topleft', 'bottomleft', atau 'bottomright'
 }).addTo(this.map);
 
     this.baseLayer = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -1120,17 +1120,17 @@ L.control.zoom({
       popupAnchor: [1, -12],
     });
 
-    this.legend = L.control({ position: 'bottomleft' });
-    this.legend.onAdd = function (map) {
-      var div = L.DomUtil.create('div', 'info legend-container');
-      var labels = ['<strong>Legenda</strong>'];
-      labels.push(
-        '<img class="ml-2" src="https://cdn-icons-png.flaticon.com/512/3046/3046360.png" width="18px" height="auto" alt="Logo Lainnya"> Kotama/Balakpus '
-      );
-      div.innerHTML += labels.join('<br>');
-      return div;
-    };
-    this.legend.addTo(this.map);
+    // this.legend = L.control({ position: 'bottomleft' });
+    // this.legend.onAdd = function (map) {
+    //   var div = L.DomUtil.create('div', 'info legend-container');
+    //   var labels = ['<strong>Legenda</strong>'];
+    //   labels.push(
+    //     '<img class="ml-2" src="https://cdn-icons-png.flaticon.com/512/3046/3046360.png" width="18px" height="auto" alt="Logo Lainnya"> Kotama/Balakpus '
+    //   );
+    //   div.innerHTML += labels.join('<br>');
+    //   return div;
+    // };
+    // this.legend.addTo(this.map);
     this.baseLayer.addTo(this.map)
     this.showLainnya = true;
     this.filterJabatanKosong();
@@ -1318,7 +1318,7 @@ th {
 }
 
 .leaflet-top .leaflet-control-zoom {
-  margin-top: 60px; /* Sesuaikan dengan margin yang diinginkan */
+  /* margin-top: 60px;  */
 }
 
 .custom-tooltip {
