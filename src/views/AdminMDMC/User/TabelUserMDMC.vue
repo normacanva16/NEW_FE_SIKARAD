@@ -40,7 +40,7 @@
               </b-form-group>
 
               <b-form-group label="Status Akun" label-for="isActive">
-                <b-form-checkbox id="checkbox-1" v-model="isActive" name="checkbox-1" switch value="1" unchecked-value="0">{{ isActive == "1" ? "Active" : "Tidak Active" }} </b-form-checkbox>
+                <b-form-checkbox id="checkbox-1" v-model="isActive" name="checkbox-1" switch value="1" unchecked-value="0">{{ isActive == "1" ? "Active" : "Not Active" }} </b-form-checkbox>
               </b-form-group>
 
               </div>
