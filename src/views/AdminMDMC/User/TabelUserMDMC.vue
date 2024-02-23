@@ -18,7 +18,8 @@
           </div>
           <b-row>
             <b-col>
-              <b-form-group label="Tipe Akun" label-for="tipe_akun">
+              <div class="d-flex justify-between">
+                <b-form-group label="Tipe Akun" label-for="tipe_akun" class="mr-3">
                 <multiselect
                   :allow-empty="false"
                   v-model="tipeAkun"
@@ -30,12 +31,19 @@
                   placeholder="Pilih tipe akun"
                   label="name"
                   track-by="id"
+                  :show-labels="false"
                 >
                 </multiselect>
                 <b-form-text class="text-danger" v-if="errorTipeAkun">
                   Tipe Akun Wajib Diisi!
                 </b-form-text>
               </b-form-group>
+
+              <b-form-group label="Status Akun" label-for="password">
+                <b-form-checkbox id="checkbox-1" v-model="isPublish" name="checkbox-1" switch value="1" unchecked-value="0">{{ isPublish == "1" ? "Active" : "Tidak Active" }} </b-form-checkbox>
+              </b-form-group>
+
+              </div>
               <b-form-group label="Nama Admin" label-for="nama_admin">
                 <b-form-input
                   id="nama_admin"
