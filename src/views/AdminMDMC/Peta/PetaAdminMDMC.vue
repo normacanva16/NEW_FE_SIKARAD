@@ -1054,7 +1054,7 @@ L.control.zoom({
           });
 
           this.map.on('zoomend', () => {
-            if (this.map.getZoom() >= 16) {
+            if (this.map.getZoom() >= 1) {
               if (this.tooltips.length === 0) {
                 for (var i = 0; i < this.DataLocation.length; i++) {
                   var marker = this.DataLocation[i];
