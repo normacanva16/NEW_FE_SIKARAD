@@ -493,7 +493,72 @@ export default {
           value: "jenderal"
         }
       ],
-      optionKorps:[],
+      optionKorps:[
+      {
+          text: "INF",
+          value: "inf"
+        },
+        {
+          text: "KAV",
+          value: "kav"
+        },
+        {
+          text: "ARM",
+          value: "arm"
+        },
+        {
+          text: "ARH",
+          value: "arh"
+        },
+        {
+          text: "CPN",
+          value: "cpn"
+        },
+        {
+          text: "CZI",
+          value: "czi"
+        },
+        {
+          text: "CHB",
+          value: "chb"
+        },
+        {
+          text: "CPL",
+          value: "cpl"
+        },
+        {
+          text: "CPM",
+          value: "cpm"
+        },
+        {
+          text: "CKM",
+          value: "ckm"
+        },
+        {
+          text: "CBA",
+          value: "cba"
+        },
+        {
+          text: "CAJ",
+          value: "caj"
+        },
+        {
+          text: "CTP",
+          value: "ctp"
+        },
+        {
+          text: "CKU",
+          value: "cku"
+        },
+        {
+          text: "CHK",
+          value: "chk"
+        },
+        {
+          text: "K",
+          value: "k"
+        }
+      ],
       keyword: "",
       katakunci: "",
       title: "",
