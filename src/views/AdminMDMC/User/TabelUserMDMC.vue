@@ -39,8 +39,8 @@
                 </b-form-text>
               </b-form-group>
 
-              <b-form-group label="Status Akun" label-for="password">
-                <b-form-checkbox id="checkbox-1" v-model="isPublish" name="checkbox-1" switch value="1" unchecked-value="0">{{ isPublish == "1" ? "Active" : "Tidak Active" }} </b-form-checkbox>
+              <b-form-group label="Status Akun" label-for="isActive">
+                <b-form-checkbox id="checkbox-1" v-model="isActive" name="checkbox-1" switch value="1" unchecked-value="0">{{ isActive == "1" ? "Active" : "Tidak Active" }} </b-form-checkbox>
               </b-form-group>
 
               </div>
@@ -184,6 +184,7 @@ export default {
       options: ["list", "of", "options"],
       id: null,
       tipeAkun: "",
+      isActive: false,
       namaAdmin: "",
       email: "",
       phone_number: "",
@@ -302,7 +303,7 @@ export default {
           this.userName = response.data.data.username;
           this.email = response.data.data.email;
           this.phone_number = response.data.data.phone_number;
-          this.keteranganStatus = response.data.data.keterangan[0];
+          this.isActive = response.data.data.is_active;
         });
     },
 
@@ -403,7 +404,7 @@ export default {
       this.phone_number = "";
       this.password = "";
       this.userName = "";
-      this.keteranganStatus = "";
+      this.isActive = false;
       this.keterangan = "";
       this.errorTipeAkun = false;
       this.errorNamaAdmin = false;
@@ -423,7 +424,8 @@ export default {
           email: this.email,
           phone_number: this.phone_number,
           password: this.password ? this.password : "",
-          username: this.userName
+          username: this.userName,
+          is_active: this.isActive
         };
 
         this.loadingCreate = true;
