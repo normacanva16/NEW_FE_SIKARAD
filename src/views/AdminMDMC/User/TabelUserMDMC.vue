@@ -44,14 +44,14 @@
               </b-form-group>
 
               </div>
-              <b-form-group label="Nama Admin" label-for="nama_admin">
+              <b-form-group label="Nama" label-for="nama_admin">
                 <b-form-input
                   id="nama_admin"
                   v-model="namaAdmin"
                   placeholder="Masukkan nama lengkap"
                 ></b-form-input>
                 <b-form-text class="text-danger" v-if="errorNamaAdmin">
-                  Nama Admin Wajib Diisi!
+                  Nama Wajib Diisi!
                 </b-form-text>
               </b-form-group>
               <b-form-group label="Email" label-for="email">

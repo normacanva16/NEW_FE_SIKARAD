@@ -47,7 +47,7 @@
     <b-modal
       id="modal-input-manual"
       ref="modal-input-manual"
-      title="Tambah Relawan"
+      title="Ubah Data Profile"
       hide-footer
       size="md"
       @hidden="resetField()"
