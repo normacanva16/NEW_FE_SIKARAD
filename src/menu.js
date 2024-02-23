@@ -21,18 +21,14 @@ if (roles === "superadmin") {
     // aksi
 
     {
-      name: "Personel",
+      name: "Data Personel",
       icon: "fa fa-people-group",
-      submenu: [
-        {
-          name: "Tabel Data Personel",
-          path: "/admin-sikarad-pegawai",
-        },
-        {
-          name: "Rekapitulasi Personel",
-          path: "/admin-sikarad-rekapitulasi",
-        },
-      ],
+      path: "/admin-sikarad-pegawai",
+    },
+    {
+      name: "Rekapitulasi Data Personel",
+      icon: "fa fa-chart-column",
+      path: "/admin-sikarad-rekapitulasi",
     },
     // administrasi
     {
@@ -66,18 +62,14 @@ if (roles === "admin") {
       path: "/admin-sikarad-peta",
     },
     {
-      name: "Personel",
+      name: "Data Personel",
       icon: "fa fa-people-group",
-      submenu: [
-        {
-          name: "Tabel Data Personel",
-          path: "/admin-sikarad-pegawai",
-        },
-        {
-          name: "Rekapitulasi Personel",
-          path: "/admin-sikarad-rekapitulasi",
-        },
-      ],
+      path: "/admin-sikarad-pegawai",
+    },
+    {
+      name: "Rekapitulasi Data Personel",
+      icon: "fa fa-chart-column",
+      path: "/admin-sikarad-rekapitulasi",
     },
     {
       name: "Master",
@@ -105,18 +97,14 @@ if (roles === "user") {
       path: "/admin-sikarad-peta",
     },
     {
-      name: "Personel",
+      name: "Data Personel",
       icon: "fa fa-people-group",
-      submenu: [
-        {
-          name: "Tabel Data Personel",
-          path: "/admin-sikarad-pegawai",
-        },
-        {
-          name: "Rekapitulasi Personel",
-          path: "/admin-sikarad-rekapitulasi",
-        },
-      ],
+      path: "/admin-sikarad-pegawai",
+    },
+    {
+      name: "Rekapitulasi Data Personel",
+      icon: "fa fa-chart-column",
+      path: "/admin-sikarad-rekapitulasi",
     },
   ];
 }
