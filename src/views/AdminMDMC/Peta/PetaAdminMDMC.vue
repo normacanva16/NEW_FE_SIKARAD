@@ -1055,19 +1055,52 @@ L.control.zoom({
 
           this.map.on('zoomend', () => {
             if (this.map.getZoom() >= 1) {
+              // if (this.tooltips.length === 0) {
+              //   for (var i = 0; i < this.DataLocation.length; i++) {
+              //     var marker = this.DataLocation[i];
+              //     var tooltip = L.tooltip({
+              //       permanent: true,
+              //       direction: 'top'
+              //     })
+              //       .setContent('<b>' + marker.nama + '</b>')
+              //       .setLatLng([marker.latitude, marker.longitude])
+              //       .addTo(this.map);
+              //     this.tooltips.push(tooltip)
+              //   }
+              // }
               if (this.tooltips.length === 0) {
-                for (var i = 0; i < this.DataLocation.length; i++) {
-                  var marker = this.DataLocation[i];
-                  var tooltip = L.tooltip({
-                    permanent: true,
-                    direction: 'top'
-                  })
-                    .setContent('<b>' + marker.nama + '</b>')
-                    .setLatLng([marker.latitude, marker.longitude])
-                    .addTo(this.map);
-                  this.tooltips.push(tooltip)
+                  for (var i = 0; i < this.DataLocation.length; i++) {
+                    var marker = this.DataLocation[i];
+                    var tooltipContent = '<b>' + marker.nama + '</b>';
+                    var textColor = '#000000'; // default black color for text
+                    var borderColorClass = ''; // default border class
+
+                    // Check if marker.jabdiatas1 is greater than 0
+                    if (marker.jabdiatas1 > 0) {
+                      // Set text color to red if marker.jabdiatas1 > 0
+                      textColor = '#FF0000'; // red color
+                      borderColorClass = ' red-border'; // red border class
+                    }
+
+                    // Add information about jabdiatas1 if it's greater than 1.5
+                    if (marker.jabdiatas1 > 0) {
+                      tooltipContent += '<br><span style="font-size: smaller;">jab > 1,5 thn = </span><span style="color:' + textColor + ';">' + marker.jabdiatas1 + '</span>';
+                    }
+
+                    var tooltip = L.tooltip({
+                      permanent: true,
+                      direction: 'top',
+                      className: 'custom-tooltip' + borderColorClass, // Add custom class for styling
+                      style: {
+                        color: textColor // Set the text color
+                      }
+                    })
+                      .setContent('<span style="color:' + textColor + ';">' + tooltipContent + '</span>')
+                      .setLatLng([marker.latitude, marker.longitude])
+                      .addTo(this.map);
+                    this.tooltips.push(tooltip)
+                  }
                 }
-              }
             } else {
               for (var i = 0; i < this.tooltips.length; i++) {
                 var tooltip = this.tooltips[i];
@@ -1286,5 +1319,14 @@ th {
 
 .leaflet-top .leaflet-control-zoom {
   margin-top: 60px; /* Sesuaikan dengan margin yang diinginkan */
+}
+
+.custom-tooltip {
+  border: 0.5px solid #fff; /* default border color */
+
+}
+
+.custom-tooltip.red-border {
+  border-color: #FF0000; /* red border color */
 }
 </style>
