@@ -206,7 +206,7 @@
                 <!-- hr border -->
                 <hr />
                 <!-- lokasi terdekat -->
-                <div>
+                <!-- <div>
                   <b-row>
                     <b-col>
                       <p>Terdekat Dari Lokasi</p>
@@ -263,8 +263,8 @@
                       </b-button>
                     </div>
                   </div>
-                </div>
-              </div>
+                </div> -->
+              </div> 
             </div>
           </div>
         </template>
@@ -698,127 +698,127 @@ export default {
     closeDropdown() {
       this.showMatches = true;
     },
-    lokasiTerdekatRute1() {
-      if (this.routingControl) {
-        this.map.removeControl(this.routingControl);
-        this.routingControl = null;
-      }
-      if (this.marker) {
-        this.map.removeLayer(this.marker);
-        this.marker = null;
-      }
-      swal({
-        title: 'Sedang Mencari Rute',
-        allowEscapeKey: false,
-        allowOutsideClick: true,
-        timer: 2000,
-        onOpen: () => {
-          swal.showLoading();
-        }
-      });
-      const latLngTempatTerdekat1 = L.latLng(this.selectedMarker.tempatTerdekatJarak1.split(","));
-      this.buttonRute = true;
-      this.routingControl = L.Routing.control({
-        waypoints: [
-          L.latLng(this.ruteMulaiLokasi),
-          latLngTempatTerdekat1
-        ],
-        lineOptions: {
-          styles: [
-            { color: '#00b0ff', opacity: 0.7, weight: 5 }
-          ]
-        },
-        addWaypoints: false,
-        extendToWaypoints: true,
-        collapsible: true,
-        createMarker: function () { return null; }
-      }).addTo(this.map);
-      this.modalDetail = false;
+    // lokasiTerdekatRute1() {
+    //   if (this.routingControl) {
+    //     this.map.removeControl(this.routingControl);
+    //     this.routingControl = null;
+    //   }
+    //   if (this.marker) {
+    //     this.map.removeLayer(this.marker);
+    //     this.marker = null;
+    //   }
+    //   swal({
+    //     title: 'Sedang Mencari Rute',
+    //     allowEscapeKey: false,
+    //     allowOutsideClick: true,
+    //     timer: 2000,
+    //     onOpen: () => {
+    //       swal.showLoading();
+    //     }
+    //   });
+    //   const latLngTempatTerdekat1 = L.latLng(this.selectedMarker.tempatTerdekatJarak1.split(","));
+    //   this.buttonRute = true;
+    //   this.routingControl = L.Routing.control({
+    //     waypoints: [
+    //       L.latLng(this.ruteMulaiLokasi),
+    //       latLngTempatTerdekat1
+    //     ],
+    //     lineOptions: {
+    //       styles: [
+    //         { color: '#00b0ff', opacity: 0.7, weight: 5 }
+    //       ]
+    //     },
+    //     addWaypoints: false,
+    //     extendToWaypoints: true,
+    //     collapsible: true,
+    //     createMarker: function () { return null; }
+    //   }).addTo(this.map);
+    //   this.modalDetail = false;
 
-    },
-    lokasiTerdekatRute2() {
-      if (this.routingControl) {
-        this.map.removeControl(this.routingControl);
-        this.routingControl = null;
-      }
-      if (this.marker) {
-        this.map.removeLayer(this.marker);
-        this.marker = null;
-      }
-      swal({
-        title: 'Sedang Mencari Rute',
-        allowEscapeKey: false,
-        allowOutsideClick: true,
-        timer: 2000,
-        onOpen: () => {
-          swal.showLoading();
-        }
-      });
-      const latLngTempatTerdekat2 = L.latLng(this.selectedMarker.tempatTerdekatJarak2.split(","));
-      this.buttonRute = true;
-      this.routingControl = L.Routing.control({
-        waypoints: [
-          L.latLng(this.ruteMulaiLokasi),
-          latLngTempatTerdekat2
-        ],
-        lineOptions: {
-          styles: [
-            { color: '#00b0ff', weight: 3 }
-          ]
-        },
-        addWaypoints: false,
-        extendToWaypoints: true,
-        collapsible: true,
-        createMarker: function () { return null; }
-      }).addTo(this.map);
-      this.modalDetail = false;
+    // },
+    // lokasiTerdekatRute2() {
+    //   if (this.routingControl) {
+    //     this.map.removeControl(this.routingControl);
+    //     this.routingControl = null;
+    //   }
+    //   if (this.marker) {
+    //     this.map.removeLayer(this.marker);
+    //     this.marker = null;
+    //   }
+    //   swal({
+    //     title: 'Sedang Mencari Rute',
+    //     allowEscapeKey: false,
+    //     allowOutsideClick: true,
+    //     timer: 2000,
+    //     onOpen: () => {
+    //       swal.showLoading();
+    //     }
+    //   });
+    //   const latLngTempatTerdekat2 = L.latLng(this.selectedMarker.tempatTerdekatJarak2.split(","));
+    //   this.buttonRute = true;
+    //   this.routingControl = L.Routing.control({
+    //     waypoints: [
+    //       L.latLng(this.ruteMulaiLokasi),
+    //       latLngTempatTerdekat2
+    //     ],
+    //     lineOptions: {
+    //       styles: [
+    //         { color: '#00b0ff', weight: 3 }
+    //       ]
+    //     },
+    //     addWaypoints: false,
+    //     extendToWaypoints: true,
+    //     collapsible: true,
+    //     createMarker: function () { return null; }
+    //   }).addTo(this.map);
+    //   this.modalDetail = false;
 
-    },
-    lokasiTerdekatRute3() {
-      if (this.routingControl) {
-        this.map.removeControl(this.routingControl);
-        this.routingControl = null;
-      }
-      if (this.marker) {
-        this.map.removeLayer(this.marker);
-        this.marker = null;
-      }
-      swal({
-        title: 'Sedang Mencari Rute',
-        allowEscapeKey: false,
-        allowOutsideClick: true,
-        timer: 2000,
-        onOpen: () => {
-          swal.showLoading();
-        }
-      });
-      const latLngTempatTerdekat3 = L.latLng(this.selectedMarker.tempatTerdekatJarak3.split(","));
-      this.buttonRute = true;
-      this.routingControl = L.Routing.control({
-        waypoints: [
-          L.latLng(this.ruteMulaiLokasi),
-          latLngTempatTerdekat3
-        ],
-        lineOptions: {
-          styles: [
-            { color: '#00b0ff', opacity: 0.7, weight: 5 }
-          ]
-        },
-        addWaypoints: false,
-        extendToWaypoints: true,
-        collapsible: true,
-        createMarker: function () { return null; }
-      }).addTo(this.map);
-      this.modalDetail = false;
+    // },
+    // lokasiTerdekatRute3() {
+    //   if (this.routingControl) {
+    //     this.map.removeControl(this.routingControl);
+    //     this.routingControl = null;
+    //   }
+    //   if (this.marker) {
+    //     this.map.removeLayer(this.marker);
+    //     this.marker = null;
+    //   }
+    //   swal({
+    //     title: 'Sedang Mencari Rute',
+    //     allowEscapeKey: false,
+    //     allowOutsideClick: true,
+    //     timer: 2000,
+    //     onOpen: () => {
+    //       swal.showLoading();
+    //     }
+    //   });
+    //   const latLngTempatTerdekat3 = L.latLng(this.selectedMarker.tempatTerdekatJarak3.split(","));
+    //   this.buttonRute = true;
+    //   this.routingControl = L.Routing.control({
+    //     waypoints: [
+    //       L.latLng(this.ruteMulaiLokasi),
+    //       latLngTempatTerdekat3
+    //     ],
+    //     lineOptions: {
+    //       styles: [
+    //         { color: '#00b0ff', opacity: 0.7, weight: 5 }
+    //       ]
+    //     },
+    //     addWaypoints: false,
+    //     extendToWaypoints: true,
+    //     collapsible: true,
+    //     createMarker: function () { return null; }
+    //   }).addTo(this.map);
+    //   this.modalDetail = false;
 
-    },
-    hapusRute() {
-      if (this.routingControl) {
-        this.map.removeControl(this.routingControl);
-        this.routingControl = null;
-      }
-      this.buttonRute = false;
-    },
+    // },
+    // hapusRute() {
+    //   if (this.routingControl) {
+    //     this.map.removeControl(this.routingControl);
+    //     this.routingControl = null;
+    //   }
+    //   this.buttonRute = false;
+    // },
     toggleStatusJabatan() {
       if (this.showLainnya) {
         this.showJabatanKosong = false;
@@ -958,7 +958,7 @@ L.control.zoom({
         this.dataTotal = response.data.data.totalData;
         this.map.addLayer(this.LainLayer);
 
-        console.log(DataLocation, "Data Lokasi");
+        // console.log(DataLocation, "Data Lokasi");
 
         DataLocation.forEach(marker => {
           let map = L.marker([marker.latitude, marker.longitude]);
@@ -1012,22 +1012,22 @@ L.control.zoom({
                 totalPersonel: "" + marker.totalPersonel + "",
                 latitude: "" + marker.latitude + "",
                 longitude: "" + marker.longitude + "",
-                tempatDekat1: "" + namaTempatDekat.place1 + "",
-                tempatDekat2: "" + namaTempatDekat.place2 + "",
-                tempatDekat3: "" + namaTempatDekat.place3 + "",
-                tempatDekat4: "" + namaTempatDekat.place4 + "",
-                tempatDekaticon1: "" + namaTempatDekat.icon1 + "",
-                tempatDekaticon2: "" + namaTempatDekat.icon2 + "",
-                tempatDekaticon3: "" + namaTempatDekat.icon3 + "",
-                tempatDekaticon4: "" + namaTempatDekat.icon4 + "",
-                jarakMeter1: "" + (sortedDistances[0] / 1000).toFixed(2) + "",
-                jarakMeter2: "" + (sortedDistances[1] / 1000).toFixed(2) + "",
-                jarakMeter3: "" + (sortedDistances[2] / 1000).toFixed(2) + "",
-                jarakMeter4: "" + (sortedDistances[3] / 1000).toFixed(2) + "",
-                tempatTerdekatJarak1: "" + closestPlaces.find(place => place.nama === namaTempatDekat.place1).latitude + "," + closestPlaces.find(place => place.nama === namaTempatDekat.place1).longitude,
-                tempatTerdekatJarak2: "" + closestPlaces.find(place => place.nama === namaTempatDekat.place2).latitude + "," + closestPlaces.find(place => place.nama === namaTempatDekat.place2).longitude,
-                tempatTerdekatJarak3: "" + closestPlaces.find(place => place.nama === namaTempatDekat.place3).latitude + "," + closestPlaces.find(place => place.nama === namaTempatDekat.place3).longitude,
-                tempatTerdekatJarak4: "" + closestPlaces.find(place => place.nama === namaTempatDekat.place4).latitude + "," + closestPlaces.find(place => place.nama === namaTempatDekat.place4).longitude,
+                // tempatDekat1: "" + namaTempatDekat.place1 + "", 
+                // tempatDekat2: "" + namaTempatDekat.place2 + "",
+                // tempatDekat3: "" + namaTempatDekat.place3 + "",
+                // tempatDekat4: "" + namaTempatDekat.place4 + "",
+                // tempatDekaticon1: "" + namaTempatDekat.icon1 + "",
+                // tempatDekaticon2: "" + namaTempatDekat.icon2 + "",
+                // tempatDekaticon3: "" + namaTempatDekat.icon3 + "",
+                // tempatDekaticon4: "" + namaTempatDekat.icon4 + "",
+                // jarakMeter1: "" + (sortedDistances[0] / 1000).toFixed(2) + "",
+                // jarakMeter2: "" + (sortedDistances[1] / 1000).toFixed(2) + "",
+                // jarakMeter3: "" + (sortedDistances[2] / 1000).toFixed(2) + "",
+                // jarakMeter4: "" + (sortedDistances[3] / 1000).toFixed(2) + "",
+                // tempatTerdekatJarak1: "" + closestPlaces.find(place => place.nama === namaTempatDekat.place1).latitude + "," + closestPlaces.find(place => place.nama === namaTempatDekat.place1).longitude,
+                // tempatTerdekatJarak2: "" + closestPlaces.find(place => place.nama === namaTempatDekat.place2).latitude + "," + closestPlaces.find(place => place.nama === namaTempatDekat.place2).longitude,
+                // tempatTerdekatJarak3: "" + closestPlaces.find(place => place.nama === namaTempatDekat.place3).latitude + "," + closestPlaces.find(place => place.nama === namaTempatDekat.place3).longitude,
+                // tempatTerdekatJarak4: "" + closestPlaces.find(place => place.nama === namaTempatDekat.place4).latitude + "," + closestPlaces.find(place => place.nama === namaTempatDekat.place4).longitude,
               };
             } else {
               this.modalDetail = true;
