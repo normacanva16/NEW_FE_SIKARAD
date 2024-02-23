@@ -57,6 +57,13 @@
                   Email Akun Wajib Diisi!
                 </b-form-text>
               </b-form-group>
+              <b-form-group label="Telepon" label-for="phone_number">
+                <b-form-input
+                  id="phone_number"
+                  v-model="phone_number"
+                  placeholder="Masukkan Telepon"
+                ></b-form-input>
+              </b-form-group>
               <b-form-group label="Username" label-for="user_name">
                 <b-form-input
                   id="user_name"
@@ -171,6 +178,7 @@ export default {
       tipeAkun: "",
       namaAdmin: "",
       email: "",
+      phone_number: "",
       password: "",
       userName: "",
       keterangan: "",
@@ -285,6 +293,7 @@ export default {
           this.namaAdmin = response.data.data.fullname;
           this.userName = response.data.data.username;
           this.email = response.data.data.email;
+          this.phone_number = response.data.data.phone_number;
           this.keteranganStatus = response.data.data.keterangan[0];
         });
     },
@@ -383,6 +392,7 @@ export default {
       this.tipeAkun = "";
       this.namaAdmin = "";
       this.email = "";
+      this.phone_number = "";
       this.password = "";
       this.userName = "";
       this.keteranganStatus = "";
@@ -403,6 +413,7 @@ export default {
           role_id: this.tipeAkun.id,
           fullname: this.namaAdmin,
           email: this.email,
+          phone_number: this.phone_number,
           password: this.password ? this.password : "",
           username: this.userName,
           organisasi_id: this.keteranganStatus

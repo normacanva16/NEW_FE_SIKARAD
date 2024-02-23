@@ -47,103 +47,73 @@
     <b-modal
       id="modal-input-manual"
       ref="modal-input-manual"
-      v-model="modalEditProfile"
       title="Tambah Relawan"
       hide-footer
-      size="xl"
+      size="md"
       @hidden="resetField()"
     >
-      <form @submit.prevent="submitForm">
-        <div class="clearfix" v-if="loadingCreate === true">
-          <b-spinner class="float-right" label="Floated Right"></b-spinner>
-        </div>
+    <form>
+          <div class="clearfix" v-if="loadingCreate === true">
+            <b-spinner class="float-right" label="Floated Right"></b-spinner>
+          </div>
+          <b-row>
+            <b-col>
+              <b-form-group label="Nama" label-for="nama_admin">
+                <b-form-input
+                  id="nama_admin"
+                  v-model="namaAdmin"
+                  placeholder="Masukkan nama lengkap"
+                ></b-form-input>
+                <b-form-text class="text-danger" v-if="errorNamaAdmin">
+                  Nama Admin Wajib Diisi!
+                </b-form-text>
+              </b-form-group>
+              <b-form-group label="Email" label-for="email">
+                <b-form-input
+                  id="email"
+                  v-model="email"
+                  placeholder="Masukkan email"
+                  type="email"
+                ></b-form-input>
+                <b-form-text class="text-danger" v-if="errorEmail">
+                  Email Akun Wajib Diisi!
+                </b-form-text>
+              </b-form-group>
+              <b-form-group label="Telepon" label-for="phone_number">
+                <b-form-input
+                  id="phone_number"
+                  v-model="phone_number"
+                  placeholder="Masukkan Telepon"
+                ></b-form-input>
+              </b-form-group>
+              <b-form-group label="Username" label-for="user_name">
+                <b-form-input
+                  id="user_name"
+                  v-model="userName"
+                  placeholder="Masukkan Username"
+                ></b-form-input>
+                <b-form-text class="text-danger" v-if="errorUserName">
+                  Username Akun Wajib Diisi!
+                </b-form-text>
+              </b-form-group>
+              <b-form-group label="Password" label-for="password">
+                <b-form-input
+                  id="password"
+                  v-model="password"
+                  placeholder="Kosongkan jika tidak ada perubahan"
+                  type="password"
+                ></b-form-input>
+                <b-form-text class="text-danger" v-if="errorPassword">
+                  Password Akun Wajib Diisi!
+                </b-form-text>
+              </b-form-group>
+            </b-col>
+          </b-row>
 
-        <b-row>
-          <b-col sm="12">
-            <label for="">
-              <h4>
-                <i class="fa-solid fa-address-book"></i> Informasi Identitas
-              </h4>
-            </label>
-          </b-col>
-          <b-col sm="6">
-            <b-form-group label="Nama Lengkap" label-for="nama_lengkap">
-              <b-form-input
-                id="nama_lengkap"
-                v-model="namaLengkap"
-                placeholder="Masukkan nama lengkap"
-              ></b-form-input>
-              <b-form-text class="text-danger" v-if="errorNamaLengkap">
-                Nama Lengkap Wajib Diisi!
-              </b-form-text>
-            </b-form-group>
-          </b-col>
-        </b-row>
-        <b-row>
-          <b-col sm="12">
-            <label for="">
-              <h4><i class="fa-solid fa-phone mr-1"></i> Kontak</h4>
-            </label>
-          </b-col>
-          <b-col sm="6">
-            <b-form-group label="Email" label-for="email">
-              <b-form-input
-                id="email"
-                v-model="email"
-                placeholder="Masukkan email"
-                type="email"
-              ></b-form-input>
-              <b-form-text class="text-danger" v-if="errorEmail">
-                Email Wajib Diisi!
-              </b-form-text>
-            </b-form-group>
-
-            <b-form-group label="Password" label-for="password">
-              <b-form-input
-                id="password"
-                v-model="password"
-                placeholder="(Kosongkan Jika Tidak Ada Perubahan)"
-                type="password"
-              ></b-form-input>
-              <b-form-text class="text-danger" v-if="errorPassword">
-                Password Wajib Diisi!
-              </b-form-text>
-            </b-form-group>
-
-            <b-form-group label="Telepon" label-for="telepon">
-              <b-form-input
-                id="telepon"
-                v-model="telepon"
-                placeholder="Masukkan nomor telepon"
-                type="number"
-              ></b-form-input>
-              <b-form-text class="text-danger" v-if="errorTelepon">
-                Telepon Wajib Diisi!
-              </b-form-text>
-            </b-form-group>
-          </b-col>
-        </b-row>
-        <b-row>
-        </b-row>
-        <b-row>
-          <b-col sm="6">
-            <b-form-group label="Username" label-for="user_name">
-          <b-form-input
-            id="user_name"
-            v-model="userName"
-            placeholder="Masukkan Username"
-          ></b-form-input>
-          <b-form-text class="text-danger" v-if="errorUserName">
-            Username Darah Wajib Diisi!
-          </b-form-text>
-        </b-form-group>
-          </b-col>
-        </b-row>
-
-        <b-button type="submit" variant="primary" :disabled="loadingCreate"
-          >Submit</b-button
-        >
-      </form>
+          <b-button variant="primary" :disabled="loadingCreate" @click="submitForm">
+  Submit
+</b-button>
+        </form>
     </b-modal>
 
     <div class="card p-4">
@@ -203,58 +173,69 @@
 </template>
 
 <script>
-import router from "@/router";
 import axios from "axios";
 import swal from "sweetalert2";
 import Cookies from "universal-cookie";
-import Multiselect from "vue-multiselect";
-import Datepicker from "vuejs-datepicker";
 
 const cookies = new Cookies();
 
 export default {
   components: {
-    Multiselect,
-    Datepicker,
   },
   data() {
     return {
+      DataUser: [],
+      optionRoles: [],
+      optionInstansi: [],
       detailRelawan: null,
-      modalEditProfile: false,
-      modalInputKesehatan: false,
       keyword: "",
+      loadingCreate: false,
       pageIndex: 1,
       pageSize: 10,
       totalCount: 0,
+      options: ["list", "of", "options"],
       id: null,
-      roles: null,
-      namaLengkap: "",
-      errorNamaLengkap: false,
-      userName: "",
-      errorUserName: false,
-      namaPanggilan: "",
-      tanggalLahir: "",
-      errorTanggalLahir: false,
+      tipeAkun: "",
+      namaAdmin: "",
       email: "",
-      errorEmail: false,
+      phone_number: "",
       password: "",
+      userName: "",
+      keterangan: "",
+      keteranganStatus: "",
+      errorTipeAkun: false,
+      errorNamaAdmin: false,
+      errorEmail: false,
       errorPassword: false,
-      telepon: "",
-      errorTelepon: false,
-      whatsapp: "",
-      alamatRumah: "",
-      alamatKantor: "",
-      action: "create",
-      loadingCreate: false,
-      loadingImportExcel: false,
+      errorUserName: false,
+      errorKeterangan: false,
       token: null,
-      roles: null,
+      action: "create",
     };
   },
   methods: {
     getToken() {
       this.token = cookies.get("token");
       this.roles = cookies.get("roles");
+    },
+
+    resetField() {
+      this.id = null;
+      this.tipeAkun = "";
+      this.namaAdmin = "";
+      this.email = "";
+      this.phone_number = "";
+      this.password = "";
+      this.userName = "";
+      this.keteranganStatus = "";
+      this.keterangan = "";
+      this.errorTipeAkun = false;
+      this.errorNamaAdmin = false;
+      this.errorEmail = false;
+      this.errorPassword = false;
+      this.errorUserName = false;
+      this.errorKeterangan = false;
+      this.action = "create";
     },
 
     formattedDate(oldDate) {
@@ -272,92 +253,61 @@ export default {
     handleEditForm(id) {
       this.action = "update";
       this.id = id;
-      this.modalEditProfile = true;
+      this.$refs["modal-input-manual"].show("modal-input-manual");
 
       axios.get(`${process.env.VUE_APP_URL}users/${id}/admin`).then((response) => { 
-        let data = response.data.data;
-        this.namaLengkap = data.fullname;
-        this.userName = data.username;
-        this.email = data.email;
-        this.telepon = data.phone_number;
+          this.namaAdmin = response.data.data.fullname;
+          this.userName = response.data.data.username;
+          this.email = response.data.data.email;
+          this.phone_number = response.data.data.phone_number;
       });
     },
 
-    batasNIK(e) {
-      return String(e).substring(0, 16);
-    },
-
     async submitForm() {
-      // if (this.validation()) {
-      const formData = new FormData();
-      formData.append("fullname", this.namaLengkap);
-      formData.append("email", this.email);
-      formData.append("password", this.password);
-      formData.append("phone_number", this.telepon);
+  if (this.validation()) {
+    const data = {
+      fullname: this.namaAdmin,
+      email: this.email,
+      phone_number: this.phone_number,
+      password: this.password ? this.password : "",
+      username: this.userName,
+    };
 
-      this.loadingCreate = true;
-      if (this.id) {
-        await axios
-          .put(`${process.env.VUE_APP_URL}users/${this.id}/admin`, formData, { 
-            headers: {
-              Authorization: `Bearer ${this.token}`,
-            },
-          })
-          .then((response) => {
-            this.loadingCreate = false;
-            swal({
-              title: "Success",
-              text: "Data Berhasil Disimpan",
-              type: "success",
-              timer: 2000,
-            });
-            this.modalEditProfile = false;
-            this.getData();
-            this.resetField();
-          })
-          .catch((error) => {
-            this.loadingCreate = false;
-            console.error(error);
-            if (error.response.data.error_messages[0].msg) {
-              swal("Server error!", error.response.data.error_messages[0].msg);
-            } else {
-              swal("Server error!", "Could not connect to the server!");
-            }
-          });
+    this.loadingCreate = true;
+
+    try {
+      const response = await axios.put(
+        `${process.env.VUE_APP_URL}users/${this.id}/user/profile`,
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${this.token}`,
+          },
+        }
+      );
+
+      swal({
+        title: "Success",
+        text: "Data Berhasil Disimpan",
+        type: "success",
+      });
+      
+      this.$refs["modal-input-manual"].hide();
+      this.getData();
+      this.resetField();
+    } catch (error) {
+      this.loadingCreate = false;
+
+      console.error(error);
+      if (error.response && error.response.data.error_messages[0].msg) {
+        swal("Server error!", error.response.data.error_messages[0].msg);
       } else {
-        await axios
-          .post(`${process.env.VUE_APP_URL}users/admin`, data, {
-            headers: {
-              Authorization: `Bearer ${this.token}`,
-            },
-          })
-          .then((response) => {
-            this.loadingCreate = false;
-
-            swal({
-              title: "Success",
-              text: "Data Berhasil Disimpan",
-              type: "success",
-              timer: 2000,
-            });
-            this.getData();
-            this.resetField();
-            this.modalEditProfile = false;
-          })
-          .catch((error) => {
-            this.loadingCreate = false;
-
-            console.error(error);
-            if (error.response.data.error_messages[0].msg) {
-              swal("Server error!", error.response.data.error_messages[0].msg);
-            } else {
-              swal("Server error!", "Could not connect to the server!");
-            }
-          });
-        // end validation
-        // }
+        swal("Server error!", "Could not connect to the server!");
       }
-    },
+    }
+  }
+},
+
 
     async getData() {
       try {
@@ -373,36 +323,53 @@ export default {
     },
 
     validation() {
-      if (this.judul === "") {
-        this.errorJudul = true;
+      if (this.tipeAkun === "") {
+        this.errorTipeAkun = true;
       } else {
-        this.errorJudul = false;
+        this.errorTipeAkun = false;
       }
 
-      if (this.file === "") {
-        this.errorFile = true;
+      if (this.namaAdmin === "") {
+        this.errorNamaAdmin = true;
       } else {
-        this.errorFile = false;
+        this.errorNamaAdmin = false;
       }
 
-      if (this.deskripsi === "") {
-        this.errorDeskripsi = true;
+      if (this.email === "") {
+        this.errorEmail = true;
       } else {
-        this.errorDeskripsi = false;
+        this.errorEmail = false;
       }
 
-      if (this.tanggalData === "") {
-        this.errorTanggalData = true;
+      if (this.action === "create") {
+        if (this.password === "") {
+          this.errorPassword = true;
+        } else {
+          this.errorPassword = false;
+        }
+      }
+
+      if (this.userName === "") {
+        this.errorUserName = true;
       } else {
-        this.errorTanggalData = false;
+        this.errorUserName = false;
+      }
+
+      if (this.keterangan === "") {
+        this.errorKeterangan = true;
+      } else {
+        this.errorKeterangan = false;
       }
 
       if (
-        this.judul === "" ||
-        this.file === "" ||
-        this.tanggalData === "" ||
-        this.deskripsi === ""
+        this.tipeAkun === "" ||
+        this.namaAdmin === "" ||
+        this.email === "" ||
+        this.userName === "" ||
+        this.keterangan === ""
       ) {
+        return false;
+      } else if (this.action === "create" && this.password === "") {
         return false;
       } else {
         return true;
@@ -426,19 +393,7 @@ export default {
   },
 
   watch: {
-    modalEditProfile: function (newData) {
-      if (newData === true) {
-     
-      }
-    },
 
-    tanggalLahir: function (newData, oldData) {
-      this.tanggalLahir = this.formattedDate(newData);
-    },
-
-    tanggalBerlakuPassport: function (newData, oldData) {
-      this.tanggalBerlakuPassport = this.formattedDate(newData);
-    },
   },
 };
 </script>
