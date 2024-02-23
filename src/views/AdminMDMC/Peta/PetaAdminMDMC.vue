@@ -488,6 +488,7 @@ export default {
       selectedMarker: {},
       buttonRute: false,
       places: [],
+      totalDataJabatanKosong: '',
       nearestDataPlace: '',
       sidebarVisible: false,
       baseLayer: null,
@@ -1099,11 +1100,9 @@ L.control.zoom({
     this.legend.addTo(this.map);
     this.baseLayer.addTo(this.map)
     this.showLainnya = true;
-    this.filterDataAksi();
     this.filterJabatanKosong();
     this.filterJabatanDibawah1();
     this.filterJabatanDiatas1();
-    this.startPolling();
     this.map.on('click', this.onClickCloseSidebar);
 
   },
@@ -1147,7 +1146,6 @@ L.control.zoom({
           this.map.removeLayer(layer);
         }
       });
-      this.filterDataAksi();
     },
     showJabatanKurang1(newValue) {
       this.map.eachLayer((layer) => {
