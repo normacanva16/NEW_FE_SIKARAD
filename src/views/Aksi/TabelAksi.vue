@@ -742,7 +742,8 @@ export default {
     resetSearch() {
       this.kotama = '',
       this.masa_jabatan = '',
-      this.pangkat = ''
+      this.pangkat = '',
+      this.korps = ''
       this.getData();
     },
 
@@ -796,6 +797,10 @@ export default {
           url += `&pangkat=${this.pangkat.value}`;
         }
 
+        if (this.korps !== null && this.korps.value !== null && this.korps.value !== "" && this.korps.value !== undefined) {
+          url += `&korps=${this.korps.value}`;
+        }
+
         await axios.get(url, { responseType: "blob" }).then((response) => {
           let FileSaver = require("file-saver");
           let tanggal = new Date().getDate();
@@ -828,6 +833,10 @@ export default {
 
         if (this.pangkat !== null && this.pangkat.value !== null && this.pangkat.value !== "" && this.pangkat.value !== undefined) {
           url += `&pangkat=${this.pangkat.value}`;
+        }
+
+        if (this.korps !== null && this.korps.value !== null && this.korps.value !== "" && this.korps.value !== undefined) {
+          url += `&korps=${this.korps.value}`;
         }
 
         await axios
@@ -978,6 +987,10 @@ export default {
 
         if (this.pangkat !== null && this.pangkat.value !== null && this.pangkat.value !== "" && this.pangkat.value !== undefined) {
           url += `&pangkat=${this.pangkat.value}`;
+        }
+
+        if (this.korps !== null && this.korps.value !== null && this.korps.value !== "" && this.korps.value !== undefined) {
+          url += `&korps=${this.korps.value}`;
         }
 
         await axios.get(url).then((response) => { 
