@@ -308,16 +308,19 @@
                   <p>Data tidak ada...</p>
                 </template>
                 <template v-else>
+                  <div class="table-container">
                   <table class="table">
                     <thead>
                       <tr>
+                        <th scope="col">No</th>
                         <th scope="col">Nama Kotama</th>
                         <th scope="col">Jumlah Personel</th>
                         <th scope="col">Detail</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr v-for="dataItem in itemNotif.data" :key="dataItem.id">
+                      <tr v-for="(dataItem, index) in itemNotif.data" :key="dataItem.id">
+                        <td>{{ index + 1 }}</td>
                         <td>{{ dataItem.nama }}</td>
                         <td>{{ dataItem.jumlah_employee }}</td>
                         <td>
@@ -326,6 +329,7 @@
                       </tr>
                     </tbody>
                   </table>
+                </div>
                 </template>
               </b-collapse>
             </div>
@@ -338,16 +342,19 @@
                   <p>Data tidak ada...</p>
                 </template>
                 <template v-else>
+                  <div class="table-container">
                   <table class="table">
                     <thead>
                       <tr>
+                        <th scope="col">No</th>
                         <th scope="col">Nama Kotama</th>
                         <th scope="col">Jumlah Personel</th>
                         <th scope="col">Detail</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr v-for="dataItem in itemNotif.data" :key="dataItem.id">
+                      <tr v-for="(dataItem, index) in itemNotif.data" :key="dataItem.id">
+                        <td>{{ index + 1 }}</td>
                         <td>{{ dataItem.nama }}</td>
                         <td>{{ dataItem.jumlah_employee }}</td>
                         <td>
@@ -356,6 +363,7 @@
                       </tr>
                     </tbody>
                   </table>
+                  </div>
                 </template>
               </b-collapse>
             </div>
@@ -379,32 +387,36 @@
                   <p>Data tidak ada...</p>
                 </template>
                 <template v-else>
-                  <table class="table">
-                    <thead>
-                      <tr>
-                        <th scope="col">SATUAN</th>
-                        <th scope="col">JABATAN</th>
-                        <th scope="col">KORPS</th>
-                        <th scope="col">PANGKAT</th>
-                        <th scope="col">NAMA</th>
-                        <th scope="col">NRP</th>
-                        <th scope="col">TMT JABATAN</th>
-                        <th scope="col">MASA JABATAN</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr v-for="dataItem in itemDetail.data" :key="dataItem.id">
-                        <td>{{ dataItem.satuan }}</td>
-                        <td>{{ dataItem.jabatan }}</td>
-                        <td>{{ dataItem.korps }}</td>
-                        <td>{{ dataItem.pangkat }}</td>
-                        <td>{{ dataItem.employee_nama }}</td>
-                        <td>{{ dataItem.nrp }}</td>
-                        <td>{{ dataItem.tmt_jabatan }}</td>
-                        <td>{{ dataItem.masa_jabatan }}</td>
-                      </tr>
-                    </tbody>
-                  </table>
+                  <div class="table-container">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th scope="col">NO</th>
+                          <th scope="col">SATUAN</th>
+                          <th scope="col">JABATAN</th>
+                          <th scope="col">KORPS</th>
+                          <th scope="col">PANGKAT</th>
+                          <th scope="col">NAMA</th>
+                          <th scope="col">NRP</th>
+                          <th scope="col">TMT JABATAN</th>
+                          <th scope="col">MASA JABATAN</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr v-for="(dataItem, index) in itemDetail.data" :key="dataItem.id">
+                          <td>{{ index + 1 }}</td>
+                          <td>{{ dataItem.satuan }}</td>
+                          <td>{{ dataItem.jabatan }}</td>
+                          <td>{{ dataItem.korps }}</td>
+                          <td>{{ dataItem.pangkat }}</td>
+                          <td>{{ dataItem.employee_nama }}</td>
+                          <td>{{ dataItem.nrp }}</td>
+                          <td>{{ dataItem.tmt_jabatan }}</td>
+                          <td>{{ dataItem.masa_jabatan }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
                 </template>
               </b-collapse>
             </div>
@@ -417,9 +429,11 @@
                   <p>Data tidak ada...</p>
                 </template>
                 <template v-else>
+                  <div class="table-container">
                   <table class="table">
                     <thead>
                       <tr>
+                        <th scope="col">NO</th>
                         <th scope="col">SATUAN</th>
                         <th scope="col">JABATAN</th>
                         <th scope="col">KORPS</th>
@@ -431,7 +445,8 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr v-for="dataItem in itemDetail.data" :key="dataItem.id">
+                      <tr v-for="(dataItem, index) in itemDetail.data" :key="dataItem.id">
+                        <td>{{ index + 1 }}</td>
                         <td>{{ dataItem.satuan }}</td>
                         <td>{{ dataItem.jabatan }}</td>
                         <td>{{ dataItem.korps }}</td>
@@ -443,6 +458,7 @@
                       </tr>
                     </tbody>
                   </table>
+                </div>
                 </template>
               </b-collapse>
             </div>
@@ -1332,5 +1348,8 @@ th {
 
 .custom-tooltip.red-border {
   border-color: #FF0000; /* red border color */
+}
+.table-container {
+  overflow-x: auto;
 }
 </style>
