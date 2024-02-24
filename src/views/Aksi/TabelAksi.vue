@@ -33,6 +33,18 @@
                 ></b-form-input>
                   </b-col>
               </b-row>
+              <b-row class="my-1">
+                  <b-col sm="3">
+                    <label for="input-none">SATUAN:</label>
+                  </b-col>
+                  <b-col sm="9">
+                    <b-form-input
+                  id="satuan"
+                  v-model="satuan"
+                  readonly
+                ></b-form-input>
+                  </b-col>
+              </b-row>
 
               <b-row class="my-1">
                   <b-col sm="3">
@@ -68,6 +80,19 @@
                     <b-form-input
                   id="pangkat"
                   v-model="pangkat"
+                  readonly
+                ></b-form-input>
+                  </b-col>
+              </b-row>
+
+              <b-row class="my-1">
+                  <b-col sm="3">
+                    <label for="input-none">TGL LAHIR:</label>
+                  </b-col>
+                  <b-col sm="9">
+                    <b-form-input
+                  id="tgl_lahir"
+                  v-model="tgl_lahir"
                   readonly
                 ></b-form-input>
                   </b-col>
@@ -422,7 +447,9 @@ export default {
       file: "",
       errorFile: false,
       kotama_balakpus:"",
+      satuan:"",
       kode_jabatan:"",
+      tgl_lahir:"",
       nama:"",
       pangkat:"",
       korps:"",
@@ -624,6 +651,13 @@ export default {
           width: 200,
         },
         {
+          field: "satuan",
+          key: "satuan",
+          title: "SATUAN",
+          align: "left",
+          width: 200,
+        },
+        {
           field: "jabatan",
           key: "jabatan",
           title: "JABATAN",
@@ -778,7 +812,9 @@ export default {
         .get(`${process.env.VUE_APP_URL}employee/${id}`)
         .then((response) => {
           this.kotama_balakpus = response.data.data.kotama_balakpus;
+          this.satuan = response.data.data.satuan;
           this.kode_jabatan = response.data.data.kode_jabatan;
+          this.tgl_lahir = response.data.data.tgl_lahir;
           this.nama = response.data.data.nama;
           this.pangkat = response.data.data.pangkat;
           this.korps = response.data.data.korps;

@@ -382,6 +382,7 @@
                   <table class="table">
                     <thead>
                       <tr>
+                        <th scope="col">SATUAN</th>
                         <th scope="col">JABATAN</th>
                         <th scope="col">KORPS</th>
                         <th scope="col">PANGKAT</th>
@@ -393,6 +394,7 @@
                     </thead>
                     <tbody>
                       <tr v-for="dataItem in itemDetail.data" :key="dataItem.id">
+                        <td>{{ dataItem.satuan }}</td>
                         <td>{{ dataItem.jabatan }}</td>
                         <td>{{ dataItem.korps }}</td>
                         <td>{{ dataItem.pangkat }}</td>
@@ -418,6 +420,7 @@
                   <table class="table">
                     <thead>
                       <tr>
+                        <th scope="col">SATUAN</th>
                         <th scope="col">JABATAN</th>
                         <th scope="col">KORPS</th>
                         <th scope="col">PANGKAT</th>
@@ -429,6 +432,7 @@
                     </thead>
                     <tbody>
                       <tr v-for="dataItem in itemDetail.data" :key="dataItem.id">
+                        <td>{{ dataItem.satuan }}</td>
                         <td>{{ dataItem.jabatan }}</td>
                         <td>{{ dataItem.korps }}</td>
                         <td>{{ dataItem.pangkat }}</td>
