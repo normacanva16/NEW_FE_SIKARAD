@@ -233,8 +233,9 @@
               <b-form-file
                 :id="'file_' + index"
                 v-model="file"
+                @input="updateSelectedIndex(index)"
                 placeholder="Masukkan file"
-                :disabled="item.value === 'true' || file !== ''"
+                :disabled="item.value === 'true' || (file !== '' && index !== selectedIndex)"
               ></b-form-file>
 
               <!-- Conditionally render the button or icon based on item.value -->
@@ -242,7 +243,9 @@
                 <i class="fa-solid fa-check text-success ml-3"></i>
               </template>
               <template v-else>
-                <b-button class="ml-3" type="submit" variant="primary" :disabled="loadingCreate">Submit</b-button>
+                <b-button class="ml-3" type="submit" variant="primary" :disabled="loadingCreate || (file !== '' && index !== selectedIndex)" @click="updateCode(item.code)">
+                  Submit
+                </b-button>
               </template>
             </div>
 
@@ -411,6 +414,7 @@ export default {
   data() {
     return {
       isAdmin: true,
+      selectedIndex: null,
     uploadInProgress: false,
       modalShow: false, 
       modalInputManual: false,
@@ -423,6 +427,7 @@ export default {
       pangkat:"",
       korps:"",
       nrp:"",
+      code:0,
       jabatan:"",
       tmt_jabatan:"",
       abit:"",
@@ -734,6 +739,12 @@ export default {
     };
   },
   methods: {
+    updateCode(code) {
+    this.code = code;
+  },
+    updateSelectedIndex(index) {
+    this.selectedIndex = index;
+  },
     pageNumberChange(pageIndex) {
       this.pageIndex = pageIndex;
       this.getData();
@@ -1088,7 +1099,7 @@ export default {
         this.loadingCreate = true;
 
           await axios
-            .post(`${process.env.VUE_APP_URL}employee`, formData, {
+            .post(`${process.env.VUE_APP_URL}employee?code=${this.code}`, formData, {
               headers: {
                 Authorization: `Bearer ${this.token}`,
               },
