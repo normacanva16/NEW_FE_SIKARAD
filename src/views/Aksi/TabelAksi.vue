@@ -643,13 +643,13 @@ export default {
       },
       columns: [
         { field: "no", key: "no", title: "No", align: "center", width: 60 },
-        {
-          field: "kotama_balakpus",
-          key: "kotama_balakpus",
-          title: "KOTAMA / BALAKPUS",
-          align: "left",
-          width: 200,
-        },
+        // {
+        //   field: "kotama_balakpus",
+        //   key: "kotama_balakpus",
+        //   title: "KOTAMA / BALAKPUS",
+        //   align: "left",
+        //   width: 200,
+        // }, 
         {
           field: "satuan",
           key: "satuan",
