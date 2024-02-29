@@ -729,7 +729,7 @@ export default {
             if (months === 0) {
                 if (days === 0) {
                     return <b-badge variant="warning">{row.masa_jabatan}</b-badge>;
-                } else if (days === 1) {
+                } else {
                     return <b-badge variant="danger">{row.masa_jabatan}</b-badge>;
                 }
             } else {
