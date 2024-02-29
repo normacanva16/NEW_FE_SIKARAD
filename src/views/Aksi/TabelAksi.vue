@@ -696,15 +696,49 @@ export default {
             days = parseInt(stringBetweenBulanHari);
         }
 
-        if ((years === 0 && months >= 0) || (years === 1  && months === 0 && days === 0)) {
-            return <b-badge variant="success">{row.masa_jabatan}</b-badge>;
-        } else if ((years === 1 && months >= 0) ||  (years === 2  && months === 0 && days === 0)) {
-            return <b-badge variant="warning">{row.masa_jabatan}</b-badge>;
-        } else if ((years === 2  && months >= 0) || (years > 2)) {
+        // if (((years === 0 && months >= 0) && (years !== 0 && months !== 0 && days !== 0)) || (years === 1  && months === 0 && days === 0)) {
+        //     return <b-badge variant="success">{row.masa_jabatan}</b-badge>;
+        // } else if (((years === 1 && months >= 0)&& (years !== 0 && months !== 0 && days !== 0) )||  (years === 2  && months === 0 && days === 0)) {
+        //     return <b-badge variant="warning">{row.masa_jabatan}</b-badge>;
+        // } else if ((years === 2  && months >= 0 && days >= 1) || (years > 2)) {
+        //     return <b-badge variant="danger">{row.masa_jabatan}</b-badge>;
+        // }else if ((years === 0  && months === 0 && days === 0) ) {
+        //   return <b-badge variant="light">{row.masa_jabatan}</b-badge>;
+        // }
+        if (years === 0) {
+            if (months === 0) {
+                if (days === 0) {
+                    return <b-badge variant="light">{row.masa_jabatan}</b-badge>;
+                } else {
+                  return <b-badge variant="success">{row.masa_jabatan}</b-badge>;
+                }
+            } else {
+                return <b-badge variant="success">{row.masa_jabatan}</b-badge>;
+            }
+        } else if (years === 1) {
+            if (months === 0) {
+                if (days === 0) {
+                  return <b-badge variant="success">{row.masa_jabatan}</b-badge>;
+                } else {
+                  return <b-badge variant="warning">{row.masa_jabatan}</b-badge>;
+                }
+            } else {
+              return <b-badge variant="warning">{row.masa_jabatan}</b-badge>;
+            }
+        } else if (years === 2) {
+            if (months === 0) {
+                if (days === 0) {
+                    return <b-badge variant="warning">{row.masa_jabatan}</b-badge>;
+                } else if (days === 1) {
+                    return <b-badge variant="danger">{row.masa_jabatan}</b-badge>;
+                }
+            } else {
+                return <b-badge variant="danger">{row.masa_jabatan}</b-badge>;
+            }
+        } else if (years >= 3) {
             return <b-badge variant="danger">{row.masa_jabatan}</b-badge>;
-        }else if ((years === 0  && months === 0 && days === 0) ) {
-          return <b-badge variant="light">{row.masa_jabatan}</b-badge>;
         }
+
     } else {
         return '-';
     }
